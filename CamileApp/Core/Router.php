@@ -1,8 +1,7 @@
 <?php
 
 
-namespace CamileApp\Core\test;
-
+namespace CamileApp\Core;
 
 class Router
 {
@@ -11,14 +10,17 @@ class Router
         if (!isset($_GET['route']))
         {
             $route = 'front.home';
-        } else
+        }
+        else
         {
             $route = $_GET['route'];
         }
 
-        if ($route === 'front.home')
-        {
-            require ROOT . '/CamileApp/view/frontend/home.php';
+            $routeExplode = explode('.', $route);
+            $controller = 'CamileApp\\Controller\\'.ucfirst($routeExplode[0]).'Controller';
+            $action = $routeExplode[1];
+
+            $controller = new $controller();
+            $controller->$action();
         }
-    }
 }

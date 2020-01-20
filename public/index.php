@@ -1,9 +1,10 @@
 <?php
 
+use CamileApp\Core\App;
+
 define('ROOT', dirname(__DIR__));
 
-require ROOT.'/CamileApp/core/App.php';
-use CamileApp\Core\App;
+require ROOT.'/vendor/autoload.php';
 
 App::getInstance()->router();
 

@@ -3,10 +3,6 @@
 
 namespace CamileApp\Core;
 
-require ROOT.'/CamileApp/core/Router.php';
-
-use CamileApp\Core\Router;
-
 
 class App
 {

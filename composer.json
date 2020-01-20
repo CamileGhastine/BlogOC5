@@ -1,0 +1,14 @@
+{
+    "name": "camile/blog-oc5",
+    "authors": [
+        {
+            "name": "camileGhastine",
+            "email": "camileghastine@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CamileApp\\":"CamileApp/"
+        }
+    }
+}
