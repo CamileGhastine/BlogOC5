@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CamileApp\Core;
+namespace CamileApp\Core\test;
 
 
 class Router
