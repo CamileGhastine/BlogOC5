@@ -5,7 +5,7 @@
     <title>Camile Ghastine</title>
 </head>
 <body>
-
+<h1>Mon super blog !!!</h1>
 <?= $content ?>
 
 </body>

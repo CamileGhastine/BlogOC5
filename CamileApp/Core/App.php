@@ -10,6 +10,8 @@ class App
 {
     private static $appInstance;
     private $router;
+    private $manager;
+    private $db;
 
     public function __construct()
     {
@@ -40,7 +42,18 @@ class App
 
     public function getDB()
     {
-        $db = new MysqlDatabase();
-        $db->getDB();
+        if($this->db === null)
+        {
+            $db = new MysqlDatabase();
+            $this->db = $db->getDB();
+            return $this->db;
+        }
+        return $this->db;
+    }
+
+    public function getManager($managerType)
+    {
+        $manager = 'CamileApp\\Model\\'.ucfirst($managerType).'Manager';
+        return $this->manager = new $manager($this->getDB());
     }
 }
