@@ -3,6 +3,7 @@
 
 namespace CamileApp\Core;
 
+use CamileApp\Controller\ErrorController;
 
 class App
 {
@@ -27,5 +28,11 @@ class App
     public function router()
     {
         $this->router->run();
+    }
+
+    public function errorServer()
+    {
+        $error = new ErrorController();
+        $error -> errorServer();
     }
 }

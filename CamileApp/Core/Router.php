@@ -16,11 +16,20 @@ class Router
             $route = $_GET['route'];
         }
 
+        try
+        {
             $routeExplode = explode('.', $route);
             $controller = 'CamileApp\\Controller\\'.ucfirst($routeExplode[0]).'Controller';
             $action = $routeExplode[1];
 
             $controller = new $controller();
             $controller->$action();
+
         }
+        catch (Exception $e)
+        {
+            App::getInstance()->errorServer();
+        }
+
+    }
 }
