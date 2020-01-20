@@ -7,5 +7,5 @@ define('ROOT', dirname(__DIR__));
 require ROOT.'/vendor/autoload.php';
 
 App::getInstance()->router();
-
+App::getInstance()->getDB();
 

@@ -28,7 +28,7 @@ class Router
         }
         catch (Exception $e)
         {
-            App::getInstance()->errorServer();
+            App::getInstance()->error('server');
         }
 
     }

@@ -12,4 +12,9 @@ class ErrorController extends Controller
     {
         $this->render('Error_500');
     }
+
+    public function errorConnection()
+    {
+        $this->render('Error_Connection');
+    }
 }

@@ -4,6 +4,7 @@
 namespace CamileApp\Core;
 
 use CamileApp\Controller\ErrorController;
+use CamileApp\Core\Database\MysqlDatabase;
 
 class App
 {
@@ -30,9 +31,16 @@ class App
         $this->router->run();
     }
 
-    public function errorServer()
+    public function error($errorType)
     {
         $error = new ErrorController();
-        $error -> errorServer();
+        $action = 'error'.ucfirst($errorType);
+        $error -> $action();
+    }
+
+    public function getDB()
+    {
+        $db = new MysqlDatabase();
+        $db->getDB();
     }
 }
