@@ -4,8 +4,17 @@
 namespace CamileApp\Controller;
 
 
+/**
+ * Class Controller parent of all Controller
+ * @package CamileApp\Controller
+ */
 abstract class Controller
 {
+    /**
+     * call the view and template by transfering the variables
+     * @param $view
+     * @param array $compactVars
+     */
     protected function render($view, $compactVars=[])
     {
         extract($compactVars);

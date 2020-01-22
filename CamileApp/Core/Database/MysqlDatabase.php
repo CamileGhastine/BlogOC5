@@ -6,10 +6,20 @@ namespace CamileApp\Core\Database;
 use \PDO;
 use CamileApp\Core\App;
 
+/**
+ * Class MysqlDatabase
+ * @package CamileApp\Core\Database
+ */
 class MysqlDatabase extends Database
 {
+    /**
+     * @var DBconnection
+     */
     private $db;
 
+    /**
+     * @return $db
+     */
     public function getDB()
     {
         if ($this->db === null)
@@ -19,6 +29,9 @@ class MysqlDatabase extends Database
         return $this->db;
     }
 
+    /**
+     * @return PDO PDO connection to DB
+     */
     private function getConnection()
     {
         try

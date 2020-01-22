@@ -4,6 +4,10 @@
 namespace CamileApp\Model;
 
 
+/**
+ * Class Manager
+ * @package CamileApp\Model
+ */
 abstract class Manager
 {
     protected $db;

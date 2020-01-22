@@ -5,8 +5,15 @@ namespace CamileApp\Core;
 
 use Exception;
 
+/**
+ * Class Router
+ * @package CamileApp\Core
+ */
 class Router
 {
+    /**
+     * route the client request
+     */
     public function run()
     {
         if(!isset($_GET['route']))

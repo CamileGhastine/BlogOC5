@@ -6,17 +6,16 @@ namespace CamileApp\Core;
 use CamileApp\Controller\ErrorController;
 use CamileApp\Core\Database\MysqlDatabase;
 
+/**
+ * Class App prevent  dependency injection
+ * @package CamileApp\Core
+ */
 class App
 {
     private static $appInstance;
     private $router;
-    private $manager;
+    private $error;
     private $db;
-
-    public function __construct()
-    {
-        $this->router = new Router();
-    }
 
     public static function getInstance()
     {
@@ -30,14 +29,25 @@ class App
 
     public function router()
     {
+        if($this->router === null)
+        {
+            $this->router = new Router();
+        }
         $this->router->run();
     }
 
+    /**
+     * to call the page depending on the type of error
+     * @param $errorType
+     */
     public function error($errorType)
     {
-        $error = new ErrorController();
+        if($this->error === null)
+        {
+            $this->error = new ErrorController();
+        }
         $action = 'error'.ucfirst($errorType);
-        $error -> $action();
+        $this->error->$action();
     }
 
     public function getDB()
@@ -46,7 +56,6 @@ class App
         {
             $db = new MysqlDatabase();
             $this->db = $db->getDB();
-            return $this->db;
         }
         return $this->db;
     }
@@ -54,6 +63,6 @@ class App
     public function getManager($managerType)
     {
         $manager = 'CamileApp\\Model\\'.ucfirst($managerType).'Manager';
-        return $this->manager = new $manager($this->getDB());
+        return new $manager($this->getDB());
     }
 }
