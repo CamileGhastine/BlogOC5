@@ -28,4 +28,9 @@ class ErrorController extends Controller
         $this->render('error_notFound');
     }
 
+    public function unclassified($message)
+    {
+        $this->render('unclassified', compact('message'));
+    }
+
 }

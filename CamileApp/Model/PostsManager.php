@@ -3,7 +3,6 @@
 
 namespace CamileApp\Model;
 
-use \PDO;
 
 /**
  * Class PostsManager
@@ -14,12 +13,26 @@ class PostsManager extends Manager
 
 
     /**
-     * @return mixed all posts in DB
+     *  all posts
+     * @return mixed
      */
     public function all()
     {
         $posts = $this->db->query('SELECT * FROM posts');
         return $posts;
+    }
+
+    /**
+     * one post by id
+     * @param $id
+     * @return mixed
+     */
+    public function postById($id)
+    {
+        $req = $this->db->prepare('SELECT * FROM posts WHERE id=:id');
+        $req->execute(['id' => $id]);
+        return $req->fetch();
+
     }
 
 }

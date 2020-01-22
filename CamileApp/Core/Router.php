@@ -25,8 +25,8 @@ class Router
             $route = $_GET['route'];
         }
 
-        try
-        {
+//        try
+//        {
             $routeExplode = explode('.', $route);
 
             $controller = 'CamileApp\\Controller\\' . ucfirst($routeExplode[0]) . 'Controller';
@@ -44,11 +44,11 @@ class Router
             {
                 throw new Exception('notFound');
             }
-        }
-        catch(Exception $e)
-        {
-            App::getInstance()->error($e->getMessage());
-        }
+//        }
+//        catch(Exception $e)
+//        {
+//            App::getInstance()->error($e->getMessage());
+//        }
 
     }
 }

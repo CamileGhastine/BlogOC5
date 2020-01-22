@@ -29,4 +29,15 @@ class FrontController extends Controller
         $posts = App::getInstance()->getManager('posts')->all();
         $this->render('posts', compact('posts'));
     }
+
+    /**
+     * one post
+     * @param $id
+     */
+    public function post()
+    {
+
+        $post = App::getInstance()->getManager('posts')->postById($_GET['id']);
+        $this->render('post', compact('post'));
+    }
 }

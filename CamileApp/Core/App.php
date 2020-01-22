@@ -46,8 +46,16 @@ class App
         {
             $this->error = new ErrorController();
         }
+
         $action = 'error'.ucfirst($errorType);
-        $this->error->$action();
+        if(method_exists($this->error, $action))
+        {
+            $this->error->$action();
+        }
+        else
+        {
+            $this->error->unclassified($errorType);
+        }
     }
 
     public function getDB()
