@@ -12,25 +12,16 @@ class ErrorController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/Error/';
 
-    /**
-     * probleme of connection to DB
-     */
-    public function errorConnection()
+    public function getErrorMessage($errorType)
     {
-        $this->render('error_connection');
+        switch($errorType)
+        {
+            case 'Connection' : $message = 'Problème de connexion à la base de données !!!';
+            break;
+            case 'notFound' : $message = 'Erreur 404 : Page introuvable !!!';
+            break;
+            default : $message = 'Erreur : '.$errorType;
+        }
+        $this->render('error', compact('message'));
     }
-
-    /**
-     * Page note found
-     */
-    public function ErrorNotFound()
-    {
-        $this->render('error_notFound');
-    }
-
-    public function unclassified($message)
-    {
-        $this->render('unclassified', compact('message'));
-    }
-
 }
