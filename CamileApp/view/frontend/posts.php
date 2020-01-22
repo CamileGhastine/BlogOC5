@@ -1,5 +1,7 @@
-<?php
 
+<p><a href="index.php">Retour à l'accueil</a></p>
+
+<?php
 foreach ($posts as $post)
 { ?>
     <h3> <B><?= htmlspecialchars($post['title']); ?></B></h3>

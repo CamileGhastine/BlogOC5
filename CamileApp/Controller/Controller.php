@@ -6,7 +6,7 @@ namespace CamileApp\Controller;
 
 abstract class Controller
 {
-    protected function render($view, $compactVars)
+    protected function render($view, $compactVars=[])
     {
         extract($compactVars);
         ob_start();

@@ -29,7 +29,7 @@ class MysqlDatabase extends Database
         }
         catch (Exception $e)
         {
-            App::getInstance()->Error('Connection');
+            App::getInstance()->error('connection');
         }
     }
 }
