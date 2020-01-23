@@ -12,6 +12,16 @@ use CamileApp\Core\App;
 class FrontController extends Controller
 {
     protected $viewPath = ROOT.'/CamileApp/view/frontend/';
+    protected $posts;
+    protected $comment;
+
+    public function __construct()
+    {
+        $this->posts = App::getinstance()->getManager('posts');
+        $this->comments = App::getinstance()->getManager('comments');
+        $this->posts = App::getinstance()->getManager('posts');
+    }
+
 
     /**
      * home page
@@ -26,7 +36,7 @@ class FrontController extends Controller
      */
     public function posts()
     {
-        $posts = App::getInstance()->getManager('posts')->all();
+        $posts = $this->posts->allWithCommentCount();
         $this->render('posts', compact('posts'));
     }
 
@@ -36,8 +46,8 @@ class FrontController extends Controller
      */
     public function post()
     {
-
-        $post = App::getInstance()->getManager('posts')->postById($_GET['id']);
-        $this->render('post', compact('post'));
+        $post = $this->posts->postById($_GET['id']);
+        $comments = $this->comments->commentsById($_GET['id']);
+        $this->render('post', compact('post', 'comments'));
     }
 }
