@@ -12,6 +12,10 @@ class ErrorController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/Error/';
 
+    /**
+     * return the message error to the view error
+     * @param $errorType
+     */
     public function getErrorMessage($errorType)
     {
         switch($errorType)
@@ -19,6 +23,8 @@ class ErrorController extends Controller
             case 'Connection' : $message = 'Problème de connexion à la base de données !!!';
             break;
             case 'notFound' : $message = 'Erreur 404 : Page introuvable !!!';
+            break;
+            case 'typage' : $message = 'Problème de typage, renouveler votre requête !!!';
             break;
             default : $message = 'Erreur : '.$errorType;
         }

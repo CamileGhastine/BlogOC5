@@ -2,7 +2,7 @@
 
 
 namespace CamileApp\Model;
-
+use \PDO;
 
 /**
  * Class CategoriesManager
@@ -17,7 +17,9 @@ class CategoriesManager extends Manager
     public function all()
     {
         $sql = 'SELECT * FROM categories';
-        return $this->db->query($sql);
+        $req = $this->db->query($sql);
+        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\CategoriesEntity');
+        return $req->fetchall();
     }
 
 }

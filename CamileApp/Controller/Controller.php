@@ -11,7 +11,7 @@ namespace CamileApp\Controller;
 abstract class Controller
 {
     /**
-     * call the view and template by transfering the variables
+     * view and template by transfering the variables
      * @param $view
      * @param array $compactVars
      */

@@ -2,7 +2,7 @@
 
 
 namespace CamileApp\Model;
-
+use \PDO;
 
 /**
  * Class PostsManager
@@ -11,9 +11,8 @@ namespace CamileApp\Model;
 class PostsManager extends Manager
 {
 
-
     /**
-     *  all posts (with number of comments)
+     * all posts (with number of comments)
      * @return mixed
      */
     public function allWithCommentCount()
@@ -24,7 +23,9 @@ FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
 GROUP BY p.id
 ORDER BY p.date_creation DESC ';
-        return $this->db->query($sql);
+        $req = $this->db->query($sql);
+        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
+        return $req->fetchall();
     }
 
     /**
@@ -43,6 +44,7 @@ ORDER BY p.date_creation DESC ';
         WHERE p.id=:id';
         $req = $this->db->prepare($sql);
         $req->execute(['id' => $id]);
+        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
         return $req->fetch();
     }
 
@@ -64,7 +66,8 @@ ORDER BY p.date_creation DESC
         ';
         $req = $this->db->prepare($sql);
         $req->execute(['id' => $id]);
-        return $req;
+        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
+        return $req->fetchall();
     }
 
 }
