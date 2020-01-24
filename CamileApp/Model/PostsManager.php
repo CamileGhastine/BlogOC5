@@ -13,23 +13,22 @@ class PostsManager extends Manager
 
 
     /**
-     *  all posts
+     *  all posts (with number of comments)
      * @return mixed
      */
     public function allWithCommentCount()
     {
         $sql = '
-SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(c.validated) AS numberComments
+SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments
 FROM posts AS p
-LEFT JOIN comments AS c ON c.post_id = p.id
+LEFT JOIN comments AS co ON co.post_id = p.id
 GROUP BY p.id
 ORDER BY p.date_creation DESC ';
-        $posts = $this->db->query($sql);
-        return $posts;
+        return $this->db->query($sql);
     }
 
     /**
-     * one post by id
+     * one postById by id
      * @param $id
      * @return mixed
      */
@@ -45,7 +44,27 @@ ORDER BY p.date_creation DESC ';
         $req = $this->db->prepare($sql);
         $req->execute(['id' => $id]);
         return $req->fetch();
+    }
 
+    /**
+     * all postById by category id (with number of comments)
+     * @param $id
+     * @return mixed
+     */
+    public function allByCategoryWithCommentCount($id)
+    {
+        $sql ='
+SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments
+FROM posts AS p
+LEFT JOIN comments AS co ON co.post_id = p.id
+LEFT JOIN categories AS ca ON ca.id = p.category_id
+WHERE ca.id = :id
+GROUP BY p.id
+ORDER BY p.date_creation DESC
+        ';
+        $req = $this->db->prepare($sql);
+        $req->execute(['id' => $id]);
+        return $req;
     }
 
 }

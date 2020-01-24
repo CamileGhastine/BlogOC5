@@ -20,6 +20,7 @@ class FrontController extends Controller
         $this->posts = App::getinstance()->getManager('posts');
         $this->comments = App::getinstance()->getManager('comments');
         $this->posts = App::getinstance()->getManager('posts');
+        $this->categories = App::getinstance()->getManager('categories');
     }
 
 
@@ -37,17 +38,27 @@ class FrontController extends Controller
     public function posts()
     {
         $posts = $this->posts->allWithCommentCount();
-        $this->render('posts', compact('posts'));
+        $categories = $this->categories->all();
+        $this->render('posts', compact('posts', 'categories'));
     }
 
     /**
-     * one post
-     * @param $id
+     * One postById (by id)
      */
-    public function post()
+    public function postById()
     {
         $post = $this->posts->postById($_GET['id']);
         $comments = $this->comments->commentsById($_GET['id']);
-        $this->render('post', compact('post', 'comments'));
+        $this->render('postById', compact('post', 'comments'));
+    }
+
+    /**
+     * all posts by category id
+     */
+    public function postsByCategory()
+    {
+        $posts = $this->posts->allByCategoryWithCommentCount($_GET['id']);
+        $categories = $this->categories->all();
+        $this->render('postsByCategory', compact('posts', 'categories'));
     }
 }

@@ -4,8 +4,17 @@
 namespace CamileApp\Model;
 
 
+/**
+ * Class CommentsManager
+ * @package CamileApp\Model
+ */
 class CommentsManager extends Manager
 {
+    /**
+     * all comment by postById id
+     * @param $id
+     * @return mixed
+     */
     public function commentsById($id)
     {
         $req = $this->db->prepare('

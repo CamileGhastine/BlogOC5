@@ -1,7 +1,7 @@
 
 <p><a href="index.php">Retour à l'accueil</a></p>
 
-<p>Tous les articles</p>
+<p><a href="index.php?route=front.posts">Tous les articles</a></p>
 <?php
 while ($category = $categories->fetch())
 {
@@ -9,8 +9,8 @@ while ($category = $categories->fetch())
     $categoryId = $category['id'];
     $url = 'index.php?route=front.postsByCategory&id='.$categoryId;
     ?>
-    <p><a href="<?= $url ?>"><?= $categoryName ?></a></p>
-<?php
+    <p><?= $categoryId == $_GET['id'] ? $categoryName : '<a href="'.$url.'">'.$categoryName.'</a>' ?></p>
+    <?php
 }
 
 
@@ -27,6 +27,6 @@ while ($post = $posts->fetch())
     <p><?= $chapo ?></p>
     <p><small><?= $date ?></small></p>
     <p>Commentaires (<?= $numberComments ?>)</p>
-<?php
+    <?php
 }
 ?>
