@@ -14,6 +14,7 @@ class PostsManager extends Manager
     /**
      * all posts (with number of comments)
      * @return mixed
+     * @function request($sql, $param, $table, $fetchall)
      */
     public function allWithCommentCount()
     {
@@ -23,15 +24,14 @@ FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
 GROUP BY p.id
 ORDER BY p.date_creation DESC ';
-        $req = $this->db->query($sql);
-        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
-        return $req->fetchall();
+        return $this->db->request($sql, null, 'posts', true);
     }
 
     /**
      * one postById by id
      * @param $id
      * @return mixed
+     * @function request($sql, $param, $table, $fetchall)
      */
     public function postById($id)
     {
@@ -42,16 +42,14 @@ ORDER BY p.date_creation DESC ';
         LEFT JOIN categories AS ca ON ca.id = p.category_id
         LEFT JOIN comments AS co ON co.post_id = p.id
         WHERE p.id=:id';
-        $req = $this->db->prepare($sql);
-        $req->execute(['id' => $id]);
-        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
-        return $req->fetch();
+        return $this->db->request($sql, $id, 'posts', false);
     }
 
     /**
      * all postById by category id (with number of comments)
      * @param $id
      * @return mixed
+     * @function request($sql, $param, $table, $fetchall)
      */
     public function allByCategoryWithCommentCount($id)
     {
@@ -64,10 +62,7 @@ WHERE ca.id = :id
 GROUP BY p.id
 ORDER BY p.date_creation DESC
         ';
-        $req = $this->db->prepare($sql);
-        $req->execute(['id' => $id]);
-        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\PostsEntity');
-        return $req->fetchall();
+        return $this->db->Request($sql, $id, 'posts', true);
     }
 
 }

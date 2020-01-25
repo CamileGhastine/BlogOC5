@@ -5,6 +5,7 @@ namespace CamileApp\Core;
 
 use CamileApp\Controller\ErrorController;
 use CamileApp\Core\Database\MysqlDatabase;
+use Config\Config;
 
 /**
  * Class App prevent  dependency injection
@@ -19,7 +20,7 @@ class App
 
     public static function getInstance()
     {
-        if (self::$appInstance === null)
+        if(self::$appInstance === null)
         {
             self::$appInstance = new App();
             return self::$appInstance;
@@ -53,15 +54,15 @@ class App
     {
         if($this->db === null)
         {
-            $db = new MysqlDatabase();
-            $this->db = $db->getDB();
+            require ROOT.'/Config/Config.php';
+            $this->db = new MysqlDatabase(Config::configDB());
         }
         return $this->db;
     }
 
     public function getManager($managerType)
     {
-        $manager = 'CamileApp\\Model\\'.ucfirst($managerType).'Manager';
+        $manager = 'CamileApp\\Model\\' . ucfirst($managerType) . 'Manager';
         return new $manager($this->getDB());
     }
 }

@@ -37,8 +37,8 @@ class FrontController extends Controller
      */
     public function posts()
     {
-        $posts = $this->posts->allWithCommentCount();
         $categories = $this->categories->all();
+        $posts = $this->posts->allWithCommentCount();
         $this->render('posts', compact('posts', 'categories'));
     }
 
