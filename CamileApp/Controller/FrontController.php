@@ -14,15 +14,14 @@ class FrontController extends Controller
     protected $viewPath = ROOT.'/CamileApp/view/frontend/';
     protected $posts;
     protected $comment;
+    protected $categories;
 
     public function __construct()
     {
         $this->posts = App::getinstance()->getManager('posts');
         $this->comments = App::getinstance()->getManager('comments');
-        $this->posts = App::getinstance()->getManager('posts');
         $this->categories = App::getinstance()->getManager('categories');
     }
-
 
     /**
      * home page

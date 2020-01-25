@@ -1,6 +1,3 @@
-
-<p><a href="index.php">Retour à l'accueil</a></p>
-
 <p>Tous les articles</p>
 <?php
 foreach ($categories as $category)

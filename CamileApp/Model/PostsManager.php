@@ -13,8 +13,8 @@ class PostsManager extends Manager
 
     /**
      * all posts (with number of comments)
+     * function request($sql, $param, $table, $fetchall)
      * @return mixed
-     * @function request($sql, $param, $table, $fetchall)
      */
     public function allWithCommentCount()
     {
@@ -29,9 +29,9 @@ ORDER BY p.date_creation DESC ';
 
     /**
      * one postById by id
+     * function request($sql, $param, $table, $fetchall)
      * @param $id
      * @return mixed
-     * @function request($sql, $param, $table, $fetchall)
      */
     public function postById($id)
     {
@@ -47,9 +47,9 @@ ORDER BY p.date_creation DESC ';
 
     /**
      * all postById by category id (with number of comments)
+     * function request($sql, $param, $table, $fetchall)
      * @param $id
      * @return mixed
-     * @function request($sql, $param, $table, $fetchall)
      */
     public function allByCategoryWithCommentCount($id)
     {

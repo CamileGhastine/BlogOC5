@@ -1,6 +1,3 @@
-
-<p><a href="index.php">Retour à l'accueil</a></p>
-
 <p><a href="index.php?route=front.posts">Tous les articles</a></p>
 <?php
 foreach($categories as $category)
@@ -14,7 +11,7 @@ foreach($categories as $category)
     <p><?= $categoryId == $_GET['id'] ? $categoryName : '<a href="'.$url.'">'.$categoryName.'</a>' ?></p>
     <?php
 }
-echo '<p>'.$categoryDescription.'</p>';
+echo '<p class="border text-center">'.$categoryDescription.'</p>';
 
 foreach($posts as $post)
 {

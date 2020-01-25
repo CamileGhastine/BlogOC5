@@ -11,8 +11,8 @@ class CategoriesManager extends Manager
 {
     /**
      * all categories
+     * function request($sql, $param, $table, $fetchall)
      * @return mixed
-     * @function request($sql, $param, $table, $fetchall)
      */
     public function all()
     {

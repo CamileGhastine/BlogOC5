@@ -50,6 +50,7 @@ class MysqlDatabase extends Database
     }
 
     /**
+     * function request = query or prepare
      * @param $sql
      * @param $param
      * @param $table

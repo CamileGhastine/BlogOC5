@@ -11,9 +11,9 @@ class CommentsManager extends Manager
 {
     /**
      * all comment by postById id
+     * function request($sql, $param, $table, $fetchall)
      * @param $id
      * @return mixed
-     * @function request($sql, $param, $table, $fetchall)
 
      */
     public function commentsById($id)
