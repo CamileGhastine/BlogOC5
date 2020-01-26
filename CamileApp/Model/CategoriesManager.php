@@ -9,6 +9,8 @@ namespace CamileApp\Model;
  */
 class CategoriesManager extends Manager
 {
+    protected $table = 'categories';
+
     /**
      * all categories
      * function request($sql, $param, $table, $fetchall)

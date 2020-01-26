@@ -2,7 +2,6 @@
 
 
 namespace CamileApp\Model;
-use \PDO;
 
 /**
  * Class PostsManager
@@ -10,6 +9,7 @@ use \PDO;
  */
 class PostsManager extends Manager
 {
+    protected $table = 'posts';
 
     /**
      * all posts (with number of comments)

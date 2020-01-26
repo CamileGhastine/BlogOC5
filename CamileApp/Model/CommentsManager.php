@@ -9,6 +9,8 @@ namespace CamileApp\Model;
  */
 class CommentsManager extends Manager
 {
+    protected $table = 'comments';
+
     /**
      * all comment by postById id
      * function request($sql, $param, $table, $fetchall)

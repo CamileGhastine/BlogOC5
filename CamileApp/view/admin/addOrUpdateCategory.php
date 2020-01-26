@@ -1,21 +1,39 @@
+<?php
+// Request Add category ($update=false) or Update category ($update=true)
+$update = isset($category);
+
+if($update)
+{
+    $titlePage = 'Modifier la actégorie';
+    $categoryId = htmlspecialchars($category->getId());
+    $formAction = 'index.php?route=admin.updateCategory&id='.$categoryId;
+    $categoryName = htmlspecialchars($category->getName());
+    $categoryDescription = htmlspecialchars($category->getDescription());
+    $button = 'Modifier';
+}
+else
+{
+    $titlePage = 'Ajouter une catégorie';
+    $formAction = 'index.php?route=admin.addCategory';
+    $categoryId = null;
+    $categoryName = null;
+    $categoryDescription = null;
+    $button = 'Ajouter';
+}
+?>
+
 <div class="row">
     <div class="col-lg-12 mt-3">
 
         <div class="row pt-4">
             <div class="col-sm-8">
-                <h1>Modifier la catégories</h1>
+                <h1><?= $titlePage ?></h1>
             </div>
             <div class="col-sm-4">
-                <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
             </div>
         </div>
 
-        <?php
-        $categoryId = htmlspecialchars($category->getId());
-        $categoryName = htmlspecialchars($category->getName());
-        $categoryDescription = htmlspecialchars($category->getDescription());
-        ?>
-        <form method="post" action="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="pb-3">
+        <form method="post" action="<?= $formAction ?>" class="pb-3">
 
             <div class="form-group">
                 <label for="name" >Nom</label>
@@ -29,7 +47,7 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <button type="submit" class="btn btn-danger">Modifier</button>
+                    <button type="submit" class="btn btn-danger"><?= $button ?></button>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-end">
                     <a class="btn btn-success " href="index.php?route=admin.categories">Annuler</a>

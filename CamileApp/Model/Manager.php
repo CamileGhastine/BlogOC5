@@ -23,7 +23,7 @@ abstract class Manager
      */
     public function delete()
     {
-        $sql = 'DELETE from posts WHERE id=:id';
+        $sql = 'DELETE from '.$this->table.' WHERE id=:id';
         return $this->db->request($sql,['id' => $_GET['id']], 'posts');
     }
 }

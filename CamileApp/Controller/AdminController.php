@@ -48,7 +48,7 @@ class AdminController extends Controller
         else
         {
             $categories = $this->categories->all();
-            $this->render('addPost', compact('categories'));
+            $this->render('addOrUpdatePost', compact('categories'));
         }
 
     }
@@ -76,7 +76,7 @@ class AdminController extends Controller
         {
             $post = $this->posts->postById($_GET['id']);
             $categories = $this->categories->all();
-            $this->render('updatePost', compact('post', 'categories'));
+            $this->render('addOrUpdatePost', compact('post', 'categories'));
         }
     }
 
@@ -101,7 +101,7 @@ class AdminController extends Controller
         }
         else
         {
-            $this->render('addCategory');
+            $this->render('addOrUpdateCategory');
         }
 
     }
@@ -128,7 +128,7 @@ class AdminController extends Controller
         else
         {
             $category = $this->categories->categoryById();
-            $this->render('updateCategory', compact('category'));
+            $this->render('addOrUpdateCategory', compact('category'));
         }
     }
 }
