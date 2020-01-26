@@ -3,7 +3,7 @@
 
         <div class="row pt-4">
             <div class="col-sm-8">
-                <h1>Modifier une catégories</h1>
+                <h1>Modifier la catégories</h1>
             </div>
             <div class="col-sm-4">
                 <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>

@@ -81,4 +81,25 @@ ORDER BY p.date_creation DESC
         ';
         return $this->db->Request($sql, null, 'posts', true);
     }
+
+    /**
+     * INSERT INTO request
+     * @return mixed
+     */
+    public function add()
+    {
+        $sql = 'INSERT INTO posts(title, chapo, content, category_id, user_id) VALUES (:title, :chapo, :content, :category_id, 1)';
+        return $this->db->request($sql, $_POST, 'posts');
+    }
+
+    /**
+     * UPDATE request
+     * @return mixed
+     */
+    public function update()
+    {
+        $sql = 'UPDATE posts SET title=:title, chapo=:chapo, content=:content, category_id=:category_id, user_id=1 WHERE id=:id';
+        $_POST['id']= $_GET['id'];
+        return $this->db->request($sql, $_POST, 'posts');
+    }
 }

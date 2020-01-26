@@ -42,12 +42,13 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $this->categories->add();
-            header('Location: index.php?route=admin.categories&success=add');
+            $this->posts->add();
+            header('Location: index.php?route=admin.posts&success=add');
         }
         else
         {
-            $this->render('addCategory');
+            $categories = $this->categories->all();
+            $this->render('addPost', compact('categories'));
         }
 
     }
@@ -57,8 +58,8 @@ class AdminController extends Controller
      */
     public function deletepost()
     {
-        $this->categories->delete();
-        header('Location: index.php?route=admin.categories&success=delete');
+        $this->posts->delete();
+        header('Location: index.php?route=admin.posts&success=delete');
     }
 
     /**
@@ -68,13 +69,14 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $this->categories->update();
-            header('Location: index.php?route=admin.categories&success=update');
+            $this->posts->update();
+            header('Location: index.php?route=admin.posts&success=update');
         }
         else
         {
-            $category = $this->categories->categoryById();
-            $this->render('updateCategory', compact('category'));
+            $post = $this->posts->postById($_GET['id']);
+            $categories = $this->categories->all();
+            $this->render('updatePost', compact('post', 'categories'));
         }
     }
 

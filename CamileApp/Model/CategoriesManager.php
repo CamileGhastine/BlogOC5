@@ -41,16 +41,6 @@ class CategoriesManager extends Manager
     }
 
     /**
-     * DELETE request
-     * @return mixed
-     */
-    public function delete()
-    {
-        $sql = 'DELETE from categories WHERE id=:id';
-        return $this->db->request($sql,['id' => $_GET['id']], 'categories');
-    }
-
-    /**
      * UPDATE request
      * @return mixed
      */
