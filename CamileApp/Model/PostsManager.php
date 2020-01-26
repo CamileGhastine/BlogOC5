@@ -42,7 +42,7 @@ ORDER BY p.date_creation DESC ';
         LEFT JOIN categories AS ca ON ca.id = p.category_id
         LEFT JOIN comments AS co ON co.post_id = p.id
         WHERE p.id=:id';
-        return $this->db->request($sql, $id, 'posts', false);
+        return $this->db->request($sql, ['id' => $id], 'posts', false);
     }
 
     /**
@@ -62,7 +62,7 @@ WHERE ca.id = :id
 GROUP BY p.id
 ORDER BY p.date_creation DESC
         ';
-        return $this->db->Request($sql, $id, 'posts', true);
+        return $this->db->Request($sql, ['id' => $id], 'posts', true);
     }
 
 }

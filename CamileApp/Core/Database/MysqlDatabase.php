@@ -57,16 +57,26 @@ class MysqlDatabase extends Database
      * @param $fetchall
      * @return array|mixed
      */
-    public function request($sql, $param, $table, $fetchall)
+    public function request($sql, $param, $table, $fetchall=null)
     {
         if($param === null)
         {
             $req = $this->getPDO()->query($sql);
+
+            if($fetchall === null)
+            {
+                return $req;
+            }
         }
         else
         {
             $req = $this->getPDO()->prepare($sql);
-            $req->execute([':id' => $param]);
+            $req->execute($param);
+
+            if($fetchall === null)
+            {
+                return $req;
+            }
         }
 
         $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\'.$table.'Entity');

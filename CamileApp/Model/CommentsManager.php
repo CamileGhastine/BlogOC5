@@ -23,6 +23,6 @@ class CommentsManager extends Manager
             LEFT JOIN users AS u ON u.id = co.user_id 
             WHERE co.validated=1 AND co.post_id=:id
             ORDER BY co.date_creation DESC';
-        return $this->db->request($sql,$id, 'comments', true);
+        return $this->db->request($sql, ['id' => $id], 'comments', true);
     }
 }
