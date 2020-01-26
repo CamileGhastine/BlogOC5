@@ -3,7 +3,7 @@
 
         <div class="row pt-4">
             <div class="col-sm-8">
-                <h1>Ajouter une catégories</h1>
+                <h1>Modifier une catégories</h1>
             </div>
             <div class="col-sm-4">
                 <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
@@ -11,9 +11,9 @@
         </div>
 
         <?php
-        $categoryId = $category->getId();
-        $categoryName = $category->getName();
-        $categoryDescription = $category->getDescription();
+        $categoryId = htmlspecialchars($category->getId());
+        $categoryName = htmlspecialchars($category->getName());
+        $categoryDescription = htmlspecialchars($category->getDescription());
         ?>
         <form method="post" action="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="pb-3">
 

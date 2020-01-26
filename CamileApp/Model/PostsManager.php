@@ -65,4 +65,20 @@ ORDER BY p.date_creation DESC
         return $this->db->Request($sql, ['id' => $id], 'posts', true);
     }
 
+    /**
+     * all posts with all infos (category, number of validated and unvalidated comments)
+     * @return mixed
+     */
+    public function allWithAllInfos()
+    {
+        $sql ='
+SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments, ca.name as category, (SELECT COUNT(*)-COUNT(validated) FROM `comments` where post_id =p.id) AS numberUnvalidated
+FROM posts AS p
+LEFT JOIN comments AS co ON co.post_id = p.id
+LEFT JOIN categories AS ca ON ca.id = p.category_id
+GROUP BY p.id
+ORDER BY p.date_creation DESC
+        ';
+        return $this->db->Request($sql, null, 'posts', true);
+    }
 }

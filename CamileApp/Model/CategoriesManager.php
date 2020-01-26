@@ -16,28 +16,44 @@ class CategoriesManager extends Manager
      */
     public function all()
     {
-        $sql = 'SELECT * FROM categories';
+        $sql = 'SELECT * FROM categories ORDER BY name';
         return $this->db->request($sql, null, 'categories', true);
     }
 
+    /**
+     * one category (by id)
+     * @return mixed
+     */
     public function categoryById()
     {
         $sql = 'SELECT * FROM categories WHERE id=:id';
         return $this->db->request($sql, ['id' => $_GET['id']], 'categories', false);
     }
 
+    /**
+     * INSERT INTO request
+     * @return mixed
+     */
     public function add()
     {
         $sql = 'INSERT INTO categories(name, description) VALUES (:name, :description)';
         return $this->db->request($sql, $_POST, 'categories');
     }
 
+    /**
+     * DELETE request
+     * @return mixed
+     */
     public function delete()
     {
         $sql = 'DELETE from categories WHERE id=:id';
         return $this->db->request($sql,['id' => $_GET['id']], 'categories');
     }
 
+    /**
+     * UPDATE request
+     * @return mixed
+     */
     public function update()
     {
         $sql = 'UPDATE categories SET name=:name, description=:description WHERE id=:id';

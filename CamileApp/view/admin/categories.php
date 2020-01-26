@@ -37,7 +37,6 @@
     <table class="table table-striped ">
         <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Catégorie</th>
             <th scope="col">Action</th>
             <th scope="col"></th>
@@ -52,7 +51,6 @@
 
             ?>
             <tr>
-                <td><?= $categoryId; ?></td>
                 <td><?= $categoryName; ?></td>
                 <td>
                     <a href="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
@@ -61,7 +59,7 @@
                 <td>
                     <?php if($btn == 'secondary'): ?>
                         <a id="deleteConfirmation" href="index.php?route=admin.deleteCategory&id=<?= $categoryId ?>" class="btn-sm btn-primary mt-3">Confirmer</a>
-                        <a href="index.php?route=admin.Categories" class="btn-sm btn-success mt-3">Annuler</a
+                        <a href="index.php?route=admin.categories" class="btn-sm btn-success mt-3">Annuler</a
                     <?php endif ?>
                 </td>
             </tr>
