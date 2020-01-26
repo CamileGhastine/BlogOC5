@@ -32,6 +32,18 @@ class CategoriesManager extends Manager
         return $this->db->request($sql, ['id' => $_GET['id']], 'categories', false);
     }
 
+    public function allWithPostCount()
+    {
+        $sql = '
+        SELECT ca.id, ca.name, ca.description, COUNT(p.id) AS numberPosts
+        FROM categories AS ca
+        LEFT JOIN posts AS p ON p.category_id=ca.id
+        GROUP BY ca.id
+        ORDER BY ca.name';
+        return $this->db->request($sql, null, 'categories', true);
+
+    }
+
     /**
      * INSERT INTO request
      * @return mixed

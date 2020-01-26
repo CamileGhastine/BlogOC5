@@ -85,7 +85,7 @@ class AdminController extends Controller
      */
     public function categories()
     {
-        $categories = $this->categories->all();
+        $categories = $this->categories->allWithPostCount();
         $this->render('categories', compact('categories'));
     }
 
