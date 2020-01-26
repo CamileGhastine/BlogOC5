@@ -3,7 +3,6 @@
 
 namespace CamileApp\Controller;
 
-
 /**
  * Class ErrorController
  * @package CamileApp\Controller

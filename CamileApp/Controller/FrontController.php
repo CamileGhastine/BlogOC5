@@ -3,8 +3,6 @@
 
 namespace CamileApp\Controller;
 
-use CamileApp\Core\App;
-
 /**
  * Class FrontController
  * @package CamileApp\Controller
@@ -12,16 +10,6 @@ use CamileApp\Core\App;
 class FrontController extends Controller
 {
     protected $viewPath = ROOT.'/CamileApp/view/frontend/';
-    protected $posts;
-    protected $comment;
-    protected $categories;
-
-    public function __construct()
-    {
-        $this->posts = App::getinstance()->getManager('posts');
-        $this->comments = App::getinstance()->getManager('comments');
-        $this->categories = App::getinstance()->getManager('categories');
-    }
 
     /**
      * home page

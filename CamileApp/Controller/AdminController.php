@@ -2,21 +2,9 @@
 
 namespace CamileApp\Controller;
 
-use CamileApp\Core\App;
-
 class AdminController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/admin/';
-    protected $posts;
-    protected $comment;
-    protected $categories;
-
-    public function __construct()
-    {
-        $this->posts = App::getinstance()->getManager('posts');
-        $this->comments = App::getinstance()->getManager('comments');
-        $this->categories = App::getinstance()->getManager('categories');
-    }
 
     /**
      * Admin dashboard

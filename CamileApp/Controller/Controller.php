@@ -3,6 +3,7 @@
 
 namespace CamileApp\Controller;
 
+use CamileApp\Core\App;
 
 /**
  * Class Controller parent of all Controller
@@ -10,6 +11,17 @@ namespace CamileApp\Controller;
  */
 abstract class Controller
 {
+    protected $posts;
+    protected $comment;
+    protected $categories;
+
+    public function __construct()
+    {
+        $this->posts = App::getinstance()->getManager('posts');
+        $this->comments = App::getinstance()->getManager('comments');
+        $this->categories = App::getinstance()->getManager('categories');
+    }
+
     /**
      * view and template by transfering the variables
      * @param $view
