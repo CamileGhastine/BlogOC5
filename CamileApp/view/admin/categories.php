@@ -25,7 +25,7 @@
                     $message = 'La catégorie a  été modifiée avec succès.';
                 break;
                 case('no') :
-                    $message = 'La catégorie ne peut être supprimée, car elle contient des articles. <a href="index.php?route=admin.posts" class="btn-sm btn-primary">Supprimer des articles</a>
+                    $message = 'La catégorie ne peut pas être supprimée, car elle contient des articles. <a href="index.php?route=admin.posts" class="btn-sm btn-primary">Supprimer les articles</a>
 ';
                     $alert = 'danger';
                 break;

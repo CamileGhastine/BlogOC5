@@ -6,6 +6,7 @@ namespace CamileApp\Core;
 use CamileApp\Controller\ErrorController;
 use CamileApp\Core\Database\MysqlDatabase;
 use Config\Config;
+use CamileApp\Core\Constraints\ValidationForm;
 
 /**
  * Class App prevent  dependency injection
@@ -64,5 +65,10 @@ class App
     {
         $manager = 'CamileApp\\Model\\' . ucfirst($managerType) . 'Manager';
         return new $manager($this->getDB());
+    }
+
+    public function getValidationForm()
+    {
+        return new ValidationForm();
     }
 }

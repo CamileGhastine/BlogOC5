@@ -1,14 +1,18 @@
 <?php
+
+$nameMessage = isset($formMessage['name']) ? $formMessage['name'] : '';
+$descriptionMessage = isset($formMessage['description']) ? $formMessage['description'] : '';
+
 // Request Add category ($update=false) or Update category ($update=true)
-$update = isset($category);
+$update = (isset($category) OR isset($postUnvalid));
 
 if($update)
 {
-    $titlePage = 'Modifier la actégorie';
-    $categoryId = htmlspecialchars($category->getId());
+    $titlePage = 'Modifier la catégorie';
+    $categoryId = isset($postUnvalid) ? $id : htmlspecialchars($category->getId());
     $formAction = 'index.php?route=admin.updateCategory&id='.$categoryId;
-    $categoryName = htmlspecialchars($category->getName());
-    $categoryDescription = htmlspecialchars($category->getDescription());
+    $categoryName = isset($postUnvalid) ? $postUnvalid['name']: htmlspecialchars($category->getName());
+    $categoryDescription = isset($postUnvalid) ? $postUnvalid['description']: htmlspecialchars($category->getDescription());
     $button = 'Modifier';
 }
 else
@@ -16,8 +20,8 @@ else
     $titlePage = 'Ajouter une catégorie';
     $formAction = 'index.php?route=admin.addCategory';
     $categoryId = null;
-    $categoryName = null;
-    $categoryDescription = null;
+    $categoryName = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['name']) : null;;
+    $categoryDescription = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['description']) : null;;
     $button = 'Ajouter';
 }
 ?>
@@ -35,14 +39,24 @@ else
 
         <form method="post" action="<?= $formAction ?>" class="pb-3">
 
-            <div class="form-group">
-                <label for="name" >Nom</label>
-                <input type="text" class="form-control" name="name" value="<?= $categoryName ?>">
+            <div class="row pt-4">
+                <div class="form-group col-lg-8">
+                    <label for="name" >Nom</label>
+                    <input type="text" class="form-control" name="name" value="<?= $categoryName ?>" maxlength="100">
+                </div>
+                <div class="col-lg-4 d-flex align-items-end">
+                    <p><?= $nameMessage ?></p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="description">description</label>
-                <textarea class="form-control" name="description" rows="2"><?= $categoryDescription ?></textarea>
+            <div class="row pt-4">
+                <div class="form-group col-lg-8">
+                    <label for="description">description</label>
+                    <textarea class="form-control" name="description" rows="2" maxlength="255"><?= $categoryDescription ?></textarea>
+                </div>
+                <div class="col-lg-4 d-flex align-items-end">
+                    <p><?= $descriptionMessage ?></p>
+                </div>
             </div>
 
             <div class="row">

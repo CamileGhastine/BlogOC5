@@ -30,8 +30,19 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $this->posts->add();
-            header('Location: index.php?route=admin.posts&success=add');
+            $formMessage = $this->ValidationForm->checkValidity($_POST);
+
+            if(!$formMessage)
+            {
+                $this->posts->add();
+                header('Location: index.php?route=admin.posts&success=add');
+            }
+            else
+            {
+                $postAddUnvalid = $_POST;
+                $categories = $this->categories->all();
+                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postAddUnvalid'));
+            }
         }
         else
         {
@@ -57,8 +68,20 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $this->posts->update();
-            header('Location: index.php?route=admin.posts&success=update');
+            $formMessage = $this->ValidationForm->checkValidity($_POST);
+
+            if(!$formMessage)
+            {
+                $this->posts->update();
+                header('Location: index.php?route=admin.posts&success=update');
+            }
+            else
+            {
+                $id = $_GET['id'];
+                $postUnvalid = $_POST;
+                $categories = $this->categories->all();
+                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postUnvalid', 'id'));
+            }
         }
         else
         {
@@ -84,8 +107,18 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $this->categories->add();
-            header('Location: index.php?route=admin.categories&success=add');
+            $formMessage = $this->ValidationForm->checkValidity($_POST);
+
+            if(!$formMessage)
+            {
+                $this->categories->add();
+                header('Location: index.php?route=admin.categories&success=add');
+            }
+            else
+            {
+                $postAddUnvalid = $_POST;
+                $this->render('addOrUpdatecategory', compact('formMessage', 'postAddUnvalid'));
+            }
         }
         else
         {
@@ -108,10 +141,21 @@ class AdminController extends Controller
      */
     public function updateCategory()
     {
+        $formMessage = $this->ValidationForm->checkValidity($_POST);
+
         if($_POST)
         {
-            $this->categories->update();
-            header('Location: index.php?route=admin.categories&success=update');
+            if(!$formMessage)
+            {
+                $this->categories->update();
+                header('Location: index.php?route=admin.categories&success=update');
+            }
+            else
+            {
+                $id = $_GET['id'];
+                $postUnvalid = $_POST;
+                $this->render('addOrUpdateCategory', compact('formMessage', 'postUnvalid', 'id'));
+            }
         }
         else
         {

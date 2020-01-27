@@ -14,12 +14,15 @@ abstract class Controller
     protected $posts;
     protected $comment;
     protected $categories;
+    protected $ValidationForm;
+
 
     public function __construct()
     {
         $this->posts = App::getinstance()->getManager('posts');
         $this->comments = App::getinstance()->getManager('comments');
         $this->categories = App::getinstance()->getManager('categories');
+        $this->ValidationForm = App::getinstance()->getValidationForm();
     }
 
     /**
