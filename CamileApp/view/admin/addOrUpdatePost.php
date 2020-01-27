@@ -6,17 +6,17 @@ $contentMessage = isset($formMessage['content']) ? $formMessage['content'] : '';
 
 
 // Request Add post ($update=false) or Update post ($update=true)
-$update = (isset($post) OR isset($postUnvalid));
+$update = (isset($post) OR isset($postUpdateUnvalid));
 
 if($update)
 {
     $titlePage = 'Modifier l\'article';
-    $postId = isset($postUnvalid) ? $id : htmlspecialchars($post->getId());
+    $postId = isset($postUpdateUnvalid) ? $id : htmlspecialchars($post->getId());
     $formAction = 'index?route=admin.updatePost&id='.$postId;
-    $title = isset($postUnvalid) ? htmlspecialchars($postUnvalid['title']) :  htmlspecialchars($post->getTitle());
-    $chapo = isset($postUnvalid) ? htmlspecialchars($postUnvalid['chapo']) : htmlspecialchars($post->getChapo());
-    $content = isset($postUnvalid) ? htmlspecialchars($postUnvalid['content']) : htmlspecialchars($post->getContent());
-    $postCategory_id = isset($postUnvalid) ? htmlspecialchars($postUnvalid['category_id']) : htmlspecialchars($post->getCategory_id());
+    $title = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['title']) :  htmlspecialchars($post->getTitle());
+    $chapo = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['chapo']) : htmlspecialchars($post->getChapo());
+    $content = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['content']) : htmlspecialchars($post->getContent());
+    $postCategory_id = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['category_id']) : htmlspecialchars($post->getCategory_id());
     $button = 'Modifier';
 }
 else

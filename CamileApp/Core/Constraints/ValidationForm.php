@@ -2,6 +2,10 @@
 
 namespace CamileApp\Core\Constraints;
 
+/**
+ * Class ValidationForm
+ * @package CamileApp\Core\Constraints
+ */
 abstract class ValidationForm
 {
     /**
@@ -40,7 +44,7 @@ abstract class ValidationForm
 
         if(empty($post))
         {
-            return 'Le champs saisi ne doit pas être vide.';
+            return 'Ce champs  ne peut pas être vide.';
         }
 
         if(strlen($post) < $this->min)

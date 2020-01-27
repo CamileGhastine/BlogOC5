@@ -4,6 +4,10 @@
 namespace CamileApp\Core\Constraints;
 
 
+/**
+ * Class CategoriesValidationForm
+ * @package CamileApp\Core\Constraints
+ */
 class CategoriesValidationForm extends ValidationForm
 {
     public function getConstraints($var)

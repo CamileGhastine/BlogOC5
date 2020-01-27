@@ -27,4 +27,14 @@ class CommentsManager extends Manager
             ORDER BY co.date_creation DESC';
         return $this->db->request($sql, ['id' => $id], 'comments', true);
     }
+
+    /**
+     * INSERT INTO request
+     * @return mixed
+     */
+    public function add()
+    {
+        $sql = 'INSERT INTO comments(content, post_id, user_id, validated) VALUES (:content, :post_id, 1, 1)';
+        return $this->db->request($sql, $_POST, 'comments');
+    }
 }

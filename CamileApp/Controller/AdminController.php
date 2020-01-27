@@ -78,9 +78,9 @@ class AdminController extends Controller
             else
             {
                 $id = $_GET['id'];
-                $postUnvalid = $_POST;
+                $postUpdateUnvalid = $_POST;
                 $categories = $this->categories->all();
-                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postUnvalid', 'id'));
+                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postUpdateUnvalid', 'id'));
             }
         }
         else
@@ -153,8 +153,8 @@ class AdminController extends Controller
             else
             {
                 $id = $_GET['id'];
-                $postUnvalid = $_POST;
-                $this->render('addOrUpdateCategory', compact('formMessage', 'postUnvalid', 'id'));
+                $postUpdateUnvalid = $_POST;
+                $this->render('addOrUpdateCategory', compact('formMessage', 'postUpdateUnvalid', 'id'));
             }
         }
         else

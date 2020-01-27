@@ -4,15 +4,15 @@ $nameMessage = isset($formMessage['name']) ? $formMessage['name'] : '';
 $descriptionMessage = isset($formMessage['description']) ? $formMessage['description'] : '';
 
 // Request Add category ($update=false) or Update category ($update=true)
-$update = (isset($category) OR isset($postUnvalid));
+$update = (isset($category) OR isset($postUpdateUnvalid));
 
 if($update)
 {
     $titlePage = 'Modifier la catégorie';
-    $categoryId = isset($postUnvalid) ? $id : htmlspecialchars($category->getId());
+    $categoryId = isset($postUpdateUnvalid) ? $id : htmlspecialchars($category->getId());
     $formAction = 'index.php?route=admin.updateCategory&id='.$categoryId;
-    $categoryName = isset($postUnvalid) ? $postUnvalid['name']: htmlspecialchars($category->getName());
-    $categoryDescription = isset($postUnvalid) ? $postUnvalid['description']: htmlspecialchars($category->getDescription());
+    $categoryName = isset($postUpdateUnvalid) ? $postUpdateUnvalid['name']: htmlspecialchars($category->getName());
+    $categoryDescription = isset($postUpdateUnvalid) ? $postUpdateUnvalid['description']: htmlspecialchars($category->getDescription());
     $button = 'Modifier';
 }
 else

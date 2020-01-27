@@ -1,6 +1,7 @@
 <p><a href="index.php?route=front.posts">Retour aux articles</a></p>
 
 <?php
+$postId = $post->getId();
 $title = htmlspecialchars($post->getTitle());
 $chapo = htmlspecialchars($post->getChapo());
 $content = htmlspecialchars($post->getContent());
@@ -8,6 +9,9 @@ $datePost = $post->getDate_creation() == $post->getDate_modification() ? 'Publi�
 $author = htmlspecialchars($post->getPseudo());
 $category = htmlspecialchars($post->getCategory());
 $numberComments = ($post->getNumberComments());
+$contentUnvalid = isset($postAddUnvalid) ? $postAddUnvalid['content'] : null;
+$contentMessage = isset($formMessage) ? $formMessage['content'] : null;
+$successMessage = isset($_GET['success']) ? 'Une fois validé par l\'administrateur, votre commentaires sera publié.': null;
 ?>
 
 <h2> <B><?=$title?></B></h2>
@@ -18,10 +22,13 @@ $numberComments = ($post->getNumberComments());
 <p><small><?= $datePost ?></small></p>
 <br/>
 
-<h4>Commentaires (<?= $numberComments ?>) :</h4>
-<form method="post" action="index.php?route=back.addComment">
-    <label for="content"></label>
-    <textarea></textarea>
+<h4 id="comments">Commentaires (<?= $numberComments ?>) :</h4>
+<P><?= $successMessage ?></P>
+<form method="post" action="index.php?route=back.addComment&id=<?= $postId ?>">
+    <label for="content">Réagissez ici :</label>
+    <input name="post_id" type="hidden" value="<?= $postId ?>">
+    <textarea name="content"><?= $contentUnvalid ?></textarea>
+    <P><?= $contentMessage ?></P>
     <input type="submit" value="Réagir">
 </form>
 <?php
