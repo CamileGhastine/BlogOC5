@@ -12,7 +12,10 @@ class BackController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/backend/';
 
-
+    public function connexionRegister()
+    {
+        $this->render('connexionRegister');
+    }
     /**
      * add a new comment
      */

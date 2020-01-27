@@ -29,6 +29,7 @@
 
     <p><a href="index.php?">Accueil</a></p>
     <p><a href="index.php?route=admin.home">Admin</a></p>
+    <p><a href="index.php?route=back.connexionRegister">Enregistrement/connexion</a></p>
 
     <div class="px-5">
         <?= $content ?>
