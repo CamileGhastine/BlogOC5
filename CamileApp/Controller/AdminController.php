@@ -132,8 +132,16 @@ class AdminController extends Controller
      */
     public function deleteCategory()
     {
-        $this->categories->delete();
-        header('Location: index.php?route=admin.categories&success=delete');
+        if($_GET['id'] != 1)
+        {
+            $this->posts->changeCategoryToUnknown();
+            $this->categories->delete();
+            header('Location: index.php?route=admin.categories&success=delete');
+        }
+        else
+        {
+            header('Location: index.php?route=admin.categories&success=no');
+        }
     }
 
     /**

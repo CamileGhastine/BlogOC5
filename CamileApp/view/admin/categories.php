@@ -19,14 +19,13 @@
                     $message = 'La catégorie a  été créée avec succès.';
                 break;
                 case('delete') :
-                    $message = 'La catégorie a  été supprimée avec succès.';
+                    $message = 'La catégorie a  été supprimée avec succès.<br/> Si elle Contenait des articles, ils ont été transférés dans la catégorie "non classé" ';
                 break;
                 case('update') :
                     $message = 'La catégorie a  été modifiée avec succès.';
                 break;
                 case('no') :
-                    $message = 'La catégorie ne peut pas être supprimée, car elle contient des articles. <a href="index.php?route=admin.posts" class="btn-sm btn-primary">Supprimer les articles</a>
-';
+                    $message = 'Cette catégorie ne peut pas être supprimée.';
                     $alert = 'danger';
                 break;
             }
@@ -59,16 +58,17 @@
             $categoryId = $category->getId();
             $url = $category->getUrl();
             $btn = (isset($_GET['delete']) AND $_GET['delete'] == $categoryId) ? 'secondary' : 'danger';
-            $deleteHref = $numberPosts ? 'index.php?route=admin.categories&success=no' : 'index.php?route=admin.categories&delete='.$categoryId.'#deleteConfirmation'
 
             ?>
             <tr>
                 <td><?= $categoryName ?></td>
                 <td class="text-center"><?= $numberPosts ?></td>
-                <td>
-                    <a href="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
-                    <a href="<?= $deleteHref ?>" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
-                </td>
+                <?php if($categoryId != 1) : ?>
+                    <td>
+                        <a href="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
+                        <a href="index.php?route=admin.categories&delete=<?= $categoryId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
+                    </td>
+                <?php endif ?>
                 <td>
                     <?php if($btn == 'secondary'): ?>
                         <a id="deleteConfirmation" href="index.php?route=admin.deleteCategory&id=<?= $categoryId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>

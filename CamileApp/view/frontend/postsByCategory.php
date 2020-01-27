@@ -2,7 +2,7 @@
 <?php
 foreach($categories as $category)
 {
-    $categoryName = htmlspecialchars($category->getName());
+    $categoryName = $category->getNumberPosts() ? htmlspecialchars($category->getName()) : null;
     $categoryId = $category->getId();
     $categoryId == $_GET['id'] ? $categoryDescription = $category->getDescription() : null ;
     $url = $category->getUrl();

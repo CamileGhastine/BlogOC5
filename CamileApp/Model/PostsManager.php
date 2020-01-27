@@ -102,4 +102,15 @@ ORDER BY p.date_creation DESC
         $_POST['id']= $_GET['id'];
         return $this->db->request($sql, $_POST, 'posts');
     }
+
+    /**
+     * change Post Catgory to Unknown (id=1) when the category is delete
+     * @return mixed
+     */
+    public function changeCategoryToUnknown()
+    {
+        $sql = '
+UPDATE posts SET category_id=1 WHERE category_id=:id';
+        return $this->db->request($sql, ['id' =>$_GET['id']] , 'posts');
+    }
 }
