@@ -14,7 +14,9 @@ abstract class Controller
     protected $posts;
     protected $comment;
     protected $categories;
-    protected $ValidationForm;
+    protected $postsValidationForm;
+    protected $categoriesValidationForm;
+    protected $commentsValidationForm;
 
 
     public function __construct()
@@ -22,7 +24,9 @@ abstract class Controller
         $this->posts = App::getinstance()->getManager('posts');
         $this->comments = App::getinstance()->getManager('comments');
         $this->categories = App::getinstance()->getManager('categories');
-        $this->ValidationForm = App::getinstance()->getValidationForm();
+        $this->postsValidationForm = App::getinstance()->getValidationForm('posts');
+        $this->categoriesValidationForm = App::getinstance()->getValidationForm('categories');
+        $this->commentsValidationForm = App::getinstance()->getValidationForm('comments');
     }
 
     /**

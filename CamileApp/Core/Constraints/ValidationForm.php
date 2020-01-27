@@ -2,7 +2,7 @@
 
 namespace CamileApp\Core\Constraints;
 
-class ValidationForm
+abstract class ValidationForm
 {
     /**
      * Minimum field length
@@ -54,31 +54,5 @@ class ValidationForm
         }
     }
 
-    public function getConstraints($var)
-    {
-        $this->min = 3;
 
-        switch($var)
-        {
-            //post
-            case 'title' :
-                $this->max = 100;
-                break;
-            case 'chapo' :
-                $this->max = 255;
-                break;
-            // post and comment
-            case 'content' :
-                $this->max = null;
-                break;
-            //category
-            case 'name' :
-                $this->max = 100;
-                break;
-            case 'description' :
-                $this->max = 255;
-                break;
-
-        }
-    }
 }

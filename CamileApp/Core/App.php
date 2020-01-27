@@ -67,8 +67,9 @@ class App
         return new $manager($this->getDB());
     }
 
-    public function getValidationForm()
+    public function getValidationForm($validationType)
     {
-        return new ValidationForm();
+        $validation =  'CamileApp\\Core\\Constraints\\' . ucfirst($validationType) . 'ValidationForm';
+        return new $validation();
     }
 }

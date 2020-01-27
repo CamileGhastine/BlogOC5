@@ -19,6 +19,11 @@ $numberComments = ($post->getNumberComments());
 <br/>
 
 <h4>Commentaires (<?= $numberComments ?>) :</h4>
+<form method="post" action="index.php?route=back.addComment">
+    <label for="content"></label>
+    <textarea></textarea>
+    <input type="submit" value="Réagir">
+</form>
 <?php
 foreach($comments as $comment)
 {

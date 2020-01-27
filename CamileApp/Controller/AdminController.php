@@ -30,7 +30,7 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $formMessage = $this->ValidationForm->checkValidity($_POST);
+            $formMessage = $this->postsValidationForm->checkValidity($_POST);
 
             if(!$formMessage)
             {
@@ -68,7 +68,7 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $formMessage = $this->ValidationForm->checkValidity($_POST);
+            $formMessage = $this->postsValidationForm->checkValidity($_POST);
 
             if(!$formMessage)
             {
@@ -107,7 +107,7 @@ class AdminController extends Controller
     {
         if($_POST)
         {
-            $formMessage = $this->ValidationForm->checkValidity($_POST);
+            $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
 
             if(!$formMessage)
             {
@@ -141,7 +141,7 @@ class AdminController extends Controller
      */
     public function updateCategory()
     {
-        $formMessage = $this->ValidationForm->checkValidity($_POST);
+        $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
 
         if($_POST)
         {
