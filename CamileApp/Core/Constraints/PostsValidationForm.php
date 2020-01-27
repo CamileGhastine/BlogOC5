@@ -2,12 +2,15 @@
 
 namespace CamileApp\Core\Constraints;
 
+
 /**
  * Class PostsValidationForm
  * @package CamileApp\Core\Constraints
  */
 class PostsValidationForm extends ValidationForm
 {
+    protected $keys=['title', 'chapo', 'content'];
+
     public function getConstraints($var)
     {
         $this->min = 3;

@@ -10,6 +10,8 @@ namespace CamileApp\Core\Constraints;
  */
 class CategoriesValidationForm extends ValidationForm
 {
+    protected $keys=['name', 'description'];
+
     public function getConstraints($var)
     {
         $this->min = 3;

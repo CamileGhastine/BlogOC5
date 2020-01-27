@@ -23,11 +23,11 @@ abstract class ValidationForm
     {
         foreach($post AS $key => $value)
         {
-            if(!stristr($key, 'id'))
+            if(in_array($key, $this->keys))
             {
-                if($this->checkField($post[$key], $key))
+                if($this->checkField($value, $key))
                 {
-                    $message[$key] = $this->checkField($post[$key], $key);
+                    $message[$key] = $this->checkField($value, $key);
                 }
             }
         }
@@ -37,25 +37,31 @@ abstract class ValidationForm
         }
     }
 
-    public function checkField($post, $key)
+    public function checkField($value, $key)
     {
 
         $this->getConstraints($key);
 
-        if(empty($post))
+        if($this->moreConstraints($value, $key) != null)
+        {
+            return $this->moreConstraints($value, $key);
+        }
+
+        if(empty($value))
         {
             return 'Ce champs  ne peut pas être vide.';
         }
 
-        if(strlen($post) < $this->min)
+        if(strlen($value) < $this->min)
         {
             return 'Le champs saisi est trop court (minimum ' . $this->min . ' caractères).';
         }
 
-        if($this->max !== null && strlen($post) > $this->max)
+        if($this->max !== null && strlen($value) > $this->max)
         {
             return 'Le champs saisi est trop long (maximum ' . $this->max . ' caractères).';
         }
+
     }
 
 

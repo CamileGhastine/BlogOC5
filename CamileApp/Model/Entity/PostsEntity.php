@@ -141,7 +141,7 @@ class PostsEntity
     {
         if(!is_null($date_creation))
         {
-            $this->date_creation;
+            $this->date_creation = $date_creation;
         }
 
         if(is_string($this->date_creation))
@@ -167,7 +167,7 @@ class PostsEntity
     {
         if(!is_null($date_modification))
         {
-            $this->date_modification;
+            $this->date_modification = $date_modification;
         }
 
         if(is_string($this->date_creation))

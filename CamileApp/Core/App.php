@@ -6,7 +6,7 @@ namespace CamileApp\Core;
 use CamileApp\Controller\ErrorController;
 use CamileApp\Core\Database\MysqlDatabase;
 use Config\Config;
-use CamileApp\Core\Constraints\ValidationForm;
+use CamileApp\Core\Password\Password;
 
 /**
  * Class App prevent  dependency injection
@@ -72,4 +72,10 @@ class App
         $validation =  'CamileApp\\Core\\Constraints\\' . ucfirst($validationType) . 'ValidationForm';
         return new $validation();
     }
+
+    public function getPassword()
+    {
+        return new Password();
+    }
+
 }

@@ -79,7 +79,11 @@ class MysqlDatabase extends Database
             }
         }
 
-        $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\'.$table.'Entity');
+        if($table != null)
+        {
+            $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\' . $table . 'Entity');
+        }
+
         if($fetchall)
         {
             return $req->fetchall();
