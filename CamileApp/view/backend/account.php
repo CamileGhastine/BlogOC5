@@ -11,12 +11,12 @@
     <table class="table table-striped ">
         <tr>
             <th >Pseudo</th>
-            <td><?= $user->getPseudo() ?></td>
+            <td><?= htmlspecialchars($user->getPseudo()) ?></td>
             <td></td>
         </tr>
         <tr>
             <th>Courriel</th>
-            <td><?= $user->getEmail() ?></td>
+            <td><?= htmlspecialchars($user->getEmail()) ?></td>
             <td><a href="#" class="btn btn-primary">Modifier</a></td>
         </tr>
         <tr>
@@ -26,12 +26,12 @@
         </tr>
         <tr>
             <th>Satut</th>
-            <td><?= $user->getStatut() ?></td>
+            <td><?= htmlspecialchars($user->getStatut()) ?></td>
             <td></td>
         </tr>
         <tr>
             <th>Date d'inscription</th>
-            <td><?= $user->getDate_inscription() ?></td>
+            <td><?= htmlspecialchars($user->getDate_inscription()) ?></td>
             <td></td>
         </tr>
     </table>

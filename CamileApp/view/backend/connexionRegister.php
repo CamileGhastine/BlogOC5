@@ -42,6 +42,14 @@ else
             </div>
         </div>
     </div>
+<?php elseif(isset($_GET['access']) && $_GET['access']='denied') :?>
+    <div class="alert alert-danger">
+        <div class=row>
+            <div class="col-sm-10">
+                Vous ne pouvez pas accéder à cette page sans être connecté.
+            </div>
+        </div>
+    </div>
 <?php endif; ?>
 
 <div class="accordion row py-4" id="accordion">

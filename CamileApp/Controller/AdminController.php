@@ -10,11 +10,22 @@ class AdminController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/admin/';
 
+    public function isAdmin()
+    {
+        if($_SESSION['statut'] !== 'admin')
+        {
+            header('Location: index.php?route=back.connexionRegister&access=denied');
+            exit;
+        }
+    }
+
     /**
      * Admin dashboard
      */
     public function home()
     {
+        $this->isAdmin();
+
         $this->render('home');
     }
 
@@ -23,6 +34,8 @@ class AdminController extends Controller
      */
     public function posts()
     {
+        $this->isAdmin();
+
         $posts = $this->posts->allWithAllInfos();
         $this->render('posts', compact('posts'));
     }
@@ -32,6 +45,8 @@ class AdminController extends Controller
      */
     public function addPost()
     {
+        $this->isAdmin();
+
         if($_POST)
         {
             $formMessage = $this->postsValidationForm->checkValidity($_POST);
@@ -61,6 +76,8 @@ class AdminController extends Controller
      */
     public function deletepost()
     {
+        $this->isAdmin();
+
         $this->posts->delete();
         header('Location: index.php?route=admin.posts&success=delete');
     }
@@ -70,6 +87,8 @@ class AdminController extends Controller
      */
     public function updatePost()
     {
+        $this->isAdmin();
+
         if($_POST)
         {
             $formMessage = $this->postsValidationForm->checkValidity($_POST);
@@ -100,6 +119,8 @@ class AdminController extends Controller
      */
     public function categories()
     {
+        $this->isAdmin();
+
         $categories = $this->categories->allWithPostCount();
         $this->render('categories', compact('categories'));
     }
@@ -109,6 +130,8 @@ class AdminController extends Controller
      */
     public function addCategory()
     {
+        $this->isAdmin();
+
         if($_POST)
         {
             $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
@@ -136,6 +159,8 @@ class AdminController extends Controller
      */
     public function deleteCategory()
     {
+        $this->isAdmin();
+
         if($_GET['id'] != 1)
         {
             $this->posts->changeCategoryToUnknown();
@@ -153,6 +178,8 @@ class AdminController extends Controller
      */
     public function updateCategory()
     {
+        $this->isAdmin();
+
         $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
 
         if($_POST)

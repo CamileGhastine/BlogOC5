@@ -17,6 +17,12 @@
 <body>
 <div class="container-fluid">
 
+    <?php
+    $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+    $pseudo = isset($_SESSION['pseudo']) ? $_SESSION['pseudo'] : null;
+    $statut = isset($_SESSION['statut']) ? $_SESSION['statut'] : null;
+    ?>
+
     <!-- En tête -->
 
     <header>
@@ -28,14 +34,16 @@
     </header>
 
     <p><a href="index.php?">Accueil</a></p>
-    <p><a href="index.php?route=admin.home">Admin</a></p>
-    <?php if(empty($_SESSION)) : ?>
+    <?php if($statut === 'admin') : ?>
+        <p><a href="index.php?route=admin.home">Admin</a></p>
+    <?php endif ?>
+    <?php if($id === null) : ?>
         <p><a href="index.php?route=back.connexionRegister">Enregistrement/connexion</a></p>
     <?php else : ?>
-        <p><a href="index.php?route=back.account">Compte de <?= ucfirst($_SESSION['pseudo'])?></a></p>
+        <p><a href="index.php?route=back.account">Compte de <?= ucfirst($pseudo)?></a></p>
         <p><a href="index.php?route=back.disconnect">Déconnection</a></p>
-
     <?php endif ?>
+
     <div class="px-5">
         <?= $content ?>
     </div>
