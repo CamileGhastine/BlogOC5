@@ -117,7 +117,8 @@ class BackController extends Controller
      */
     public function account()
     {
-        $this->render('account');
+        $user = $this->users->infoPseudo($_SESSION['pseudo']);
+        $this->render('account', compact('user'));
     }
 
     /**

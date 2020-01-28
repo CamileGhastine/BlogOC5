@@ -54,7 +54,7 @@ class UsersManager extends Manager
      */
     public function infoPseudo($pseudo)
     {
-        $sql = 'SELECT id, pseudo, statut, pass, validated, try FROM users WHERE pseudo=:pseudo';
+        $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE pseudo=:pseudo';
         return $this->db->request($sql, ['pseudo' => $pseudo], 'users', false);
     }
 
