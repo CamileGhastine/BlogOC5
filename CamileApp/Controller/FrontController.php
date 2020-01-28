@@ -4,7 +4,7 @@
 namespace CamileApp\Controller;
 
 /**
- * Class FrontController
+ * Class FrontController functionalities accessible for everybody
  * @package CamileApp\Controller
  */
 class FrontController extends Controller

@@ -29,8 +29,13 @@
 
     <p><a href="index.php?">Accueil</a></p>
     <p><a href="index.php?route=admin.home">Admin</a></p>
-    <p><a href="index.php?route=back.connexionRegister">Enregistrement/connexion</a></p>
+    <?php if(empty($_SESSION)) : ?>
+        <p><a href="index.php?route=back.connexionRegister">Enregistrement/connexion</a></p>
+    <?php else : ?>
+        <p><a href="index.php?route=back.account">Compte de <?= ucfirst($_SESSION['pseudo'])?></a></p>
+        <p><a href="index.php?route=back.disconnect">Déconnection</a></p>
 
+    <?php endif ?>
     <div class="px-5">
         <?= $content ?>
     </div>

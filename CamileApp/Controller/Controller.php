@@ -20,6 +20,7 @@ abstract class Controller
     protected $commentsValidationForm;
     protected $registerValidationForm;
     protected $password;
+    protected $hijacking;
 
     public function __construct()
     {
@@ -32,6 +33,7 @@ abstract class Controller
         $this->commentsValidationForm = App::getinstance()->getValidationForm('comments');
         $this->registerValidationForm = App::getinstance()->getValidationForm('register');
         $this->password = App::getInstance()->getPassword();
+        $this->hijacking = App::getInstance()->hijacking();
     }
 
     /**

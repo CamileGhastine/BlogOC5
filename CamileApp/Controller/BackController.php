@@ -4,9 +4,8 @@
 namespace CamileApp\Controller;
 
 
-
 /**
- * Class BackController
+ * Class BackController  fonctionalities accessible for adminstrator and registered user
  * @package CamileApp\Controller
  */
 class BackController extends Controller
@@ -21,14 +20,64 @@ class BackController extends Controller
         $this->render('connexionRegister');
     }
 
-    private function exists($field, $value)
+    /**
+     * connexion
+     */
+    public function connect()
     {
-        $exists = $this->users->exists($field, $value);
-        return $exists[0];
+        if($this->exists('pseudo', $_POST['pseudo']))
+        {
+            $infoPseudo = $this->users->infoPseudo($_POST['pseudo']);
+
+            if($infoPseudo->getTry() >= 5)
+            {
+                $connexionMessage = 'Votre compte a été bloqué après 5 tentatives infructueuses.';
+                $this->render('connexionRegister', compact('connexionMessage'));
+            }
+
+            if($this->password->verify($_POST['pass'], $infoPseudo->getPass()))
+            {
+                if($infoPseudo->getValidated() === null)
+                {
+                    $connexionMessage = 'Encore un peu de patience ! Votre compte sera validé sous peu.';
+                    $this->render('connexionRegister', compact('connexionMessage'));
+                }
+
+                $this->users->TryToZero($_POST['pseudo']);
+
+                $_SESSION['id'] = $infoPseudo->getID();
+                $_SESSION['pseudo'] = $infoPseudo->getPseudo();
+                $_SESSION['statut'] = $infoPseudo->getStatut();
+                header('Location: index.php');
+            }
+            else
+            {
+                $this->users->substractTry($_POST['pseudo']);
+
+                $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
+
+                $connexionMessage = 'Le mot de passe est incorrect. Il vous reste '.$tryLeft.' tentatives.';
+                $connexionMessage = $tryLeft == 0 ? $connexionMessage.' Votre compte a été bloqué.' : $connexionMessage;
+                $this->render('connexionRegister', compact('connexionMessage'));
+            }
+        }
+        else
+        {
+            $connexionMessage = 'Le pseudo et/ou le mot de passe sont incorrects.';
+            $this->render('connexionRegister', compact('connexionMessage'));
+        }
     }
 
     /**
-     * new user's register
+     * disconnexion
+     */
+    public function disconnect()
+    {
+        session_destroy();
+        header('Location: index.php');
+    }
+    /**
+     * new user's register form
      */
     public function register()
     {
@@ -50,11 +99,7 @@ class BackController extends Controller
 
         if(!$formRegisterMessage)
         {
-            $param = [ 
-                'pseudo' => $_POST['pseudo'],
-                'email' => $_POST['email'],
-                'pass' => $this->password->hash($_POST['pass'])
-                ];
+            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass'])];
             $success = $this->users->add($param);
             $pseudoRegister = $_POST['pseudo'];
             $this->render('connexionRegister', compact('formRegisterMessage', 'success', 'pseudoRegister'));
@@ -65,6 +110,26 @@ class BackController extends Controller
             $this->render('connexionRegister', compact('formRegisterMessage', 'postRegister'));
         }
 
+    }
+
+    /**
+     * Dashboard user view
+     */
+    public function account()
+    {
+        $this->render('account');
+    }
+
+    /**
+     *  Allow to know if a value of a certain field exist
+     * @param $field
+     * @param $value
+     * @return mixed
+     */
+    private function exists($field, $value)
+    {
+        $exists = $this->users->exists($field, $value);
+        return $exists[0];
     }
 
     /**

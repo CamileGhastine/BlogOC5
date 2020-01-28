@@ -2,6 +2,10 @@
 
 namespace CamileApp\Controller;
 
+/**
+ * Class AdminController functionalities accessible for administrator user
+ * @package CamileApp\Controller
+ */
 class AdminController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/admin/';

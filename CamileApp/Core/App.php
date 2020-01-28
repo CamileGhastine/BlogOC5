@@ -7,6 +7,7 @@ use CamileApp\Controller\ErrorController;
 use CamileApp\Core\Database\MysqlDatabase;
 use Config\Config;
 use CamileApp\Core\Password\Password;
+use CamileApp\Core\Constraints\Hijacking;
 
 /**
  * Class App prevent  dependency injection
@@ -76,6 +77,11 @@ class App
     public function getPassword()
     {
         return new Password();
+    }
+
+    public function hijacking()
+    {
+        return Hijacking::getTry();
     }
 
 }

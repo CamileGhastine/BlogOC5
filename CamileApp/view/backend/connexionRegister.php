@@ -3,33 +3,33 @@ $showConnexion = 'show';
 $showRegister = '';
 
 $pseudoConnect = isset($pseudoRegister) ? $pseudoRegister : null;
-{
+$connexionMessage = isset($connexionMessage) ? $connexionMessage : null;
 
-    if(isset($formRegisterMessage))
-    {
-        $showRegister = 'show';
-        $showConnexion = '';
-        $pseudoMessage = isset($formRegisterMessage['pseudo']) ? $formRegisterMessage['pseudo'] : '';
-        $emailMessage = isset($formRegisterMessage['email']) ? $formRegisterMessage['email'] : '';
-        $passMessage = isset($formRegisterMessage['pass']) ? $formRegisterMessage['pass'] : '';
-        $passConfirmMessage = isset($formRegisterMessage['passConfirm']) ? $formRegisterMessage['passConfirm'] : '';
-        $pseudo = $postRegister['pseudo'];
-        $email = $postRegister['email'];
-        $pass = $postRegister['pass'];
-        $passConfirm = $postRegister['passConfirm'];
-    }
-    else
-    {
-        $pseudoMessage = '';
-        $emailMessage = '';
-        $passMessage = '';
-        $passConfirmMessage = '';
-        $pseudo = '';
-        $email = '';
-        $pass = '';
-        $passConfirm = '';
-    }
+if(isset($formRegisterMessage))
+{
+    $showRegister = 'show';
+    $showConnexion = '';
+    $pseudoMessage = isset($formRegisterMessage['pseudo']) ? $formRegisterMessage['pseudo'] : '';
+    $emailMessage = isset($formRegisterMessage['email']) ? $formRegisterMessage['email'] : '';
+    $passMessage = isset($formRegisterMessage['pass']) ? $formRegisterMessage['pass'] : '';
+    $passConfirmMessage = isset($formRegisterMessage['passConfirm']) ? $formRegisterMessage['passConfirm'] : '';
+    $pseudo = $postRegister['pseudo'];
+    $email = $postRegister['email'];
+    $pass = $postRegister['pass'];
+    $passConfirm = $postRegister['passConfirm'];
 }
+else
+{
+    $pseudoMessage = '';
+    $emailMessage = '';
+    $passMessage = '';
+    $passConfirmMessage = '';
+    $pseudo = '';
+    $email = '';
+    $pass = '';
+    $passConfirm = '';
+}
+
 ?>
 <?php if(isset($success) && $success): ?>
     <div class="alert alert-success">
@@ -56,7 +56,7 @@ $pseudoConnect = isset($pseudoRegister) ? $pseudoRegister : null;
             </div>
             <div id="collapseConnect" class="collapse <?= $showConnexion ?>" aria-labelledby="headingConnect" data-parent="#accordion">
                 <div class="card-body">
-                    <form action="?route=back.connect" method="post">
+                    <form action="index.php?route=back.connect" method="post">
                         <div class="form-group">
                             <label for="pseudo">Pseudonyme</label>
                             <input class="form-control" type="text" name="pseudo" value="<?= $pseudoConnect ?>" required="required">
@@ -64,10 +64,11 @@ $pseudoConnect = isset($pseudoRegister) ? $pseudoRegister : null;
 
                         <div class="form-group">
                             <label for="pass">Mot de passe</label>
-                            <input class="form-control" type="password" name="pass" required="required" pattern=".{6}" required="required" title="au moins 6 caractères">
+                            <input class="form-control" type="password" name="pass" required="required" pattern=".{6,}" required="required" title="au moins 6 caractères">
                         </div>
 
                         <button class="btn btn-primary" type="submit" name="connexion">Se connecter</button>
+                        <p><?= $connexionMessage ?></p>
                     </form>
                 </div>
             </div>
@@ -93,13 +94,13 @@ $pseudoConnect = isset($pseudoRegister) ? $pseudoRegister : null;
 
                         <div class="form-group">
                             <label for="pseudo">Courriel</label>
-                            <input class="form-control" type="text" name="email" value="<?= $email ?>" required="required">
+                            <input class="form-control" type="text" name="email" value="<?= $email ?>" required="required" pattern=".{6,}">
                             <?= $emailMessage ?>
                         </div>
 
                         <div class="form-group">
                             <label for="pass">Mot de passe</label>
-                            <input class="form-control" type="password" name="pass" required="required">
+                            <input class="form-control" type="password" name="pass" required="required" pattern=".{6,}">
                             <?= $passMessage ?>
                         </div>
 
