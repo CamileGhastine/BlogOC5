@@ -81,7 +81,7 @@ class CommentsEntity
     {
         if(!is_null($date_creation))
         {
-            $this->date_creation;
+            $this->date_creation = $date_creation;
         }
 
         if(is_string($this->date_creation))
@@ -104,10 +104,10 @@ class CommentsEntity
      */
     public function setDate_modification($date_modification=null): void
     {
-        if(!is_null($date_modification))
-        {
-            $this->date_modification;
-        }
+//        if(!is_null($date_modification))
+//        {
+//            $this->date_modification;
+//        }
 
         if(is_string($this->date_creation))
         {

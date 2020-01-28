@@ -3,26 +3,13 @@
 
 namespace CamileApp\Controller;
 
-use CamileApp\Core\App;
-
 /**
- * Class FrontController
+ * Class FrontController functionalities accessible for everybody
  * @package CamileApp\Controller
  */
 class FrontController extends Controller
 {
     protected $viewPath = ROOT.'/CamileApp/view/frontend/';
-    protected $posts;
-    protected $comment;
-
-    public function __construct()
-    {
-        $this->posts = App::getinstance()->getManager('posts');
-        $this->comments = App::getinstance()->getManager('comments');
-        $this->posts = App::getinstance()->getManager('posts');
-        $this->categories = App::getinstance()->getManager('categories');
-    }
-
 
     /**
      * home page
@@ -37,8 +24,8 @@ class FrontController extends Controller
      */
     public function posts()
     {
+        $categories = $this->categories->allWithPostCount();
         $posts = $this->posts->allWithCommentCount();
-        $categories = $this->categories->all();
         $this->render('posts', compact('posts', 'categories'));
     }
 
@@ -58,7 +45,7 @@ class FrontController extends Controller
     public function postsByCategory()
     {
         $posts = $this->posts->allByCategoryWithCommentCount($_GET['id']);
-        $categories = $this->categories->all();
+        $categories = $this->categories->allWithPostCount();
         $this->render('postsByCategory', compact('posts', 'categories'));
     }
 }

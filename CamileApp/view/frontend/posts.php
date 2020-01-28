@@ -1,11 +1,8 @@
-
-<p><a href="index.php">Retour à l'accueil</a></p>
-
 <p>Tous les articles</p>
 <?php
 foreach ($categories as $category)
 {
-    $categoryName = htmlspecialchars($category->getName());
+    $categoryName = $category->getNumberPosts() ? htmlspecialchars($category->getName()) : null;
     $url = $category->getUrl();
     ?>
     <p><a href="<?= $url ?>"><?= $categoryName ?></a></p>

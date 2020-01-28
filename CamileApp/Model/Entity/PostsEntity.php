@@ -21,7 +21,16 @@ class PostsEntity
     private $user_id;
     private $url;
     private $pseudo;
+    /**
+     * Number validated comments
+     * @var
+     */
     private $numberComments;
+    /**
+     * Number unvaildated Comments
+     * @var
+     */
+    private $numberUnvalidated;
     private $category;
 
     public function __construct()
@@ -132,7 +141,7 @@ class PostsEntity
     {
         if(!is_null($date_creation))
         {
-            $this->date_creation;
+            $this->date_creation = $date_creation;
         }
 
         if(is_string($this->date_creation))
@@ -158,7 +167,7 @@ class PostsEntity
     {
         if(!is_null($date_modification))
         {
-            $this->date_modification;
+            $this->date_modification = $date_modification;
         }
 
         if(is_string($this->date_creation))
@@ -264,6 +273,21 @@ class PostsEntity
         $this->numberComments = $numberComments;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNumberUnvalidated()
+    {
+        return $this->numberUnvalidated;
+    }
+
+    /**
+     * @param mixed $numberComments
+     */
+    public function setNumberUnvalidated($numberUnvalidated): void
+    {
+        $this->numberUnvalidated = $numberUnvalidated;
+    }
     /**
      * @return mixed
      */

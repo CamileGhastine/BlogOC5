@@ -2,8 +2,9 @@
 
 use CamileApp\Core\App;
 
-define('ROOT', dirname(__DIR__));
+session_start();
 
+define('ROOT', dirname(__DIR__));
 require ROOT.'/vendor/autoload.php';
 
 App::getInstance()->router();

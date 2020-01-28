@@ -12,6 +12,7 @@ class CategoriesEntity
     private $name;
     private $description;
     private $url;
+    private $numberPosts;
 
     public function __construct()
     {
@@ -97,4 +98,22 @@ class CategoriesEntity
     {
         $this->url = 'index.php?route=front.postsByCategory&id='.$this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberPosts()
+    {
+        return $this->numberPosts;
+    }
+
+    /**
+     * @param mixed $numberPosts
+     */
+    public function setNumberPosts($numberPosts): void
+    {
+        $this->numberPosts = $numberPosts;
+    }
+
+
 }

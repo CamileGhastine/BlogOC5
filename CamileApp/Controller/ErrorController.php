@@ -3,14 +3,13 @@
 
 namespace CamileApp\Controller;
 
-
 /**
  * Class ErrorController
  * @package CamileApp\Controller
  */
 class ErrorController extends Controller
 {
-    protected $viewPath = ROOT . '/CamileApp/view/Error/';
+    protected $viewPath = ROOT . '/CamileApp/view/error/';
 
     /**
      * return the message error to the view error
