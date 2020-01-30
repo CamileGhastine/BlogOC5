@@ -12,7 +12,7 @@ class Hijacking
      * Number of trying connexion allow before blocking the registered user account
      * @var int
      */
-    const TRY = 5;
+    const TRY = 1;
 
     /**
      * @return mixed

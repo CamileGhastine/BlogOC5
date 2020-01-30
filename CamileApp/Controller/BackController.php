@@ -25,49 +25,55 @@ class BackController extends Controller
      */
     public function connect()
     {
-        if($this->exists('pseudo', $_POST['pseudo']))
+        $infoPseudo = $this->users->infoPseudo($_POST['pseudo']);
+
+        if($infoPseudo) // pseudo exists in database
         {
-            $infoPseudo = $this->users->infoPseudo($_POST['pseudo']);
-
-            if($infoPseudo->getTry() >= 5)
+            if($infoPseudo->getTry() >= $this->hijacking) // maximum number of trials reached
             {
-                $connectionMessage = 'Votre compte a été bloqué après 5 tentatives infructueuses.';
+                $connectionMessage = 'Votre compte a été bloqué après ' . $this->hijacking . ' tentatives infructueuses.';
                 $this->render('connectionRegister', compact('connectionMessage'));
-            }
-
-            if($this->password->verify($_POST['pass'], $infoPseudo->getPass()))
-            {
-                if($infoPseudo->getValidated() === null)
-                {
-                    $connectionMessage = 'Encore un peu de patience ! Votre compte sera validé sous peu.';
-                    $this->render('connectionRegister', compact('connectionMessage'));
-                }
-
-                $this->users->TryToZero($_POST['pseudo']);
-
-                $_SESSION['id'] = $infoPseudo->getID();
-                $_SESSION['pseudo'] = $infoPseudo->getPseudo();
-                $_SESSION['statut'] = $infoPseudo->getStatut();
-                header('Location: index.php');
-                exit;
             }
             else
             {
-                $this->users->substractTry($_POST['pseudo']);
+                if($this->password->verify($_POST['pass'], $infoPseudo->getPass())) // password is ok
+                {
+                    if($infoPseudo->getValidated() === null) // user not yet validated by the administrator
+                    {
+                        $connectionMessage = 'Encore un peu de patience ! Votre compte sera validé sous peu.';
+                        $this->render('connectionRegister', compact('connectionMessage'));
+                    }
+                    else // Connection to user page
+                    {
+                        $this->users->TryToZero($_POST['pseudo']);
 
-                $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
+                        $_SESSION['id'] = $infoPseudo->getID();
+                        $_SESSION['pseudo'] = $infoPseudo->getPseudo();
+                        $_SESSION['statut'] = $infoPseudo->getStatut();
 
-                $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
-                $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
-                $this->render('connectionRegister', compact('connectionMessage'));
+                        header('Location: index.php');
+                        exit;
+                    }
+                }
+                else // password not ok
+                {
+                    $this->users->substractTry($_POST['pseudo']);
+
+                    $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
+
+                    $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
+                    $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
+                    $this->render('connectionRegister', compact('connectionMessage'));
+                }
             }
         }
-        else
+        else // pseudo doesn't exist
         {
             $connectionMessage = 'Le pseudo et/ou le mot de passe sont incorrects.';
             $this->render('connectionRegister', compact('connectionMessage'));
         }
     }
+
 
     /**
      * disconnection
@@ -84,7 +90,8 @@ class BackController extends Controller
      */
     public function register()
     {
-        if ($this->exists('pseudo', $_POST['pseudo']) or $this->exists('email', $_POST['email']))
+        // test if pseudo and/or mail exist
+        if($this->exists('pseudo', $_POST['pseudo']) or $this->exists('email', $_POST['email']))
         {
             if($this->exists('pseudo', $_POST['pseudo']))
             {
@@ -98,7 +105,7 @@ class BackController extends Controller
 
         $postRegister = $_POST;
 
-        if(isset($formRegisterMessage))  // pseudo and/or mail exists
+        if(isset($formRegisterMessage))  // pseudo and/or mail already exist
         {
             $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
@@ -118,9 +125,6 @@ class BackController extends Controller
                 $this->render('connectionRegister', compact('success', 'pseudoRegister'));
             }
         }
-
-
-
     }
 
     /**
