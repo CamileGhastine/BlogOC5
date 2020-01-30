@@ -87,7 +87,7 @@ ORDER BY p.date_creation DESC
      */
     public function add()
     {
-        $sql = 'INSERT INTO posts(title, chapo, content, category_id, user_id) VALUES (:title, :chapo, :content, :category_id, 1)';
+        $sql = 'INSERT INTO posts(title, chapo, content, category_id, user_id) VALUES (:title, :chapo, :content, :category_id, :user_id)';
         return $this->db->request($sql, $_POST, 'posts');
     }
 
@@ -97,8 +97,7 @@ ORDER BY p.date_creation DESC
      */
     public function update()
     {
-        $sql = 'UPDATE posts SET title=:title, chapo=:chapo, content=:content, category_id=:category_id, user_id=1 WHERE id=:id';
-        $_POST['id'] = $_GET['id'];
+        $sql = 'UPDATE posts SET title=:title, chapo=:chapo, content=:content, category_id=:category_id WHERE id=:id';
         return $this->db->request($sql, $_POST, 'posts');
     }
 
@@ -108,8 +107,7 @@ ORDER BY p.date_creation DESC
      */
     public function changeCategoryToUnknown()
     {
-        $sql = '
-UPDATE posts SET category_id=1 WHERE category_id=:id';
+        $sql = 'UPDATE posts SET category_id=1 WHERE category_id=:id';
         return $this->db->request($sql, ['id' => $_GET['id']], 'posts');
     }
 }

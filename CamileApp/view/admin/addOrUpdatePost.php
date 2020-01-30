@@ -40,7 +40,7 @@ else
                 <h1><?= $titlePage ?></h1>
             </div>
             <div class="col-sm-4">
-                <a href="#" class="btn btn-primary">Valider/modifier les commentaires</a>
+                <a href="#" class="btn btn-primary">Voir et gérer les commentaires</a>
             </div>
             <div class="col-sm-4">
                 <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>

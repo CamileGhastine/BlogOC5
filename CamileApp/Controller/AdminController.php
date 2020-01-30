@@ -49,13 +49,13 @@ class AdminController extends Controller
     public function addPost()
     {
         $this->isAdmin();
-
         if($_POST)
         {
             $formMessage = $this->postsValidationForm->checkForm($_POST);
 
             if(!$formMessage)
             {
+                $_POST['user_id'] = $_SESSION['id'];
                 $this->posts->add();
                 header('Location: index.php?route=admin.posts&success=add');
                 exit;
@@ -100,6 +100,7 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
+                $_POST['id'] = $_GET['id'];
                 $this->posts->update();
                 header('Location: index.php?route=admin.posts&success=update');
                 exit;
@@ -196,6 +197,7 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
+                $_POST['id']= $_GET['id'];
                 $this->categories->update();
                 header('Location: index.php?route=admin.categories&success=update');
                 exit;

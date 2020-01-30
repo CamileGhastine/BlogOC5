@@ -63,7 +63,6 @@ class CategoriesManager extends Manager
     public function update()
     {
         $sql = 'UPDATE categories SET name=:name, description=:description WHERE id=:id';
-        $_POST['id']= $_GET['id'];
         return $this->db->request($sql, $_POST, 'categories');
     }
 }
