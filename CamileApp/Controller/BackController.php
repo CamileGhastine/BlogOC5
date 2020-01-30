@@ -84,34 +84,42 @@ class BackController extends Controller
      */
     public function register()
     {
-        $formRegisterMessage = $this->registerValidationForm->checkForm($_POST);
-
-        if($this->exists('pseudo', $_POST['pseudo']))
+        if ($this->exists('pseudo', $_POST['pseudo']) or $this->exists('email', $_POST['email']))
         {
-            $postRegister = $_POST;
-            $formRegisterMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
+            if($this->exists('pseudo', $_POST['pseudo']))
+            {
+                $formRegisterMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
+            }
+            if($this->exists('email', $_POST['email']))
+            {
+                $formRegisterMessage['email'] = 'Ce courriel est déjà utilisé.';
+            }
         }
 
-        if($this->exists('email', $_POST['email']))
-        {
-            $postRegister = $_POST;
-            $formRegisterMessage['email'] = 'Ce courriel est déjà utilisé.';
-            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
-        }
+        $postRegister = $_POST;
 
-        if(!$formRegisterMessage)
+        if(isset($formRegisterMessage))  // pseudo and/or mail exists
         {
-            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass'])];
-            $success = $this->users->add($param);
-            $pseudoRegister = $_POST['pseudo'];
-            $this->render('connectionRegister', compact('success', 'pseudoRegister'));
+            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
         else
         {
-            $postRegister = $_POST;
-            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
+            $formRegisterMessage = $this->registerValidationForm->checkForm($_POST);
+
+            if($formRegisterMessage) // problem with input format
+            {
+                $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
+            }
+            else // no problem => register in DB ok
+            {
+                $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass'])];
+                $success = $this->users->add($param);
+                $pseudoRegister = $_POST['pseudo'];
+                $this->render('connectionRegister', compact('success', 'pseudoRegister'));
+            }
         }
+
+
 
     }
 
