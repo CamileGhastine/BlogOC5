@@ -32,7 +32,7 @@ class CommentsManager extends Manager
      */
     public function add()
     {
-        $sql = 'INSERT INTO comments(content, post_id, user_id, validated) VALUES (:content, :post_id, 1, 1)';
+        $sql = 'INSERT INTO comments(content, post_id, user_id, validated) VALUES (:content, :post_id, 1, :validated)';
         return $this->db->request($sql, $_POST, 'comments');
     }
 }

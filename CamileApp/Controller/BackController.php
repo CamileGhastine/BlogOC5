@@ -157,8 +157,9 @@ class BackController extends Controller
 
         if(!$formMessage)
         {
+            $_POST['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
             $this->comments->add($_POST);
-            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=add#comments');
+            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success='.$_SESSION['statut'].'#comments');
             exit;
         }
         else

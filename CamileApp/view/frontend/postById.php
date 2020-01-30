@@ -11,7 +11,7 @@ $category = htmlspecialchars($post->getCategory());
 $numberComments = ($post->getNumberComments());
 $contentUnvalid = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['content']) : null;
 $contentMessage = isset($formMessage) ? htmlspecialchars($formMessage['content']) : null;
-$successMessage = isset($_GET['success']) ? 'Une fois validé par l\'administrateur, votre commentaires sera publié.': null;
+$successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Une fois validé par l\'administrateur, votre commentaires sera publié.': null;
 ?>
 
 <h2> <B><?=$title?></B></h2>
