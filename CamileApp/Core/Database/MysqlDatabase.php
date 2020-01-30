@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CamileApp\Core\Database;
 
 use \PDO;
@@ -23,22 +22,23 @@ class MysqlDatabase extends Database
 
     public function __construct()
     {
-        $this->db_host = 'localhost' ;
+        $this->db_host = 'localhost';
         $this->db_name = 'projet5oc';
         $this->db_user = 'root';
         $this->db_pass = '';
     }
 
     /**
+     * Instance of PDO
      * @return DBconnection|PDO|null
      */
     public function getPDO()
     {
-        if ($this->PDO === null)
+        if($this->PDO === null)
         {
             try
             {
-                $this->PDO = new PDO('mysql:host='.$this->db_host.';'.'dbname='.$this->db_name.';charset=utf8', $this->db_user, $this->db_pass);
+                $this->PDO = new PDO('mysql:host=' . $this->db_host . ';' . 'dbname=' . $this->db_name . ';charset=utf8', $this->db_user, $this->db_pass);
                 $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(Exception $e)
@@ -50,14 +50,14 @@ class MysqlDatabase extends Database
     }
 
     /**
-     * function request = query or prepare
+     * function request (query or prepare)
      * @param $sql
      * @param $param
      * @param $table
      * @param $fetchall
      * @return array|mixed
      */
-    public function request($sql, $param, $table, $fetchall=null)
+    public function request($sql, $param, $table, $fetchall = null)
     {
         if($param === null)
         {

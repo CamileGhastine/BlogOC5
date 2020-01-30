@@ -4,7 +4,7 @@ foreach($categories as $category)
 {
     $categoryName = $category->getNumberPosts() ? htmlspecialchars($category->getName()) : null;
     $categoryId = $category->getId();
-    $categoryId == $_GET['id'] ? $categoryDescription = $category->getDescription() : null ;
+    $categoryId == $_GET['id'] ? $categoryDescription = htmlspecialchars($category->getDescription()) : null ;
     $url = $category->getUrl();
     ?>
 
@@ -17,8 +17,8 @@ foreach($posts as $post)
 {
     $url = $post->getUrl();
     $title = htmlspecialchars($post->getTitle());
-    $chapo = htmlspecialchars($post->getChapo());
-    $date = $post->getDate_creation() == $post->getDate_modification() ? 'Publié le '.htmlspecialchars($post->getDate_creation()) : 'Modifié le '. htmlspecialchars($post->getDate_modification());
+    $chapo = nl2br(htmlspecialchars($post->getChapo()));
+    $date = $post->getDate_creation() == $post->getDate_modification() ? 'Publié le '.htmlspecialchars($post->getDate_creation()) : 'Publié le '.htmlspecialchars($post->getDate_creation()).' (mis à jour le '. htmlspecialchars($post->getDate_modification()).')';
     $numberComments = $post->getNumberComments();
     ?>
 

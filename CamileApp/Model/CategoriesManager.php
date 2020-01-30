@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CamileApp\Model;
 
 /**
@@ -32,6 +31,10 @@ class CategoriesManager extends Manager
         return $this->db->request($sql, ['id' => $_GET['id']], 'categories', false);
     }
 
+    /**
+     * all categories with post count
+     * @return mixed
+     */
     public function allWithPostCount()
     {
         $sql = '
@@ -41,7 +44,6 @@ class CategoriesManager extends Manager
         GROUP BY ca.id
         ORDER BY ca.name';
         return $this->db->request($sql, null, 'categories', true);
-
     }
 
     /**
@@ -64,5 +66,4 @@ class CategoriesManager extends Manager
         $_POST['id']= $_GET['id'];
         return $this->db->request($sql, $_POST, 'categories');
     }
-
 }

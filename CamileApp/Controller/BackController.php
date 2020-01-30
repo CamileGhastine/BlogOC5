@@ -5,7 +5,7 @@ namespace CamileApp\Controller;
 
 
 /**
- * Class BackController  fonctionalities accessible for adminstrator and registered user
+ * Class BackController  functionalities accessible for administrator and registered user
  * @package CamileApp\Controller
  */
 class BackController extends Controller
@@ -13,15 +13,15 @@ class BackController extends Controller
     protected $viewPath = ROOT . '/CamileApp/view/backend/';
 
     /**
-     * Connexion/register view
+     * connection/register view
      */
-    public function connexionRegister()
+    public function connectionRegister()
     {
-        $this->render('connexionRegister');
+        $this->render('connectionRegister');
     }
 
     /**
-     * connexion
+     * user connection
      */
     public function connect()
     {
@@ -31,16 +31,16 @@ class BackController extends Controller
 
             if($infoPseudo->getTry() >= 5)
             {
-                $connexionMessage = 'Votre compte a été bloqué après 5 tentatives infructueuses.';
-                $this->render('connexionRegister', compact('connexionMessage'));
+                $connectionMessage = 'Votre compte a été bloqué après 5 tentatives infructueuses.';
+                $this->render('connectionRegister', compact('connectionMessage'));
             }
 
             if($this->password->verify($_POST['pass'], $infoPseudo->getPass()))
             {
                 if($infoPseudo->getValidated() === null)
                 {
-                    $connexionMessage = 'Encore un peu de patience ! Votre compte sera validé sous peu.';
-                    $this->render('connexionRegister', compact('connexionMessage'));
+                    $connectionMessage = 'Encore un peu de patience ! Votre compte sera validé sous peu.';
+                    $this->render('connectionRegister', compact('connectionMessage'));
                 }
 
                 $this->users->TryToZero($_POST['pseudo']);
@@ -49,6 +49,7 @@ class BackController extends Controller
                 $_SESSION['pseudo'] = $infoPseudo->getPseudo();
                 $_SESSION['statut'] = $infoPseudo->getStatut();
                 header('Location: index.php');
+                exit;
             }
             else
             {
@@ -56,45 +57,47 @@ class BackController extends Controller
 
                 $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
 
-                $connexionMessage = 'Le mot de passe est incorrect. Il vous reste '.$tryLeft.' tentatives.';
-                $connexionMessage = $tryLeft == 0 ? $connexionMessage.' Votre compte a été bloqué.' : $connexionMessage;
-                $this->render('connexionRegister', compact('connexionMessage'));
+                $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
+                $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
+                $this->render('connectionRegister', compact('connectionMessage'));
             }
         }
         else
         {
-            $connexionMessage = 'Le pseudo et/ou le mot de passe sont incorrects.';
-            $this->render('connexionRegister', compact('connexionMessage'));
+            $connectionMessage = 'Le pseudo et/ou le mot de passe sont incorrects.';
+            $this->render('connectionRegister', compact('connectionMessage'));
         }
     }
 
     /**
-     * disconnexion
+     * disconnection
      */
     public function disconnect()
     {
         session_destroy();
         header('Location: index.php');
+        exit;
     }
+
     /**
-     * new user's register form
+     * user registration
      */
     public function register()
     {
-        $formRegisterMessage = $this->registerValidationForm->checkValidity($_POST);
+        $formRegisterMessage = $this->registerValidationForm->checkForm($_POST);
 
         if($this->exists('pseudo', $_POST['pseudo']))
         {
             $postRegister = $_POST;
             $formRegisterMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-            $this->render('connexionRegister', compact('formRegisterMessage', 'postRegister'));
+            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
 
         if($this->exists('email', $_POST['email']))
         {
             $postRegister = $_POST;
             $formRegisterMessage['email'] = 'Ce courriel est déjà utilisé.';
-            $this->render('connexionRegister', compact('formRegisterMessage', 'postRegister'));
+            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
 
         if(!$formRegisterMessage)
@@ -102,12 +105,12 @@ class BackController extends Controller
             $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass'])];
             $success = $this->users->add($param);
             $pseudoRegister = $_POST['pseudo'];
-            $this->render('connexionRegister', compact('formRegisterMessage', 'success', 'pseudoRegister'));
+            $this->render('connectionRegister', compact('success', 'pseudoRegister'));
         }
         else
         {
             $postRegister = $_POST;
-            $this->render('connexionRegister', compact('formRegisterMessage', 'postRegister'));
+            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
 
     }
@@ -122,7 +125,7 @@ class BackController extends Controller
     }
 
     /**
-     *  Allow to know if a value of a certain field exist
+     *  Allow to know if a value of a field exist in the database
      * @param $field
      * @param $value
      * @return mixed
@@ -138,12 +141,13 @@ class BackController extends Controller
      */
     public function addComment()
     {
-        $formMessage = $this->commentsValidationForm->checkValidity($_POST);
+        $formMessage = $this->commentsValidationForm->checkForm($_POST);
 
         if(!$formMessage)
         {
             $this->comments->add($_POST);
             header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=add#comments');
+            exit;
         }
         else
         {

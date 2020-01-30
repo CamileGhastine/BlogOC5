@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CamileApp\Model\Entity;
-
 
 use Exception;
 
@@ -11,7 +9,6 @@ class CommentsEntity
     private $id;
     private $content;
     private $date_creation;
-    private $date_modification;
     private $post_id;
     private $user_id;
     private $validated;
@@ -20,7 +17,6 @@ class CommentsEntity
     public function __construct()
     {
         $this->setDate_creation();
-        $this->setDate_modification();
     }
 
     /**
@@ -77,7 +73,7 @@ class CommentsEntity
     /**
      * @param mixed $date_creation
      */
-    public function setDate_creation($date_creation=null): void
+    public function setDate_creation($date_creation = null): void
     {
         if(!is_null($date_creation))
         {
@@ -94,32 +90,6 @@ class CommentsEntity
     /**
      * @return mixed
      */
-    public function getDate_modification()
-    {
-        return $this->date_modification;
-    }
-
-    /**
-     * @param mixed $date_modification
-     */
-    public function setDate_modification($date_modification=null): void
-    {
-//        if(!is_null($date_modification))
-//        {
-//            $this->date_modification;
-//        }
-
-        if(is_string($this->date_creation))
-        {
-            $date = date("d/m/Y à H:i", strtotime($this->date_modification));
-            $this->date_modification = $date;
-        }
-
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPost_id()
     {
         return $this->post_id;
@@ -131,7 +101,7 @@ class CommentsEntity
      */
     public function setPost_id($post_id): void
     {
-        if(is_int($post_id) && $post_id>0)
+        if(is_int($post_id) && $post_id > 0)
         {
             $this->post_id = $post_id;
         }
@@ -152,11 +122,12 @@ class CommentsEntity
      */
     public function setUserId($user_id): void
     {
-        if(is_int($user_id) && $user_id>0)
+        if(is_int($user_id) && $user_id > 0)
         {
             $this->user_id = $user_id;
         }
-        throw new Exception('typage');    }
+        throw new Exception('typage');
+    }
 
     /**
      * @return mixed
@@ -195,7 +166,8 @@ class CommentsEntity
         {
             $this->pseudo = $pseudo;
         }
-        throw new Exception('typage');    }
+        throw new Exception('typage');
+    }
 
 
 }

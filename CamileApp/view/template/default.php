@@ -19,7 +19,7 @@
 
     <?php
     $id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
-    $pseudo = isset($_SESSION['pseudo']) ? $_SESSION['pseudo'] : null;
+    $pseudo = isset($_SESSION['pseudo']) ? htmlspecialchars($_SESSION['pseudo']) : null;
     $statut = isset($_SESSION['statut']) ? $_SESSION['statut'] : null;
     ?>
 
@@ -38,10 +38,10 @@
         <p><a href="index.php?route=admin.home">Admin</a></p>
     <?php endif ?>
     <?php if($id === null) : ?>
-        <p><a href="index.php?route=back.connexionRegister">Enregistrement/connexion</a></p>
+        <p><a href="index.php?route=back.connectionRegister">Enregistrement/connexion</a></p>
     <?php else : ?>
-        <p><a href="index.php?route=back.account">Compte de <?= ucfirst($pseudo)?></a></p>
-        <p><a href="index.php?route=back.disconnect">Déconnection</a></p>
+        <p><a href="index.php?route=back.account">Compte de <?= ucfirst($pseudo) ?></a></p>
+        <p><a href="index.php?route=back.disconnect">Déconnexion</a></p>
     <?php endif ?>
 
     <div class="px-5">

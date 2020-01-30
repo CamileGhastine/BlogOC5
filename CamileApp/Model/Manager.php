@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CamileApp\Model;
-
 
 /**
  * Class Manager
@@ -23,7 +21,7 @@ abstract class Manager
      */
     public function delete()
     {
-        $sql = 'DELETE from '.$this->table.' WHERE id=:id';
-        return $this->db->request($sql,['id' => $_GET['id']], 'posts');
+        $sql = 'DELETE from ' . $this->table . ' WHERE id=:id';
+        return $this->db->request($sql, ['id' => $_GET['id']], 'posts');
     }
 }

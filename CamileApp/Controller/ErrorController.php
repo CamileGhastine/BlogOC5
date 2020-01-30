@@ -19,13 +19,17 @@ class ErrorController extends Controller
     {
         switch($errorType)
         {
-            case 'Connection' : $message = 'Problème de connexion à la base de données !!!';
-            break;
-            case 'notFound' : $message = 'Erreur 404 : Page introuvable !!!';
-            break;
-            case 'typage' : $message = 'Problème de typage, renouveler votre requête !!!';
-            break;
-            default : $message = 'Erreur : '.$errorType;
+            case 'Connection' :
+                $message = 'Problème de connexion à la base de données !!!';
+                break;
+            case 'notFound' :
+                $message = 'Erreur 404 : Page introuvable !!!';
+                break;
+            case 'typage' :
+                $message = 'Problème de typage, renouveler votre requête !!!';
+                break;
+            default :
+                $message = 'Erreur : ' . $errorType;
         }
         $this->render('error', compact('message'));
     }

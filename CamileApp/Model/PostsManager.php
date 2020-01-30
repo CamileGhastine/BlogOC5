@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CamileApp\Model;
 
 /**
@@ -53,7 +52,7 @@ ORDER BY p.date_creation DESC ';
      */
     public function allByCategoryWithCommentCount($id)
     {
-        $sql ='
+        $sql = '
 SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments
 FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
@@ -71,7 +70,7 @@ ORDER BY p.date_creation DESC
      */
     public function allWithAllInfos()
     {
-        $sql ='
+        $sql = '
 SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments, ca.name as category, (SELECT COUNT(*)-COUNT(validated) FROM `comments` where post_id =p.id) AS numberUnvalidated
 FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
@@ -99,18 +98,18 @@ ORDER BY p.date_creation DESC
     public function update()
     {
         $sql = 'UPDATE posts SET title=:title, chapo=:chapo, content=:content, category_id=:category_id, user_id=1 WHERE id=:id';
-        $_POST['id']= $_GET['id'];
+        $_POST['id'] = $_GET['id'];
         return $this->db->request($sql, $_POST, 'posts');
     }
 
     /**
-     * change Post Catgory to Unknown (id=1) when the category is delete
+     * change Post Category to Unknown (id=1) when the category is delete
      * @return mixed
      */
     public function changeCategoryToUnknown()
     {
         $sql = '
 UPDATE posts SET category_id=1 WHERE category_id=:id';
-        return $this->db->request($sql, ['id' =>$_GET['id']] , 'posts');
+        return $this->db->request($sql, ['id' => $_GET['id']], 'posts');
     }
 }

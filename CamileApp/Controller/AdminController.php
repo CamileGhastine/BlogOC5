@@ -10,11 +10,14 @@ class AdminController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/admin/';
 
+    /**
+     * check if the user is admin
+     */
     public function isAdmin()
     {
         if($_SESSION['statut'] !== 'admin')
         {
-            header('Location: index.php?route=back.connexionRegister&access=denied');
+            header('Location: index.php?route=back.connectionRegister&access=adminDenied');
             exit;
         }
     }
@@ -30,7 +33,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Admin categories dashboard
+     * Admin posts dashboard
      */
     public function posts()
     {
@@ -41,7 +44,7 @@ class AdminController extends Controller
     }
 
     /**
-     *
+     * add post in admin dashboard
      */
     public function addPost()
     {
@@ -49,12 +52,13 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->postsValidationForm->checkValidity($_POST);
+            $formMessage = $this->postsValidationForm->checkForm($_POST);
 
             if(!$formMessage)
             {
                 $this->posts->add();
                 header('Location: index.php?route=admin.posts&success=add');
+                exit;
             }
             else
             {
@@ -72,7 +76,7 @@ class AdminController extends Controller
     }
 
     /**
-     *
+     * delete post in admin dashboard
      */
     public function deletepost()
     {
@@ -80,10 +84,11 @@ class AdminController extends Controller
 
         $this->posts->delete();
         header('Location: index.php?route=admin.posts&success=delete');
+        exit;
     }
 
     /**
-     *
+     * update post in admin dashboard
      */
     public function updatePost()
     {
@@ -91,12 +96,13 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->postsValidationForm->checkValidity($_POST);
+            $formMessage = $this->postsValidationForm->checkForm($_POST);
 
             if(!$formMessage)
             {
                 $this->posts->update();
                 header('Location: index.php?route=admin.posts&success=update');
+                exit;
             }
             else
             {
@@ -126,7 +132,7 @@ class AdminController extends Controller
     }
 
     /**
-     *
+     * add category in admin dashboard
      */
     public function addCategory()
     {
@@ -134,12 +140,13 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
+            $formMessage = $this->categoriesValidationForm->checkForm($_POST);
 
             if(!$formMessage)
             {
                 $this->categories->add();
                 header('Location: index.php?route=admin.categories&success=add');
+                exit;
             }
             else
             {
@@ -155,7 +162,7 @@ class AdminController extends Controller
     }
 
     /**
-     *
+     * delete category in admin dashboard
      */
     public function deleteCategory()
     {
@@ -166,28 +173,32 @@ class AdminController extends Controller
             $this->posts->changeCategoryToUnknown();
             $this->categories->delete();
             header('Location: index.php?route=admin.categories&success=delete');
+            exit;
         }
         else
         {
             header('Location: index.php?route=admin.categories&success=no');
+            exit;
         }
     }
 
     /**
-     *
+     *update category in admin dashboard
      */
     public function updateCategory()
     {
         $this->isAdmin();
 
-        $formMessage = $this->categoriesValidationForm->checkValidity($_POST);
 
         if($_POST)
         {
+            $formMessage = $this->categoriesValidationForm->checkForm($_POST);
+
             if(!$formMessage)
             {
                 $this->categories->update();
                 header('Location: index.php?route=admin.categories&success=update');
+                exit;
             }
             else
             {

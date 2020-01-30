@@ -9,7 +9,7 @@ namespace CamileApp\Controller;
  */
 class FrontController extends Controller
 {
-    protected $viewPath = ROOT.'/CamileApp/view/frontend/';
+    protected $viewPath = ROOT . '/CamileApp/view/frontend/';
 
     /**
      * home page

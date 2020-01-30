@@ -1,9 +1,9 @@
 <?php
 
+// Return to form after problem with the form
 $titleMessage = isset($formMessage['title']) ? $formMessage['title'] : '';
 $chapoMessage = isset($formMessage['chapo']) ? $formMessage['chapo'] : '';
 $contentMessage = isset($formMessage['content']) ? $formMessage['content'] : '';
-
 
 // Request Add post ($update=false) or Update post ($update=true)
 $update = (isset($post) OR isset($postUpdateUnvalid));

@@ -1,11 +1,13 @@
 <?php
 
-
 namespace CamileApp\Model\Entity;
-
 
 use Exception;
 
+/**
+ * Class CategoriesEntity
+ * @package CamileApp\Model\Entity
+ */
 class CategoriesEntity
 {
     private $id;
@@ -96,7 +98,7 @@ class CategoriesEntity
      */
     public function setUrl(): void
     {
-        $this->url = 'index.php?route=front.postsByCategory&id='.$this->id;
+        $this->url = 'index.php?route=front.postsByCategory&id=' . $this->id;
     }
 
     /**

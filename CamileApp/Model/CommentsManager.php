@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CamileApp\Model;
 
 /**
@@ -16,7 +15,6 @@ class CommentsManager extends Manager
      * function request($sql, $param, $table, $fetchall)
      * @param $id
      * @return mixed
-
      */
     public function commentsById($id)
     {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CamileApp\Model\Entity;
-
 
 use Exception;
 

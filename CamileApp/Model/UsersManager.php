@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CamileApp\Model;
-
 
 /**
  * Class UsersManager
@@ -35,7 +33,7 @@ class UsersManager extends Manager
     }
 
     /**
-     * try come back to zero after a good connexion
+     * try come back to zero after a good connection
      * @param $pseudo
      * @return mixed
      */
@@ -44,8 +42,6 @@ class UsersManager extends Manager
         $sql = 'UPDATE users SET try=0 WHERE pseudo=:pseudo';
         return $this->db->request($sql, ['pseudo' => $pseudo], null, null);
     }
-
-
 
     /**
      * id, statut, hash pass and try for a pseudo
@@ -67,6 +63,4 @@ class UsersManager extends Manager
         $sql = 'INSERT INTO users(pseudo, email, pass) VALUES (:pseudo, :email, :pass)';
         return $this->db->request($sql, $param, 'users');
     }
-
-
 }

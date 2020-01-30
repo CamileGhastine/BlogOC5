@@ -3,14 +3,14 @@
 <?php
 $postId = $post->getId();
 $title = htmlspecialchars($post->getTitle());
-$chapo = htmlspecialchars($post->getChapo());
-$content = htmlspecialchars($post->getContent());
+$chapo = nl2br(htmlspecialchars($post->getChapo()));
+$content = nl2br(htmlspecialchars($post->getContent()));
 $datePost = $post->getDate_creation() == $post->getDate_modification() ? 'Publié le '.htmlspecialchars($post->getDate_creation()) : 'Modifié le '. htmlspecialchars($post->getDate_modification());
 $author = htmlspecialchars($post->getPseudo());
 $category = htmlspecialchars($post->getCategory());
 $numberComments = ($post->getNumberComments());
-$contentUnvalid = isset($postAddUnvalid) ? $postAddUnvalid['content'] : null;
-$contentMessage = isset($formMessage) ? $formMessage['content'] : null;
+$contentUnvalid = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['content']) : null;
+$contentMessage = isset($formMessage) ? htmlspecialchars($formMessage['content']) : null;
 $successMessage = isset($_GET['success']) ? 'Une fois validé par l\'administrateur, votre commentaires sera publié.': null;
 ?>
 

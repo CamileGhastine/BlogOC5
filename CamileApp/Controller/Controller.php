@@ -41,13 +41,13 @@ abstract class Controller
      * @param $view
      * @param array $compactVars
      */
-    protected function render($view, $compactVars=[])
+    protected function render($view, $compactVars = [])
     {
         extract($compactVars);
         ob_start();
-        require $this->viewPath.$view.'.php';
+        require $this->viewPath . $view . '.php';
         $content = ob_get_clean();
 
-        require  ROOT.'/CamileApp/view/template/default.php';
+        require ROOT . '/CamileApp/view/template/default.php';
     }
 }

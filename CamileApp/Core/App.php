@@ -20,6 +20,10 @@ class App
     private $error;
     private $db;
 
+    /**
+     * Instance of App
+     * @return App
+     */
     public static function getInstance()
     {
         if(self::$appInstance === null)
@@ -30,6 +34,10 @@ class App
         return self::$appInstance;
     }
 
+    /**
+     * Instance of router
+     * @throws \Exception
+     */
     public function router()
     {
         if($this->router === null)
@@ -40,6 +48,7 @@ class App
     }
 
     /**
+     * Instance of error
      * to call the page depending on the type of error
      * @param $errorType
      */
@@ -52,33 +61,55 @@ class App
         $this->error->getErrorMessaage($errorType);
     }
 
+    /**
+     * Instance of MysqlDatabase
+     * @return MysqlDatabase
+     */
     public function getDB()
     {
         if($this->db === null)
         {
-            require ROOT.'/Config/Config.php';
+            require ROOT . '/Config/Config.php';
             $this->db = new MysqlDatabase(Config::configDB());
         }
         return $this->db;
     }
 
+    /**
+     * Instance of manger
+     * @param $managerType
+     * @return mixed
+     */
     public function getManager($managerType)
     {
         $manager = 'CamileApp\\Model\\' . ucfirst($managerType) . 'Manager';
         return new $manager($this->getDB());
     }
 
+    /**
+     * Instance of ValidationForm
+     * @param $validationType
+     * @return mixed
+     */
     public function getValidationForm($validationType)
     {
-        $validation =  'CamileApp\\Core\\Constraints\\' . ucfirst($validationType) . 'ValidationForm';
+        $validation = 'CamileApp\\Core\\Constraints\\ValidationForm\\' . ucfirst($validationType) . 'ValidationForm';
         return new $validation();
     }
 
+    /**
+     * Instance of Password
+     * @return Password
+     */
     public function getPassword()
     {
         return new Password();
     }
 
+    /**
+     * Return number of try before blok account
+     * @return mixed
+     */
     public function hijacking()
     {
         return Hijacking::getTry();

@@ -1,5 +1,6 @@
 <?php
 
+// Return to form after problem with the form
 $nameMessage = isset($formMessage['name']) ? $formMessage['name'] : '';
 $descriptionMessage = isset($formMessage['description']) ? $formMessage['description'] : '';
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace CamileApp\Model\Entity;
-
 
 use Exception;
 
@@ -54,7 +52,7 @@ class PostsEntity
      */
     public function setId($id): void
     {
-        if(is_int($id) && $id>0)
+        if(is_int($id) && $id > 0)
         {
             $this->id = $id;
         }
@@ -137,7 +135,7 @@ class PostsEntity
     /**
      * @param mixed $date_creation
      */
-    public function setDate_creation($date_creation=null): void
+    public function setDate_creation($date_creation = null): void
     {
         if(!is_null($date_creation))
         {
@@ -163,7 +161,7 @@ class PostsEntity
     /**
      * @param mixed $date_modification
      */
-    public function setDate_modification($date_modification=null): void
+    public function setDate_modification($date_modification = null): void
     {
         if(!is_null($date_modification))
         {
@@ -193,7 +191,7 @@ class PostsEntity
      */
     public function setCategory_id($category_id): void
     {
-        if(is_int($category_id) && $category_id>0)
+        if(is_int($category_id) && $category_id > 0)
         {
             $this->category_id = $category_id;
         }
@@ -216,7 +214,7 @@ class PostsEntity
      */
     public function setUser_id($user_id): void
     {
-        if(is_int($user_id) && $user_id>0)
+        if(is_int($user_id) && $user_id > 0)
         {
             $this->user_id = $user_id;
         }
@@ -238,7 +236,7 @@ class PostsEntity
      */
     public function setUrl(): void
     {
-        $this->url = 'index.php?route=front.postById&id='.$this->id;
+        $this->url = 'index.php?route=front.postById&id=' . $this->id;
     }
 
     /**
@@ -288,6 +286,7 @@ class PostsEntity
     {
         $this->numberUnvalidated = $numberUnvalidated;
     }
+
     /**
      * @return mixed
      */

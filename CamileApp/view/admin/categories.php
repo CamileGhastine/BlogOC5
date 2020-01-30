@@ -17,26 +17,26 @@
             {
                 case('add') :
                     $message = 'La catégorie a  été créée avec succès.';
-                break;
+                    break;
                 case('delete') :
                     $message = 'La catégorie a  été supprimée avec succès.<br/> Si elle Contenait des articles, ils ont été transférés dans la catégorie "non classé" ';
-                break;
+                    break;
                 case('update') :
                     $message = 'La catégorie a  été modifiée avec succès.';
-                break;
+                    break;
                 case('no') :
                     $message = 'Cette catégorie ne peut pas être supprimée.';
                     $alert = 'danger';
-                break;
+                    break;
             }
             ?>
-        <div class="alert alert-<?= $alert ?>">
-            <div class=row>
-                <div class="col-sm-8">
-                    <?= $message ?>
+            <div class="alert alert-<?= $alert ?>">
+                <div class=row>
+                    <div class="col-sm-8">
+                        <?= $message ?>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endif ?>
     </div>
 </div>
@@ -63,12 +63,14 @@
             <tr>
                 <td><?= $categoryName ?></td>
                 <td class="text-center"><?= $numberPosts ?></td>
-                <?php if($categoryId != 1) : ?>
-                    <td>
+
+                <td>
+                    <?php if($categoryId != 1) : ?>
                         <a href="index.php?route=admin.updateCategory&id=<?= $categoryId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
                         <a href="index.php?route=admin.categories&delete=<?= $categoryId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
-                    </td>
-                <?php endif ?>
+                    <?php endif ?>
+                </td>
+
                 <td>
                     <?php if($btn == 'secondary'): ?>
                         <a id="deleteConfirmation" href="index.php?route=admin.deleteCategory&id=<?= $categoryId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
