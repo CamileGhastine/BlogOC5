@@ -34,6 +34,7 @@
     </header>
 
     <p><a href="index.php?">Accueil</a></p>
+    <p><a href="index.php?route=front.posts">Articles</a></p>
     <?php if($statut === 'admin') : ?>
         <p><a href="index.php?route=admin.home">Admin</a></p>
     <?php endif ?>

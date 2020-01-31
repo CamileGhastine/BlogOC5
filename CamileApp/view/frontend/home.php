@@ -1,2 +1,1 @@
-<p><a href="index.php?route=front.posts">Articles</a></p>
-<p>Bienvenue sur mon blog en construction !!!</p>
+<h1>Bienvenue sur mon blog en construction !!!</h1>

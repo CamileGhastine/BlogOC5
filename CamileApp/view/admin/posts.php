@@ -16,7 +16,7 @@
             {
                 case('add') : $message = 'L\'article a  été créé avec succès.';
                     break;
-                case('delete') : $message = 'L\'article a  été supprimé avec succès.';
+                case('delete') : $message = 'L\'article et ses commentaires ont été supprimés avec succès.';
                     break;
                 case('update') : $message = 'L\'article a  été modifié avec succès.';
                     break;
@@ -64,12 +64,12 @@
                     <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier l'article et ses commentaires</a>
                     <a href="index.php?route=admin.posts&delete=<?= $postId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
                 </td>
-                <td>
-                    <?php if($btn == 'secondary'): ?>
-                        <a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
-                        <a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a
-                    <?php endif ?>
-                </td>
+
+                <?php if($btn == 'secondary'): ?>
+                    <td><a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
+                    <td><a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a></td>
+                <?php endif ?>
+
             </tr>
         <?php endforeach ?>
 

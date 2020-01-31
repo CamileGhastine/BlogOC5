@@ -19,9 +19,9 @@ abstract class Manager
      * DELETE request
      * @return mixed
      */
-    public function delete()
+    public function delete($id)
     {
         $sql = 'DELETE from ' . $this->table . ' WHERE id=:id';
-        return $this->db->request($sql, ['id' => $_GET['id']], 'posts');
+        return $this->db->request($sql, ['id' => $id]);
     }
 }

@@ -36,9 +36,20 @@ class CommentsManager extends Manager
         return $this->db->request($sql, $_POST, 'comments');
     }
 
+    /**
+     * Validate comment
+     * @param $id
+     * @return mixed
+     */
     public function validate($id)
     {
         $sql = 'UPDATE comments SET validated=1 WHERE id=:id ';
-        return $this->db->request($sql, $id, 'comments', null);
+        return $this->db->request($sql,['id' => $id], 'comments', null);
+    }
+
+    public function deleteALlByPostId($id)
+    {
+        $sql='DELETE from comments WHERE post_id=:post_id';
+        $this->db->request($sql, ['post_id' => $id]);
     }
 }
