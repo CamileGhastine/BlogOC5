@@ -20,7 +20,6 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
 <p>Par <?= $author ?></p>
 <p>Categorie : <?= $category ?></p>
 <p><small><?= $datePost ?></small></p>
-<br/>
 
 <h4 id="comments">Commentaires (<?= $numberComments ?>) :</h4>
 <P><?= $successMessage ?></P>

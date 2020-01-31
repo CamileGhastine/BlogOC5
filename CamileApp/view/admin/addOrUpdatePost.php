@@ -40,7 +40,12 @@ else // add post
                 <div class="col-lg-6">
                     <h1><?= $titlePage ?></h1>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-end">
+                <?php if($update) : ?>
+                    <div class="col-lg-3 d-flex justify-content-end">
+                        <a href="index.php?route=admin.comments&id=<?= $_GET['id'] ?>#comments" class="btn btn-primary">Gérer ses commentaires</a>
+                    </div>
+                <?php endif ?>
+                <div class="col-lg-<?= $update ? 3 : 6 ?> d-flex justify-content-end">
                     <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
                 </div>
             </div>
@@ -102,64 +107,3 @@ else // add post
             </form>
         </div>
     </div>
-
-
-<?php if($update) : ?>
-    <h4 id="comments">Commentaires (<?= $numberComments ?>) :</h4>
-
-    <div class="pb-3">
-        <table class="table table-striped ">
-            <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            foreach($comments as $comment)
-            {
-                $commentId = $comment->getId();
-                $pseudo = htmlspecialchars($comment->getPseudo());
-                $validated = $comment->getValidated();
-                $dateComment = 'le '.htmlspecialchars($comment->getDate_creation());
-                $content = $validated == null ?  '<B><I>'.htmlspecialchars($comment->getContent()).'</I></B>' : htmlspecialchars($comment->getContent());
-                $btn = (isset($_GET['delete']) AND $_GET['delete'] == $commentId) ? 'secondary' : 'danger';
-                ?>
-                <tr >
-                    <?php if(!$validated) : ?>
-                        <td>
-                            <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>" class="btn-sm btn-success mt-3">Valider</a>
-                        </td>
-                    <?php else : ?>
-                        <td></td>
-                    <?php endif ?>
-                    <td>
-                        <?= '<U><B>'.$pseudo.'</B> (<small>'.$dateComment.'</small>) :</U> '.$content ?>
-                    </td>
-                    <?php if($btn != 'secondary'): ?>
-
-                        <td>
-                            <a href="index.php?route=admin.categories&delete=#deleteConfirmation" class="btn-sm btn-primary mt-3">modifier</a>
-                        </td>
-                    <?php endif ?>
-                    <td>
-                        <a href="index.php?route=admin.updatePost&id=<?= $postId ?>&delete=<?= $commentId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3" class="btn-sm btn-danger mt-3">Supprimer</a>
-                    </td>
-
-                    <?php if($btn == 'secondary'): ?>
-                        <td><a id="deleteConfirmation" href="index.php?route=admin.deleteComment&id=<?= $postId ?>&commentId=<?= $commentId ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
-                        <td> <a href="index.php?route=admin.updatePost&id=<?= $postId ?>#comments" class="btn-sm btn-success mt-3">Annuler</a></td>
-                    <?php else : ?>
-                    <td></td>
-                    <?php endif ?>
-
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
-    </div>
-<?php endif ?>

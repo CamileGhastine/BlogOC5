@@ -14,11 +14,11 @@
         <?php if(isset($_GET['success'])):
             switch($_GET['success'])
             {
-                case('add') : $message = 'L\'article a  été créé avec succès.';
+                case('add') : $message = 'L\'article a été créé avec succès.';
                     break;
                 case('delete') : $message = 'L\'article et ses commentaires ont été supprimés avec succès.';
                     break;
-                case('update') : $message = 'L\'article a  été modifié avec succès.';
+                case('update') : $message = 'L\'article a été modifié avec succès.';
                     break;
             }
             ?>
@@ -51,7 +51,7 @@
             $title = htmlspecialchars($post->getTitle());
             $category = htmlspecialchars($post->getCategory());
             $numberComment = $post->getNumberComments() + $post->getNumberUnvalidated();
-            $href = 'index.php?route=admin.updatePost&id='.$postId.'#comments';
+            $href = 'index.php?route=admin.comments&id='.$postId.'#comments';
             $numberUnvalidated = $post->getNumberUnvalidated() == 0 ? null : 'dont '.'<a href="'.$href.'" class="btn-sm btn-success mt-3">'.$post->getNumberUnvalidated().' à valider</a>';
             $btn = (isset($_GET['delete']) AND $_GET['delete'] == $postId) ? 'secondary' : 'danger';
 

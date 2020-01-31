@@ -239,8 +239,8 @@ class AdminController extends Controller
         $this->isAdmin();
 
         $this->comments->validate($_GET['commentId']);
-        header('Location: index.php?route=admin.updatePost&id='.$_GET['id'].'#comments');
-        exitt;
+        header('Location: index.php?route=admin.comments&id='.$_GET['id'].'&action=validate#comments');
+        exit;
     }
 
     /**
@@ -250,10 +250,21 @@ class AdminController extends Controller
     {
         $this->isAdmin();
 
-        $this->comments->delete(['id' => $_GET['commentId']]);
-        header('Location: index.php?route=admin.updatePost&id='.$_GET['id'].'&delete=success#comments');
-        exitt;
+        $this->comments->delete($_GET['commentId']);
+        header('Location: index.php?route=admin.comments&id='.$_GET['id'].'&action=delete#comments');
+        exit;
+    }
 
+    /**
+     * modify comment
+     */
+    public function updateComment()
+    {
+        $this->isAdmin();
+
+        $this->comments->update($_GET['commentId'], $_POST['content']);
+        header('Location: index.php?route=admin.comments&id='.$_GET['id'].'&action=update#comments');
+        exit;
     }
 
 }

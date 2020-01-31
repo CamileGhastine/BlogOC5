@@ -47,9 +47,23 @@ class CommentsManager extends Manager
         return $this->db->request($sql,['id' => $id], 'comments', null);
     }
 
+    /**
+     * All comments of one posts (post_id)
+     * @param $id
+     */
     public function deleteALlByPostId($id)
     {
         $sql='DELETE from comments WHERE post_id=:post_id';
         $this->db->request($sql, ['post_id' => $id]);
+    }
+
+    /**
+     * UPDATE request
+     * @param $id
+     */
+    public function update($id, $content)
+    {
+        $sql = 'UPDATE comments SET content=:content WHERE id=:id';
+        $this->db->request($sql, ['id' => $id, 'content' => $content ]);
     }
 }
