@@ -38,6 +38,6 @@ foreach($comments as $comment)
     $dateComment = 'le '.htmlspecialchars($comment->getDate_creation());
     $content = $comment->getValidated() == null ?  '<B><I>Ce commentaire est en cours de validation.</I></B>' : htmlspecialchars($comment->getContent())
     ?>
-    <p><B><?= $pseudo.'</B> (<small>'.$dateComment.'</small>) : '.$content?></p>
+    <p><?= '<U><B>'.$pseudo.'</B> (<small>'.$dateComment.'</small>) :</U> '.$content?></p>
 
 <?php } ?>

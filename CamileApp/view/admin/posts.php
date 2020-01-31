@@ -51,7 +51,8 @@
             $title = htmlspecialchars($post->getTitle());
             $category = htmlspecialchars($post->getCategory());
             $numberComment = $post->getNumberComments() + $post->getNumberUnvalidated();
-            $numberUnvalidated = $post->getNumberUnvalidated() == 0 ? null : 'dont '.'<a href="#" class="btn-sm btn-success mt-3">'.$post->getNumberUnvalidated().' à valider</a>';
+            $href = 'index.php?route=admin.updatePost&id='.$postId.'#comments';
+            $numberUnvalidated = $post->getNumberUnvalidated() == 0 ? null : 'dont '.'<a href="'.$href.'" class="btn-sm btn-success mt-3">'.$post->getNumberUnvalidated().' à valider</a>';
             $btn = (isset($_GET['delete']) AND $_GET['delete'] == $postId) ? 'secondary' : 'danger';
 
             ?>
@@ -60,7 +61,7 @@
                 <td><?= $category ?></td>
                 <td class="text-center"><?= $numberComment.' '.$numberUnvalidated ?></td>
                 <td>
-                    <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier article et commentaires</a>
+                    <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier l'article et ses commentaires</a>
                     <a href="index.php?route=admin.posts&delete=<?= $postId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
                 </td>
                 <td>

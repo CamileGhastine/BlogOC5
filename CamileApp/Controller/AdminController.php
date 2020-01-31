@@ -109,15 +109,17 @@ class AdminController extends Controller
             {
                 $id = $_GET['id'];
                 $postUpdateUnvalid = $_POST;
+                $comments = $this->comments->commentsById($_GET['id']);
                 $categories = $this->categories->all();
-                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postUpdateUnvalid', 'id'));
+                $this->render('addOrUpdatePost', compact('categories','comments', 'formMessage', 'postUpdateUnvalid', 'id'));
             }
         }
         else
         {
             $post = $this->posts->postById($_GET['id']);
+            $comments = $this->comments->commentsById($_GET['id']);
             $categories = $this->categories->all();
-            $this->render('addOrUpdatePost', compact('post', 'categories'));
+            $this->render('addOrUpdatePost', compact('post', 'categories', 'comments'));
         }
     }
 
@@ -215,4 +217,23 @@ class AdminController extends Controller
             $this->render('addOrUpdateCategory', compact('category'));
         }
     }
+
+    public function comments()
+    {
+        $this->isAdmin();
+
+        $post = $this->posts->postById($_GET['id']);
+        $comments = $this->comments->commentsById($_GET['id']);
+        $this->render('comments', compact('post', 'comments'));
+    }
+
+    public function validateComment()
+    {
+        $this->isAdmin();
+
+        $this->comments->validate(['id' => $_GET['commentId']]);
+        header('Location: index.php?route=admin.updatePost&id='.$_GET['id'].'#comments');
+        exitt;
+    }
+
 }

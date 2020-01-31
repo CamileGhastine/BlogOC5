@@ -57,7 +57,7 @@ class MysqlDatabase extends Database
      * @param $fetchall
      * @return array|mixed
      */
-    public function request($sql, $param, $table, $fetchall = null)
+    public function request($sql, $param, $table = null, $fetchall = null)
     {
         if($param === null)
         {
