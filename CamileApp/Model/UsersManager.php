@@ -63,4 +63,24 @@ class UsersManager extends Manager
         $sql = 'INSERT INTO users(pseudo, email, pass) VALUES (:pseudo, :email, :pass)';
         return $this->db->request($sql, $param, 'users');
     }
+
+    /**
+     * all validated users
+     * @return mixed
+     */
+    public function getValidated()
+    {
+        $sql ='SELECT * FROM users WHERE validated IS NOT NULL';
+        return $this->db->request($sql, null, 'users', true);
+    }
+
+
+    /**
+     * number of unvalidated users
+     */
+    public function countUnvalidated()
+    {
+        $sql ='SELECT COUNT(*) AS number FROM users WHERE validated IS NULL';
+        return $this->db->request($sql, null, 'users', false);
+    }
 }

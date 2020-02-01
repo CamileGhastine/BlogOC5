@@ -267,4 +267,15 @@ class AdminController extends Controller
         exit;
     }
 
+    /**
+     * Admin users dashboard
+     */
+    public function users()
+    {
+        $this->isAdmin();
+
+        $numberUsersUnvalidated = $this->users->countUnvalidated();
+        $users = $this->users->getValidated('pseudo');
+        $this->render('users', compact('users', 'numberUsersUnvalidated'));
+    }
 }
