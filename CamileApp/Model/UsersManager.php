@@ -15,10 +15,10 @@ class UsersManager extends Manager
      * function request($sql, $param, $table, $fetchall)
      * @param $pseudo
      */
-    public function exists($field, $value)
+    public function exists($field, $value, $id=null)
     {
-        $sql = 'SELECT COUNT(*) FROM users WHERE '.$field.'=:value';
-        return $this->db->request($sql, ['value' => $value], null, false);
+        $sql = 'SELECT COUNT(*) FROM users WHERE '.$field.'=:value AND id <>:id';
+        return $this->db->request($sql, ['value' => $value, 'id' =>$id], null, false);
     }
 
     /**
@@ -60,8 +60,8 @@ class UsersManager extends Manager
      */
     public function add($param)
     {
-        $sql = 'INSERT INTO users(pseudo, email, pass) VALUES (:pseudo, :email, :pass)';
-        return $this->db->request($sql, $param, 'users');
+        $sql = 'INSERT INTO users(pseudo, email, pass, statut) VALUES (:pseudo, :email, :pass, :statut)';
+        return $this->db->request($sql, $param);
     }
 
     /**
@@ -74,6 +74,16 @@ class UsersManager extends Manager
         return $this->db->request($sql, null, 'users', true);
     }
 
+    /**
+     * all unvalidated users
+     * @return mixed
+     */
+    public function getUnvalidated()
+    {
+        $sql ='SELECT * FROM users WHERE validated IS NULL';
+        return $this->db->request($sql, null, 'users', true);
+    }
+
 
     /**
      * number of unvalidated users
@@ -83,4 +93,32 @@ class UsersManager extends Manager
         $sql ='SELECT COUNT(*) AS number FROM users WHERE validated IS NULL';
         return $this->db->request($sql, null, 'users', false);
     }
+
+    /**
+     * get all statuts
+     */
+    public function statut()
+    {
+        $sql = 'SELECT DISTINCT statut FROM users';
+        return $this->db->request($sql, null, 'users', true);
+    }
+
+    /**
+     * UPDATE request
+     */
+    public function update($param)
+    {
+        $sql = 'UPDATE users SET pseudo=:pseudo, email=:email, statut=:statut WHERE id=:id';
+        return $this->db->request($sql, $param);
+    }
+
+    /**
+     * Validate user
+     */
+    public function validate($param)
+    {
+        $sql = 'UPDATE users SET validated=1 WHERE id=:id';
+        return $this->db->request($sql, $param);
+    }
+
 }

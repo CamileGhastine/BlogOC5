@@ -10,7 +10,7 @@ namespace CamileApp\Core\Constraints\ValidationForm\Field;
  */
 class PassField extends Field
 {
-    protected $max = 50;
+    protected $max = 100;
 
     protected $pass;
 

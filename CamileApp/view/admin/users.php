@@ -12,18 +12,41 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
 </div>
 
 <p>
-    <a href="index.php?p=backend.users.add" class="btn btn-success mt-3">Ajouter un utilisateur</a>
-    <a href="index.php?p=backend.users.validate"
+    <a href="index.php?route=admin.addUser" class="btn btn-success mt-3">Ajouter un utilisateur</a>
+    <a href="index.php?route=admin.validateUsers"
        class="btn btn-success mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
         <?= $numberUsersUnvalidated . (($numberUsersUnvalidated <= 1) ? ' utilisateur à valider' : ' utilisateurs à valider') ?>
     </a>
 </p>
-
+<p>
+    <?php if(isset($_GET['success'])):
+    switch($_GET['success'])
+    {
+        case('add') :
+            $message = 'Le nouvel utilisateur a  été créée avec succès.';
+            break;
+        case('delete') :
+            $message = 'L\'utilisateur a  été supprimée avec succès.';
+            break;
+        case('update') :
+            $message = 'L\'utilisateur a  été modifiée avec succès.';
+            break;
+        case('validate') :
+            $message = 'L\'utilisateur a été validé avec succès.';
+            break;
+    }
+    ?>
+    <div class="alert alert-success">
+            <div>
+                <?= $message ?>
+            </div>
+    </div>
+<?php endif ?>
+</p>
 <div class="pb-3">
     <table class="table table-striped ">
         <thead>
         <tr>
-            <th scope="col"></th>
             <th scope="col">Pseudo</th>
             <th scope="col">Courriel</th>
             <th scope="col">Date Inscription</th>
@@ -41,18 +64,17 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
 
             ?>
             <tr>
-                <td><?= $userId ?></td>
                 <td><?= $pseudo ?></td>
                 <td><?= $email ?></td>
                 <td><?= $date ?></td>
                 <td><?= $statut ?></td>
-                <td><a href="index.php?p=backend.users.edit&id=<?= $userId ?>" class="btn btn-primary">Modifier les
+                <td><a href="index.php?route=admin.updateUser&pseudo=<?= $pseudo ?>" class="btn btn-primary">Modifier les
                         informations</a>
 
                     <?php
                     if(!isset($_GET['delete']))
                     {
-                        echo '<a href="?p=backend.users.usersAdmin&delete=' . $userId . '" class="btn btn-danger">Supprimer</a>';
+                        echo '<a href="?route=admin.users&delete=' . $userId . '#delete" class="btn btn-danger">Supprimer</a>';
                     }
                     else
                     {
@@ -68,11 +90,11 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
                     if(isset($_GET['delete']) && $_GET['delete'] == $userId)
                     {
                         ?>
-                        <form action="?p=backend.users.delete" method="post" style="display: inline;">
+                        <form action="?route=admin.delete" method="post" style="display: inline;">
                             <input type="hidden" name="id" value="<?= $userId ?>">
-                            <button type="submit" class="btn btn-danger">Confirmer</button>
+                            <button id="delete" type="submit" class="btn btn-danger">Confirmer</button>
                         </form>
-                        <a href="?p=backend.users.usersAdmin" class="btn btn-success">Annuler</a>
+                        <a href="?route=admin.users" class="btn btn-success">Annuler</a>
                     <?php } ?>
                 </td>
             </tr>

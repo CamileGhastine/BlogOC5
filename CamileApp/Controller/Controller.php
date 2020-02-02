@@ -19,6 +19,7 @@ abstract class Controller
     protected $categoriesValidationForm;
     protected $commentsValidationForm;
     protected $registerValidationForm;
+    protected $usersValidationForm;
     protected $password;
     protected $hijacking;
 
@@ -32,6 +33,7 @@ abstract class Controller
         $this->categoriesValidationForm = App::getinstance()->getValidationForm('categories');
         $this->commentsValidationForm = App::getinstance()->getValidationForm('comments');
         $this->registerValidationForm = App::getinstance()->getValidationForm('register');
+        $this->usersValidationForm = App::getinstance()->getValidationForm('users');
         $this->password = App::getInstance()->getPassword();
         $this->hijacking = App::getInstance()->hijacking();
     }
@@ -49,5 +51,17 @@ abstract class Controller
         $content = ob_get_clean();
 
         require ROOT . '/CamileApp/view/template/default.php';
+    }
+
+    /**
+     *  Allow to know if a value of a field exist in the database
+     * @param $field
+     * @param $value
+     * @return mixed
+     */
+    protected function exists($field, $value, $id=null)
+    {
+        $exists = $this->users->exists($field, $value, $id);
+        return $exists[0];
     }
 }

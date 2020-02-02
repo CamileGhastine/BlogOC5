@@ -119,7 +119,7 @@ class BackController extends Controller
             }
             else // no problem => register in DB ok
             {
-                $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass'])];
+                $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user'];
                 $success = $this->users->add($param);
                 $pseudoRegister = $_POST['pseudo'];
                 $this->render('connectionRegister', compact('success', 'pseudoRegister'));
@@ -134,18 +134,6 @@ class BackController extends Controller
     {
         $user = $this->users->infoPseudo($_SESSION['pseudo']);
         $this->render('account', compact('user'));
-    }
-
-    /**
-     *  Allow to know if a value of a field exist in the database
-     * @param $field
-     * @param $value
-     * @return mixed
-     */
-    private function exists($field, $value)
-    {
-        $exists = $this->users->exists($field, $value);
-        return $exists[0];
     }
 
     /**
