@@ -14,19 +14,8 @@ class MysqlDatabase extends Database
     /**
      * @var DBconnection
      */
-    private $PDO;
-    private $host;
-    private $db_name;
-    private $db_user;
-    private $db_pass;
+    protected $PDO;
 
-    public function __construct()
-    {
-        $this->db_host = 'localhost';
-        $this->db_name = 'projet5oc';
-        $this->db_user = 'root';
-        $this->db_pass = '';
-    }
 
     /**
      * Instance of PDO

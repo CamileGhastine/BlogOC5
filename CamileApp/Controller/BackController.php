@@ -50,6 +50,7 @@ class BackController extends Controller
                         $_SESSION['id'] = $infoPseudo->getID();
                         $_SESSION['pseudo'] = $infoPseudo->getPseudo();
                         $_SESSION['statut'] = $infoPseudo->getStatut();
+                        $_SESSION['token'] = bin2hex(random_bytes(10));
 
                         header('Location: index.php');
                         exit;

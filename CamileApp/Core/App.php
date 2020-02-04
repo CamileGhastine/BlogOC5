@@ -58,7 +58,7 @@ class App
         {
             $this->error = new ErrorController();
         }
-        $this->error->getErrorMessaage($errorType);
+        $this->error->getErrorMessage($errorType);
     }
 
     /**
