@@ -10,6 +10,6 @@ class Config
             'db_host' => 'Localhost',
             'db_name' => 'ghasxuup_projet5oc',
             'db_user' => 'ghasxuup_camile',
-            'db_pass' => '+~d!5i:6*kZ8b3qb7T');
+            'db_pass' => 't(q17:q)%yt_&0I=fZ');
     }
 }
