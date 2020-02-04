@@ -20,7 +20,7 @@
 </div>
 
 <div class="card my-4">
-    <p class="card-header text-center">Tous les articles</p>
+    <p class="card-header text-center"><B>Tous les articles</B></p>
 </div>
 
 <?php

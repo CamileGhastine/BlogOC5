@@ -60,9 +60,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="navbar-nav align-items-center">
                         <a class="nav-item nav-link " href="index.php">Accueil</a>
-                        <a class="nav-item nav-link  " href="?route=front.posts">Articles</a>
+                        <a class="nav-item nav-link  " href="index.php?route=front.posts">Articles</a>
                         <a class="nav-item nav-link  " href="doc/cv.pdf">Mon CV</a>
-                        <a class="nav-item nav-link  " href="?p=form.index">Me Contacter</a>
+                        <a class="nav-item nav-link  " href="index.php?p=form.index">Me Contacter</a>
                         <?php if($id === null) : ?>
                             <a class="nav-item nav-link " href="index.php?route=back.connectionRegister">Enregistrement/connexion</a>
                         <?php else : ?>

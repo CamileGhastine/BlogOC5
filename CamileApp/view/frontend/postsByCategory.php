@@ -37,7 +37,11 @@ foreach($categories as $category)
 ?>
 
 <div class="card my-4">
-    <p class="card-header text-center"><?= $categoryDescription ?></p>
+    <p class="card-header text-center">
+        <B><?= $categoryName ?></B>
+        <br/>
+        <?= $categoryDescription ?>
+    </p>
 </div>
 
 <?php

@@ -9,7 +9,7 @@ class Config
         return array(
             'db_host' => 'Localhost',
             'db_name' => 'ghasxuup_projet5oc',
-            'db_user' => 'ghasxuup_camile',
+            'db_user' => 'ghasxuup_test',
             'db_pass' => 't(q17:q)%yt_&0I=fZ');
     }
 }
