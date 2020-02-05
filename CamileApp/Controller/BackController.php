@@ -25,7 +25,7 @@ class BackController extends Controller
      */
     public function connect()
     {
-        $infoPseudo = $this->users->infoPseudo($_POST['pseudo']);
+        $infoPseudo = $this->users->infoPseudoWithPseudo($_POST['pseudo']);
 
         if($infoPseudo) // pseudo exists in database
         {
@@ -91,40 +91,21 @@ class BackController extends Controller
      */
     public function register()
     {
-        // test if pseudo and/or mail exist
-        if($this->exists('pseudo', $_POST['pseudo']) or $this->exists('email', $_POST['email']))
-        {
-            if($this->exists('pseudo', $_POST['pseudo']))
-            {
-                $formRegisterMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-            }
-            if($this->exists('email', $_POST['email']))
-            {
-                $formRegisterMessage['email'] = 'Ce courriel est déjà utilisé.';
-            }
-        }
-
         $postRegister = $_POST;
 
-        if(isset($formRegisterMessage))  // pseudo and/or mail already exist
+        // Form verification
+        $formRegisterMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $this->registerValidationForm->checkForm($_POST);
+
+        if($formRegisterMessage)  // form not ok
         {
             $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
         }
-        else
+        else // form ok
         {
-            $formRegisterMessage = $this->registerValidationForm->checkForm($_POST);
-
-            if($formRegisterMessage) // problem with input format
-            {
-                $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
-            }
-            else // no problem => register in DB ok
-            {
-                $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user'];
-                $success = $this->users->add($param);
-                $pseudoRegister = $_POST['pseudo'];
-                $this->render('connectionRegister', compact('success', 'pseudoRegister'));
-            }
+            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user'];
+            $success = $this->users->add($param);
+            $pseudoRegister = $_POST['pseudo'];
+            $this->render('connectionRegister', compact('success', 'pseudoRegister'));
         }
     }
 
@@ -133,7 +114,7 @@ class BackController extends Controller
      */
     public function account()
     {
-        $user = $this->users->infoPseudo($_SESSION['pseudo']);
+        $user = $this->users->infoPseudoWithPseudo($_SESSION['pseudo']);
         $this->render('account', compact('user'));
     }
 
@@ -149,7 +130,7 @@ class BackController extends Controller
             $_POST['user_id'] = $_SESSION['id'];
             $_POST['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
             $this->comments->add($_POST);
-            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success='.$_SESSION['statut'].'#comments');
+            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=' . $_SESSION['statut'] . '#comments');
             exit;
         }
         else

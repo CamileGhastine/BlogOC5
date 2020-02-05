@@ -311,7 +311,7 @@ class AdminController extends Controller
         $update = true;
         if($_POST == null)
         {
-            $user = $this->users->infoPseudo($_GET['id']);
+            $user = $this->users->infoPseudoWithId($_GET['id']);
             $statuts = $this->users->statut();
             $this->render('addOrUpdateUser', compact('user', 'update', 'statuts'));
         }
@@ -321,7 +321,7 @@ class AdminController extends Controller
             $postUpdate['id'] = $_GET['id'];
 
             // Form verification
-            $formMessage = $this->pseudoOrEmailExist($_GET['id']) ? $this->pseudoOrEmailExist($_GET['id']) : $formMessage = $this->usersValidationForm->checkForm($_POST);
+            $formMessage = $this->pseudoOrEmailExist($_GET['id']) ? $this->pseudoOrEmailExist($_GET['id']) : $this->usersValidationForm->checkForm($_POST);
 
             if($formMessage)  // form not ok
             {

@@ -53,15 +53,27 @@ class UsersManager extends Manager
         return $this->db->request($sql, ['pseudo' => $pseudo], null, null);
     }
 
+
     /**
-     * id, statut, hash pass and try for a pseudo
-     * @param $pseudo
+     * id, statut, hash pass and try for a pseudo id
+     * @param $id
      * @return mixed
      */
-    public function infoPseudo($id)
+    public function infoPseudoWithId($id)
     {
         $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE id=:id';
         return $this->db->request($sql, ['id' => $id], 'users', false);
+    }
+
+    /**
+     * id, statut, hash pass and try for a pseudo id
+     * @param $id
+     * @return mixed
+     */
+    public function infoPseudoWithPseudo($pseudo)
+    {
+        $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE pseudo=:pseudo';
+        return $this->db->request($sql, ['pseudo' => $pseudo], 'users', false);
     }
 
     /**

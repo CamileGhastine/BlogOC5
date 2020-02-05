@@ -1,30 +1,44 @@
-<div class="row">
-    <div class="col-lg-12 d-flex justify-content-center menu menuCategories">
-        <nav class="navbar navbar-expand-md navbar-dark justify-content-center">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav align-items-center">
-                    <a class="nav-item nav-link active" href="index.php?route=front.posts">Tous les articles</a>
-                    <?php
-                    foreach($categories as $category)
-                    {
-                        $categoryName = $category->getNumberPosts() ? htmlspecialchars($category->getName()) : null;
-                        $url = $category->getUrl();
-                        ?>
-                        <a class="nav-item nav-link " href="<?= $url ?>"><?= $categoryName ?></a>
-                        <?php
-                    }
-                    ?>
-                </div>
-        </nav>
-    </div>
-</div>
+<?php
+$all = isset($_GET['id']) ? false : true;
+?>
 
-<div class="card my-4">
-    <p class="card-header text-center"><B>Tous les articles</B></p>
-</div>
+    <div class="row">
+        <div class="col-lg-12 d-flex justify-content-center menu menuCategories">
+            <nav class="navbar navbar-expand-md navbar-dark justify-content-center">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="navbar-nav align-items-center">
+                        <a class="nav-item nav-link <?= $all ? 'active' : null ?>" href="index.php?route=front.posts">Tous les articles</a>
+
+                        <?php
+                        foreach($categories as $category)
+                        {
+                            $categoryName = $category->getNumberPosts() ? htmlspecialchars($category->getName()) : null;
+                            $url = $category->getUrl();
+                            if(!$all)
+                            {
+                                $categoryId = $category->getId();
+                                $categoryId == $_GET['id'] ? $categoryDescription = htmlspecialchars($category->getDescription()) : null;
+                                $active = $categoryId == $_GET['id'] ? 'active' : '';
+                            }
+                            ?>
+                            <a class="nav-item nav-link <?= !$all ? $active : null ?>" href="<?= $url ?>"><?= $categoryName ?></a>
+                            <?php
+                        }
+                        ?>
+                    </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <p class="card-header text-center">
+            <B><?= $all ? 'Tous les articles' : $categoryName ?></B>
+            <br/>
+            <?= $all ? '' : $categoryDescription ?>
+        </p>
+    </div>
 
 <?php
-
 foreach($posts as $post)
 {
     $url = $post->getUrl();
@@ -48,5 +62,3 @@ foreach($posts as $post)
     <?php
 }
 ?>
-
-
