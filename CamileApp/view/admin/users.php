@@ -69,18 +69,18 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
                 <td><?= $email ?></td>
                 <td><?= $date ?></td>
                 <td><?= $statut ?></td>
-                <td><a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn btn-primary">Modifier les
+                <td><a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn-sm btn-primary">Modifier les
                         informations</a>
 
                     <?php
                     if(!isset($_GET['delete']))
                     {
-                        echo '<a href="?route=admin.users&delete=' . $userId . '#delete" class="btn btn-danger">Supprimer</a>';
+                        echo '<a href="?route=admin.users&delete=' . $userId . '#delete" class="btn-sm btn-danger">Supprimer</a>';
                     }
                     else
                     {
                         ?>
-                        <a href="" class="<?= $_GET['delete'] == $userId ? 'btn btn-secondary' : 'btn btn-danger' ?>">Supprimer</a>
+                        <a href="" class="<?= $_GET['delete'] == $userId ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
 
                         <?php
                     }
@@ -93,9 +93,9 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
                         ?>
                         <form action="?route=admin.delete" method="post" style="display: inline;">
                             <input type="hidden" name="id" value="<?= $userId ?>">
-                            <button id="delete" type="submit" class="btn btn-danger">Confirmer</button>
+                            <button id="delete" type="submit" class="btn-sm btn-danger">Confirmer</button>
                         </form>
-                        <a href="?route=admin.users" class="btn btn-success">Annuler</a>
+                        <a href="?route=admin.users" class="btn-sm btn-success">Annuler</a>
                     <?php } ?>
                 </td>
             </tr>

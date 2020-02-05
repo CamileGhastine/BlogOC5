@@ -16,7 +16,6 @@
             <th scope="col">Date inscription</th>
             <th scope="col">Action</th>
             <th scope="col"><a href="index.php?route=admin.users" class="btn btn-primary">Annuler</a></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -34,7 +33,7 @@
                     <form method="post" action="index.php?route=admin.validateUsers&id=<?= $id ?>">
                         <div class="form-group">
                             <input type="hidden" name="validated" value="1">
-                            <button type="submit" class="btn btn-success">Valider</button>
+                            <button type="submit" class="btn-sm btn-success">Valider</button>
                         </div>
                     </form>
                 </td>
@@ -42,12 +41,12 @@
                     <?php
                     if(!isset($_GET['delete']))
                     {
-                        echo '<a href="?route=admin.validateUsers&delete=' . $id . '" class="btn btn-danger">Supprimer</a>';
+                        echo '<a href="?route=admin.validateUsers&delete=' . $id . '" class="btn-sm btn-danger">Supprimer</a>';
                     }
                     else
                     {
                         ?>
-                        <a href="" class="<?= $_GET['delete'] == $id ? 'btn btn-secondary' : 'btn btn-danger' ?>">Supprimer</a>
+                        <a href="" class="<?= $_GET['delete'] == $id ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
 
                         <?php
                     }
@@ -60,9 +59,9 @@
                         ?>
                         <form action="?route=admin.delete" method="post" style="display: inline;">
                             <input type="hidden" name="id" value="<?= $id ?>">
-                            <button id="delete" type="submit" class="btn btn-danger">Confirmer</button>
+                            <button id="delete" type="submit" class="btn-sm btn-danger">Confirmer</button>
                         </form>
-                        <a href="?route=admin.validateUsers" class="btn btn-success">Annuler</a>
+                        <a href="?route=admin.validateUsers" class="btn-sm btn-success">Annuler</a>
                     <?php } ?>
                 </td>
             </tr>
