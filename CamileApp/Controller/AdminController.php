@@ -331,8 +331,7 @@ class AdminController extends Controller
             }
             else // form ok
             {
-                $post = ['id' => $_GET['id'], 'pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'statut' => $_POST['statut']];
-                $this->users->update($post);
+                $this->users->update(['id' => $_GET['id'], 'pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'statut' => $_POST['statut']];);
                 header('Location: index.php?route=admin.users&success=update');
                 exit;
             }

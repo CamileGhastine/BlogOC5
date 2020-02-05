@@ -16,14 +16,7 @@ class Router
      */
     public function run()
     {
-        if(!isset($_GET['route']))
-        {
-            $route = 'front.home';
-        }
-        else
-        {
-            $route = $_GET['route'];
-        }
+        $route = !isset($_GET['route']) ? 'front.home' : $route = $_GET['route'];
 
 //        try
 //        {
