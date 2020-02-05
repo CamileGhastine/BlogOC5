@@ -54,14 +54,43 @@ abstract class Controller
     }
 
     /**
-     *  Allow to know if a value of a field exist in the database
+     * check if the user is admin
+     */
+    protected function isAdmin()
+    {
+        if($_SESSION['statut'] !== 'admin')
+        {
+            header('Location: index.php?route=back.connectionRegister&access=adminDenied');
+            exit;
+        }
+    }
+
+    /**
+     *  Allow to know if a value of a field exist in the database for a different id
      * @param $field
      * @param $value
      * @return mixed
      */
-    protected function exists($field, $value, $id=null)
+    protected function exists($field, $value, $id = null)
     {
         $exists = $this->users->exists($field, $value, $id);
         return $exists[0];
     }
+
+    protected function pseudoOrEmailExist($id=null)
+    {
+        if($this->exists('pseudo', $_POST['pseudo'], $id))
+        {
+            $formMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
+        }
+        if($this->exists('email', $_POST['email'], $id))
+        {
+            $formMessage['email'] = 'Ce courriel est déjà utilisé.';
+        }
+        if(isset($formMessage))
+        {
+            return $formMessage ;
+        }
+    }
+
 }

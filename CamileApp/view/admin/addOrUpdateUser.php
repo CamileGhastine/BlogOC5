@@ -1,15 +1,17 @@
 <?php
-if(!isset($update))
+if(!isset($update)) // add user
 {
     $pseudo = isset($post['pseudo']) ? $post['pseudo'] : null;
     $pass = isset($post['pass']) ? $post['pass'] : null;
     $email = isset($post['email']) ? $post['email'] : null;
     $statutUser = isset($post['statut']) ? $post['statut'] : 'user';
     $action = 'index?route=admin.addUser';
+    $titlePage = 'Ajouter un utilisateur';
+    $btn = 'Ajouter';
 }
-else
+else // update user
 {
-    if(isset($user))
+    if(isset($user)) // update users (form not submit)
     {
         $pseudo = $user->getPseudo();
         $pass = 'password1';
@@ -17,7 +19,7 @@ else
         $statutUser = $user->getStatut();
         $action = 'index?route=admin.updateUser&id='.$user->getId();
     }
-    if(isset($postUpdate))
+    if(isset($postUpdate)) // update user (form already submit)
     {
         $pseudo = $postUpdate['pseudo'];
         $pass = 'password1';
@@ -25,6 +27,8 @@ else
         $statutUser = $postUpdate['statut'];
         $action = 'index?route=admin.updateUser&id='.$postUpdate['id'];
     }
+    $titlePage = 'Modifier l\'utilisateur';
+    $btn = 'Modifier';
 }
 
 $pseudoMessage = isset($formMessage['pseudo']) ? $formMessage['pseudo'] : null;
@@ -39,7 +43,7 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
 
         <div class="row pt-4">
             <div class="col-sm-8">
-                <h1>Ajouter un utilisateur</h1>
+                <h1><?= $titlePage ?></h1>
             </div>
             <div class="col-sm-4">
                 <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
@@ -93,11 +97,7 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <?php if(isset($update)) : ?>
-                            <button type="submit" class="btn btn-danger">Modifier</button>
-                        <?php else : ?>
-                            <button type="submit" class="btn btn-danger">Ajouter</button>
-                        <?php endif ?>
+                        <button type="submit" class="btn btn-danger"><?= $btn ?></button>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-end">
                         <?php if(!isset($result)) : ?>

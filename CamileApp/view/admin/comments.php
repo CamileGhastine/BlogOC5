@@ -63,17 +63,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
 
 <div class="pb-3">
     <table class="table table-striped ">
-        <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
         <tbody>
-
         <?php
         foreach($comments as $comment)
         {
@@ -111,6 +101,8 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                     <td>
                         <a href="index.php?route=admin.comments&id=<?= $postId ?>&update=<?= $commentId ?>#update" class="btn-sm btn-primary mt-3">modifier</a>
                     </td>
+                <?php else : ?>
+                    <td></td>
                 <?php endif ?>
                 <td>
                     <a href="index.php?route=admin.comments&id=<?= $postId ?>&delete=<?= $commentId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3" class="btn-sm btn-danger mt-3">Supprimer</a>

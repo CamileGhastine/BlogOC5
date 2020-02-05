@@ -10,17 +10,6 @@ class AdminController extends Controller
 {
     protected $viewPath = ROOT . '/CamileApp/view/admin/';
 
-    /**
-     * check if the user is admin
-     */
-    public function isAdmin()
-    {
-        if($_SESSION['statut'] !== 'admin')
-        {
-            header('Location: index.php?route=back.connectionRegister&access=adminDenied');
-            exit;
-        }
-    }
 
     /**
      * Admin dashboard
@@ -288,41 +277,21 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            // test if pseudo and/or mail exist
-            if($this->exists('pseudo', $_POST['pseudo']) or $this->exists('email', $_POST['email']))
-            {
-                if($this->exists('pseudo', $_POST['pseudo']))
-                {
-                    $formMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-                }
-                if($this->exists('email', $_POST['email']))
-                {
-                    $formMessage['email'] = 'Ce courriel est déjà utilisé.';
-                }
-            }
             $post = $_POST;
 
-            if(isset($formMessage))  // pseudo and/or mail already exist
+            // Form verification
+            $formMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $formMessage = $this->usersValidationForm->checkForm($_POST);
+
+            if($formMessage)  // form ok
             {
                 $statuts = $this->users->statut();
                 $this->render('addOrUpdateUser', compact('statuts', 'formMessage', 'post'));
             }
-            else
+            else // form not ok
             {
-                $formMessage = $this->usersValidationForm->checkForm($_POST);
-
-                if(!$formMessage)
-                {
-                    $this->users->add($_POST);
-                    header('Location: index.php?route=admin.users&success=add');
-                    exit;
-                }
-                else
-                {
-                    $post = $_POST;
-                    $statuts = $this->users->statut();
-                    $this->render('addOrUpdateUser', compact('statuts', 'formMessage', 'post'));
-                }
+                $this->users->add($_POST);
+                header('Location: index.php?route=admin.users&success=add');
+                exit;
             }
         }
         else
@@ -342,54 +311,31 @@ class AdminController extends Controller
         $update = true;
         if($_POST == null)
         {
-            $user = $this->users->infoPseudo($_GET['pseudo']);
+            $user = $this->users->infoPseudo($_GET['id']);
             $statuts = $this->users->statut();
-            $this->render('addOrUpdateUser', compact('infoPseudo', 'user', 'update', 'statuts'));
-
+            $this->render('addOrUpdateUser', compact('user', 'update', 'statuts'));
         }
         else
         {
-            // test if pseudo and/or mail exist
-            if($this->exists('pseudo', $_POST['pseudo'], $_GET['id']) or $this->exists('email', $_POST['email'], $_GET['id']))
-            {
-                if($this->exists('pseudo', $_POST['pseudo'], $_GET['id']))
-                {
-                    $formMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-                }
-                if($this->exists('email', $_POST['email'], $_GET['id']))
-                {
-                    $formMessage['email'] = 'Ce courriel est déjà utilisé.';
-                }
-            }
-
             $postUpdate = $_POST;
             $postUpdate['id'] = $_GET['id'];
 
-            if(isset($formMessage))  // pseudo and/or mail already exist
+            // Form verification
+            $formMessage = $this->pseudoOrEmailExist($_GET['id']) ? $this->pseudoOrEmailExist($_GET['id']) : $formMessage = $this->usersValidationForm->checkForm($_POST);
+
+            if($formMessage)  // form not ok
             {
                 $statuts = $this->users->statut();
                 $this->render('addOrUpdateUser', compact('statuts', 'formMessage', 'postUpdate', 'update'));
             }
-            else
+            else // form ok
             {
-                $formMessage = $this->usersValidationForm->checkForm($_POST);
-
-                if(!$formMessage)
-                {
-                    $post = ['id' => $_GET['id'], 'pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'statut' => $_POST['statut']];
-                    $this->users->update($post);
-                    header('Location: index.php?route=admin.users&success=update');
-                    exit;
-                }
-                else
-                {
-                    $post = $_POST;
-                    $statuts = $this->users->statut();
-                    $this->render('addOrUpdateUser', compact('statuts', 'formMessage', 'post'));
-                }
+                $post = ['id' => $_GET['id'], 'pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'statut' => $_POST['statut']];
+                $this->users->update($post);
+                header('Location: index.php?route=admin.users&success=update');
+                exit;
             }
         }
-
     }
 
     /**

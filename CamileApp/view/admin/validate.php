@@ -16,6 +16,7 @@
             <th scope="col">Date inscription</th>
             <th scope="col">Action</th>
             <th scope="col"><a href="index.php?route=admin.users" class="btn btn-primary">Annuler</a></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

@@ -52,6 +52,7 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
             <th scope="col">Date Inscription</th>
             <th scope="col">Statut</th>
             <th scope="col">Action</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -68,7 +69,7 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
                 <td><?= $email ?></td>
                 <td><?= $date ?></td>
                 <td><?= $statut ?></td>
-                <td><a href="index.php?route=admin.updateUser&pseudo=<?= $pseudo ?>" class="btn btn-primary">Modifier les
+                <td><a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn btn-primary">Modifier les
                         informations</a>
 
                     <?php

@@ -15,10 +15,20 @@ class UsersManager extends Manager
      * function request($sql, $param, $table, $fetchall)
      * @param $pseudo
      */
-    public function exists($field, $value, $id=null)
+    public function exists($field, $value, $id = null)
     {
-        $sql = 'SELECT COUNT(*) FROM users WHERE '.$field.'=:value AND id <>:id';
-        return $this->db->request($sql, ['value' => $value, 'id' =>$id], null, false);
+        if($id === null)
+        {
+            $sqlBis = null;
+            $param = ['value' => $value];
+        }
+        else
+        {
+            $sqlBis = ' AND id <>:id';
+            $param = ['value' => $value, 'id' => $id];
+        }
+        $sql = 'SELECT COUNT(*) FROM users WHERE ' . $field . '=:value' . $sqlBis;
+        return $this->db->request($sql, $param, null, false);
     }
 
     /**
@@ -48,10 +58,10 @@ class UsersManager extends Manager
      * @param $pseudo
      * @return mixed
      */
-    public function infoPseudo($pseudo)
+    public function infoPseudo($id)
     {
-        $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE pseudo=:pseudo';
-        return $this->db->request($sql, ['pseudo' => $pseudo], 'users', false);
+        $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE id=:id';
+        return $this->db->request($sql, ['id' => $id], 'users', false);
     }
 
     /**
@@ -70,7 +80,7 @@ class UsersManager extends Manager
      */
     public function getValidated()
     {
-        $sql ='SELECT * FROM users WHERE validated IS NOT NULL';
+        $sql = 'SELECT * FROM users WHERE validated IS NOT NULL ORDER BY pseudo';
         return $this->db->request($sql, null, 'users', true);
     }
 
@@ -80,7 +90,7 @@ class UsersManager extends Manager
      */
     public function getUnvalidated()
     {
-        $sql ='SELECT * FROM users WHERE validated IS NULL';
+        $sql = 'SELECT * FROM users WHERE validated IS NULL ORDER BY pseudo';
         return $this->db->request($sql, null, 'users', true);
     }
 
@@ -90,7 +100,7 @@ class UsersManager extends Manager
      */
     public function countUnvalidated()
     {
-        $sql ='SELECT COUNT(*) AS number FROM users WHERE validated IS NULL';
+        $sql = 'SELECT COUNT(*) AS number FROM users WHERE validated IS NULL';
         return $this->db->request($sql, null, 'users', false);
     }
 
