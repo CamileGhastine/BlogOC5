@@ -4,44 +4,24 @@ namespace CamileApp\Model\Entity;
 
 use Exception;
 
-class UsersEntity
+class UsersEntity extends Entity
 {
-    private $id;
-    private $pseudo;
-    private $email;
-    private $statut;
-    private $pass;
-    private $date_inscription;
-    private $validated;
-    private $try;
-    private $pseudoExists;
+    protected $id;
+    protected $pseudo;
+    protected $email;
+    protected $statut;
+    protected $pass;
+    protected $date_inscription;
+    protected $validated;
+    protected $try;
+    protected $pseudoExists;
 
     public function __construct()
     {
         $this->setDate_inscription();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        if(is_int($id) && $id > 0)
-        {
-            $this->id = $id;
-        }
-        throw new Exception('typage');
-    }
-
-    /**
+    /**protected
      * @return mixed
      */
     public function getPseudo()
@@ -134,16 +114,7 @@ class UsersEntity
      */
     public function setDate_inscription($date_inscription = null): void
     {
-        if(!is_null($date_inscription))
-        {
-            $this->date_inscription = $date_inscription;
-        }
-
-        if(is_string($this->date_inscription))
-        {
-            $date = date("d/m/Y à H:i", strtotime($this->date_inscription));
-            $this->date_inscription = $date;
-        }
+        $this->setDate('date_inscription', $date_inscription);
     }
 
     /**

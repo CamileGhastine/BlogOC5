@@ -7,18 +7,18 @@ use Exception;
 /**
  * Class PostsEntity
  */
-class PostsEntity
+class PostsEntity extends Entity
 {
-    private $id;
-    private $title;
-    private $chapo;
-    private $content;
-    private $date_creation;
-    private $date_modification;
-    private $category_id;
-    private $user_id;
-    private $url;
-    private $pseudo;
+    protected $id;
+    protected $title;
+    protected $chapo;
+    protected $content;
+    protected $date_creation;
+    protected $date_modification;
+    protected $category_id;
+    protected $user_id;
+    protected $url;
+    protected $pseudo;
     /**
      * Number validated comments
      * @var
@@ -36,27 +36,6 @@ class PostsEntity
         $this->setDate_creation();
         $this->setDate_modification();
         $this->setUrl();
-    }
-
-    /**
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param $id
-     * @throws Exception
-     */
-    public function setId($id): void
-    {
-        if(is_int($id) && $id > 0)
-        {
-            $this->id = $id;
-        }
-        throw new Exception('typage');
     }
 
     /**
@@ -137,17 +116,7 @@ class PostsEntity
      */
     public function setDate_creation($date_creation = null): void
     {
-        if(!is_null($date_creation))
-        {
-            $this->date_creation = $date_creation;
-        }
-
-        if(is_string($this->date_creation))
-        {
-            $date = date("d/m/Y à H:i", strtotime($this->date_creation));
-            $this->date_creation = $date;
-        }
-
+        $this->setDate('date_creation', $date_creation);
     }
 
     /**
@@ -163,17 +132,7 @@ class PostsEntity
      */
     public function setDate_modification($date_modification = null): void
     {
-        if(!is_null($date_modification))
-        {
-            $this->date_modification = $date_modification;
-        }
-
-        if(is_string($this->date_creation))
-        {
-            $date = date("d/m/Y à H:i", strtotime($this->date_modification));
-            $this->date_modification = $date;
-        }
-
+        $this->setDate('date_modification', $date_modification);
     }
 
     /**

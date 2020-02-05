@@ -4,41 +4,19 @@ namespace CamileApp\Model\Entity;
 
 use Exception;
 
-class CommentsEntity
+class CommentsEntity extends Entity
 {
-    private $id;
-    private $content;
-    private $date_creation;
-    private $post_id;
-    private $user_id;
-    private $validated;
-    private $pseudo;
+    protected $id;
+    protected $content;
+    protected $date_creation;
+    protected $post_id;
+    protected $user_id;
+    protected $validated;
+    protected $pseudo;
 
     public function __construct()
     {
         $this->setDate_creation();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-
-    /**
-     * @param $id
-     * @throws Exception
-     */
-    public function setId($id): void
-    {
-        if(is_int($id) && $id > 0)
-        {
-            $this->id = $id;
-        }
-        throw new Exception('typage');
     }
 
     /**
@@ -75,16 +53,7 @@ class CommentsEntity
      */
     public function setDate_creation($date_creation = null): void
     {
-        if(!is_null($date_creation))
-        {
-            $this->date_creation = $date_creation;
-        }
-
-        if(is_string($this->date_creation))
-        {
-            $date = date("d/m/Y à H:i", strtotime($this->date_creation));
-            $this->date_creation = $date;
-        }
+        $this->setDate('date_creation', $date_creation);
     }
 
     /**

@@ -8,38 +8,17 @@ use Exception;
  * Class CategoriesEntity
  * @package CamileApp\Model\Entity
  */
-class CategoriesEntity
+class CategoriesEntity extends Entity
 {
-    private $id;
-    private $name;
-    private $description;
-    private $url;
-    private $numberPosts;
+    protected $id;
+    protected $name;
+    protected $description;
+    protected $url;
+    protected $numberPosts;
 
     public function __construct()
     {
         $this->setUrl();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param $id
-     * @throws Exception
-     */
-    public function setId($id): void
-    {
-        if(is_int($id) && $id > 0)
-        {
-            $this->id = $id;
-        }
-        throw new Exception('typage');
     }
 
     /**
