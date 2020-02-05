@@ -6,7 +6,9 @@
             "email": "camileghastine@hotmail.com"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-pdo": "*"
+    },
     "autoload": {
         "psr-4": {
             "CamileApp\\":"CamileApp/",
