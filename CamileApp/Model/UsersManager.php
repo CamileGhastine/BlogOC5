@@ -82,7 +82,7 @@ class UsersManager extends Manager
      */
     public function add($param)
     {
-        $sql = 'INSERT INTO users(pseudo, email, pass, statut) VALUES (:pseudo, :email, :pass, :statut)';
+        $sql = 'INSERT INTO users(pseudo, email, pass, statut, validated) VALUES (:pseudo, :email, :pass, :statut, :validated)';
         return $this->db->request($sql, $param);
     }
 

@@ -102,7 +102,7 @@ class BackController extends Controller
         }
         else // form ok
         {
-            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user'];
+            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user', 'validated' => null];
             $success = $this->users->add($param);
             $pseudoRegister = $_POST['pseudo'];
             $this->render('connectionRegister', compact('success', 'pseudoRegister'));

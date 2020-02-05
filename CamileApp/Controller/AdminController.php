@@ -289,6 +289,7 @@ class AdminController extends Controller
             }
             else // form not ok
             {
+                $_POST['validated'] = 1;
                 $this->users->add($_POST);
                 header('Location: index.php?route=admin.users&success=add');
                 exit;
