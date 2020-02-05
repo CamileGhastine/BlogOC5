@@ -7,6 +7,9 @@ namespace CamileApp\Model\Entity;
 class Entity
 {
     protected $id;
+    protected $content;
+    protected $pseudo;
+    protected $date_creation;
 
     /**
      * @return mixed
@@ -26,6 +29,59 @@ class Entity
             $this->id = $id;
         }
         throw new Exception('typage');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param $content
+     * @throws Exception
+     */
+    public function setContent($content): void
+    {
+        if(is_string($content))
+        {
+            $this->content = $content;
+        }
+        throw new Exception('typage');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param mixed $pseudo
+     */
+    public function setPseudo($pseudo): void
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate_creation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * @param mixed $date_creation
+     */
+    public function setDate_creation($date_creation = null): void
+    {
+        $this->setDate('date_creation', $date_creation);
     }
 
     /**

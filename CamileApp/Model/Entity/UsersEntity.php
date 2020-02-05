@@ -21,26 +21,6 @@ class UsersEntity extends Entity
         $this->setDate_inscription();
     }
 
-    /**protected
-     * @return mixed
-     */
-    public function getPseudo()
-    {
-        return $this->pseudo;
-    }
-
-    /**
-     * @param mixed $pseudo
-     */
-    public function setPseudo($pseudo): void
-    {
-        if(is_string($pseudo))
-        {
-            $this->pseudo = $pseudo;
-        }
-        throw new Exception('typage');
-    }
-
     /**
      * @return mixed
      */
