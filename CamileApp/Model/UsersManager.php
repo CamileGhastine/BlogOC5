@@ -27,8 +27,8 @@ class UsersManager extends Manager
             $sqlBis = ' AND id <>:id';
             $param = ['value' => $value, 'id' => $id];
         }
-        $sql = 'SELECT COUNT(*) FROM users WHERE ' . $field . '=:value' . $sqlBis;
-        return $this->db->request($sql, $param, null, false);
+        $sql = 'SELECT COUNT(*) AS pseudoExists FROM users WHERE ' . $field . '=:value' . $sqlBis;
+        return $this->db->request($sql, $param, 'users', false);
     }
 
     /**
@@ -39,7 +39,7 @@ class UsersManager extends Manager
     public function substractTry($pseudo)
     {
         $sql = 'UPDATE users SET try=try+1 WHERE pseudo=:pseudo';
-        return $this->db->request($sql, ['pseudo' => $pseudo], null, null);
+        return $this->db->request($sql, ['pseudo' => $pseudo]);
     }
 
     /**
@@ -50,7 +50,7 @@ class UsersManager extends Manager
     public function TryToZero($pseudo)
     {
         $sql = 'UPDATE users SET try=0 WHERE pseudo=:pseudo';
-        return $this->db->request($sql, ['pseudo' => $pseudo], null, null);
+        return $this->db->request($sql, ['pseudo' => $pseudo]);
     }
 
 

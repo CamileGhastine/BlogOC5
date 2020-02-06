@@ -74,7 +74,7 @@ abstract class Controller
     protected function exists($field, $value, $id = null)
     {
         $exists = $this->users->exists($field, $value, $id);
-        return $exists[0];
+        return $exists->getPseudoExists();
     }
 
     protected function pseudoOrEmailExist($id=null)

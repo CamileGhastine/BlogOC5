@@ -33,7 +33,7 @@ class CommentsManager extends Manager
     public function add()
     {
         $sql = 'INSERT INTO comments(content, post_id, user_id, validated) VALUES (:content, :post_id, :user_id, :validated)';
-        return $this->db->request($sql, $_POST, 'comments');
+        return $this->db->request($sql, $_POST);
     }
 
     /**
@@ -44,7 +44,7 @@ class CommentsManager extends Manager
     public function validate($id)
     {
         $sql = 'UPDATE comments SET validated=1 WHERE id=:id ';
-        return $this->db->request($sql,['id' => $id], 'comments', null);
+        return $this->db->request($sql,['id' => $id]);
     }
 
     /**

@@ -58,22 +58,16 @@ class MysqlDatabase extends Database
             $req->execute($param);
         }
 
-        if($fetchall === null)
-        {
-            return $req;
-        }
-
-        if($table != null)
-        {
-            $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\' . ucfirst($table) . 'Entity');
-        }
+        if($fetchall === null) return $req;
 
         if($fetchall)
         {
+            $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\' . ucfirst($table) . 'Entity');
             return $req->fetchall();
         }
         else
         {
+            $req->setFetchMode(PDO::FETCH_CLASS, 'CamileApp\Model\Entity\\' . ucfirst($table) . 'Entity');
             return $req->fetch();
         }
     }
