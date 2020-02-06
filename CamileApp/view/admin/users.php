@@ -91,10 +91,7 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
                     if(isset($_GET['delete']) && $_GET['delete'] == $userId)
                     {
                         ?>
-                        <form action="?route=admin.delete" method="post" style="display: inline;">
-                            <input type="hidden" name="id" value="<?= $userId ?>">
-                            <button id="delete" type="submit" class="btn-sm btn-danger">Confirmer</button>
-                        </form>
+                        <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
                         <a href="?route=admin.users" class="btn-sm btn-success">Annuler</a>
                     <?php } ?>
                 </td>

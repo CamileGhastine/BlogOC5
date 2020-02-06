@@ -44,7 +44,6 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
-                $_POST['user_id'] = $_SESSION['id'];
                 $this->posts->add();
                 header('Location: index.php?route=admin.posts&success=add');
                 exit;
@@ -62,19 +61,6 @@ class AdminController extends Controller
             $this->render('addOrUpdatePost', compact('categories'));
         }
 
-    }
-
-    /**
-     * delete post in admin dashboard
-     */
-    public function deletepost()
-    {
-        $this->isAdmin();
-
-        $this->comments->deleteAllByPostId($_GET['id']);
-        $this->posts->delete($_GET['id']);
-        header('Location: index.php?route=admin.posts&success=delete');
-        exit;
     }
 
     /**
@@ -110,6 +96,15 @@ class AdminController extends Controller
             $this->render('addOrUpdatePost', compact('post', 'categories', 'comments'));
         }
     }
+
+    /**
+     * delete post in admin dashboard
+     */
+    public function deletepost()
+    {
+        $this->delete('posts');
+    }
+
 
     /**
      * Admin categories dashboard
@@ -157,14 +152,9 @@ class AdminController extends Controller
      */
     public function deleteCategory()
     {
-        $this->isAdmin();
-
         if($_GET['id'] != 1)
         {
-            $this->posts->changeCategoryToUnknown();
-            $this->categories->delete($_GET['id']);
-            header('Location: index.php?route=admin.categories&success=delete');
-            exit;
+            $this->delete('categories');
         }
         else
         {
@@ -179,7 +169,6 @@ class AdminController extends Controller
     public function updateCategory()
     {
         $this->isAdmin();
-
 
         if($_POST)
         {
@@ -231,18 +220,6 @@ class AdminController extends Controller
     }
 
     /**
-     * delete a comment
-     */
-    public function deleteComment()
-    {
-        $this->isAdmin();
-
-        $this->comments->delete($_GET['commentId']);
-        header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=delete#comments');
-        exit;
-    }
-
-    /**
      * modify comment
      */
     public function updateComment()
@@ -251,6 +228,18 @@ class AdminController extends Controller
 
         $this->comments->update($_GET['commentId'], $_POST['content']);
         header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=update#comments');
+        exit;
+    }
+
+    /**
+     * delete a comment
+     */
+    public function deleteComment()
+    {
+        $this->isAdmin();
+
+        $this->comments->delete($_GET['commentId']);
+        header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=delete#comments');
         exit;
     }
 
@@ -358,11 +347,9 @@ class AdminController extends Controller
     /**
      * delete user
      */
-    public function delete()
+    public function deleteUser()
     {
-        $this->isAdmin();
-
-        $this->users->delete($_POST['id']);
-        header('Location: index.php?route=admin.users&success=delete');
+        $this->delete('users');
     }
 }
+

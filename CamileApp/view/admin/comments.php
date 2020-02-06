@@ -113,6 +113,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                     <td> <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-success mt-3">Annuler</a></td>
                 <?php else : ?>
                     <td></td>
+                    <td></td>
                 <?php endif ?>
 
             </tr>

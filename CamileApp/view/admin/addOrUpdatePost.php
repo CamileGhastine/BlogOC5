@@ -58,7 +58,11 @@ else // add post
                         <p><?= $titleMessage ?></p>
                     </div>
                 </div>
-                <input type="hidden" name="id" value="<?= $postId ?>">
+                <?php if($update) : ?>
+                    <input type="hidden" name="id" value="<?= $postId ?>">
+                <?php else : ?>
+                    <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
+                <?php endif ?>
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <label for="chapo">Chapô</label>

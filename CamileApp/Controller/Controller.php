@@ -77,6 +77,11 @@ abstract class Controller
         return $exists->getPseudoExists();
     }
 
+    /**
+     * test if the pseudo or/and mail exists
+     * @param null $id
+     * @return mixed
+     */
     protected function pseudoOrEmailExist($id=null)
     {
         if($this->exists('pseudo', $_POST['pseudo'], $id))
@@ -93,4 +98,26 @@ abstract class Controller
         }
     }
 
+    /**
+     * Delete à table : user, post or category
+     * @param $table
+     */
+    public function delete($table)
+    {
+        $this->isAdmin();
+
+        switch($table)
+        {
+            case 'posts':
+                $this->comments->deleteAllByPostId($_GET['commentId']);
+                break;
+            case 'categories':
+                $this->posts->changeCategoryToUnknown();
+                break;
+        }
+
+        $this->$table->delete($_GET['id']);
+        header('Location: index.php?route=admin.' . $table . '&success=delete');
+        exit;
+    }
 }
