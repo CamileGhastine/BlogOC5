@@ -24,11 +24,8 @@ class RegisterValidationForm extends ValidationForm
         foreach($this->keys as $key)
         {
             // Stock pass and passConfirm
-            if($key == 'pass' OR $key == 'passConfirm')
-            {
-                $stock = $key.'Stock';
-                $this->$stock = $post[$key];
-            }
+            $stock = $key . 'Stock';
+            $this->$stock = $post[$key];
 
             if($this->$key->check($post[$key]))
             {
