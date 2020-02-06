@@ -13,76 +13,6 @@ class BackController extends Controller
     protected $viewPath = ROOT . '/CamileApp/view/backend/';
 
     /**
-     * connection/register view
-     */
-    public function connectionRegister()
-    {
-        $this->render('connectionRegister');
-    }
-
-    /**
-     * user or admin connection
-     * @throws \Exception
-     */
-    public function connect()
-    {
-        $infoPseudo = $this->users->infoPseudoWithPseudo($_POST['pseudo']);
-
-        $connectionMessage = $this->checkConnect($infoPseudo);
-
-
-        if(!$connectionMessage) // Connection to user page
-        {
-            $this->users->TryToZero($_POST['pseudo']);
-
-            $_SESSION['id'] = $infoPseudo->getID();
-            $_SESSION['pseudo'] = $infoPseudo->getPseudo();
-            $_SESSION['statut'] = $infoPseudo->getStatut();
-            $_SESSION['token'] = bin2hex(random_bytes(10));
-
-            header('Location: index.php');
-            exit;
-        }
-        else
-        {
-            $this->render('connectionRegister', compact('connectionMessage'));
-
-        }
-    }
-
-    /**
-     * test pseudo, number of try, password, validate user
-     * @param $infoPseudo
-     * @return string
-     */
-    private function checkConnect($infoPseudo)
-    {
-
-        if(!$infoPseudo) // pseudo doesn't exist
-        {
-            return 'Le pseudo et/ou le mot de passe sont incorrects.';
-        }
-        if($infoPseudo->getTry() >= $this->hijacking) // maximum number of trials reached
-        {
-            return 'Votre compte a été bloqué après ' . $this->hijacking . ' tentatives infructueuses.';
-        }
-        if(!$this->password->verify($_POST['pass'], $infoPseudo->getPass())) // password not ok
-        {
-            $this->users->substractTry($_POST['pseudo']);
-
-            $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
-
-            $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
-            $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
-            return $connectionMessage;
-        }
-        if($infoPseudo->getValidated() === null) // user not yet validated by the administrator
-        {
-            return 'Encore un peu de patience ! Votre compte sera validé sous peu.';
-        }
-    }
-
-    /**
      * disconnection
      */
     public function disconnect()
@@ -93,35 +23,36 @@ class BackController extends Controller
     }
 
     /**
-     * user registration
-     */
-    public function register()
-    {
-        $postRegister = $_POST;
-
-        // Form verification
-        $formRegisterMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $this->registerValidationForm->checkForm($_POST);
-
-        if($formRegisterMessage)  // form not ok
-        {
-            $this->render('connectionRegister', compact('formRegisterMessage', 'postRegister'));
-        }
-        else // form ok
-        {
-            $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user', 'validated' => null];
-            $success = $this->users->add($param);
-            $pseudoRegister = $_POST['pseudo'];
-            $this->render('connectionRegister', compact('success', 'pseudoRegister'));
-        }
-    }
-
-    /**
      * Dashboard user view
      */
     public function account()
     {
+        $this->isConnect();
+
         $user = $this->users->infoPseudoWithPseudo($_SESSION['pseudo']);
         $this->render('account', compact('user'));
+    }
+
+    /**
+     * One postById (by id) comment allow
+     */
+    public function postById()
+    {
+        $this->isConnect();
+
+        if($_SESSION['statut'] == 'user')
+        {
+            $this->viewPostById();
+        }
+        elseif($_SESSION['statut'] == 'admin')
+        {
+            header('Location: index.php?route=admin.postByid&id='. $_GET['id']);
+            exit;
+        }
+        else
+        {
+            throw new Exception('session');
+        }
     }
 
     /**
@@ -129,6 +60,8 @@ class BackController extends Controller
      */
     public function addComment()
     {
+        $this->isConnect();
+
         $formMessage = $this->commentsValidationForm->checkForm($_POST);
 
         if(!$formMessage)
@@ -144,8 +77,7 @@ class BackController extends Controller
             $postAddUnvalid = $_POST;
             $post = $this->posts->postById($_GET['id']);
             $comments = $this->comments->commentsById($_GET['id']);
-            $this->viewPath = ROOT . '/CamileApp/view/frontend/';
-            $this->render('postById', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));
+            $this->render('comment', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));
             $this->viewPath = ROOT . '/CamileApp/view/backend/';
         }
     }

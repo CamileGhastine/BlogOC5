@@ -35,7 +35,7 @@ else
 ?>
 
 <?php if(isset($success) && $success): ?>
-    <div class="alert alert-success">
+    <div class="alert alert-success mt-4">
         <div class=row>
             <div class="col-sm-10">
                 L'enregistrement a été réalisé avec succès. Une fois validé par l'admistrateur, vous pourrez profiter de
@@ -46,20 +46,20 @@ else
             </div>
         </div>
     </div>
-<?php elseif(isset($_GET['access']) && $_GET['access'] = 'adminDenied') : ?>
+<?php elseif(isset($_GET['access']) && $_GET['access'] == 'adminDenied') : ?>
 <!--Try to access to any administration route page without been connect as admin-->
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mt-4">
         <div class=row>
-            <div class="col-sm-10">
+            <div class="col-lg-10">
                 Vous ne pouvez pas accéder à cette page sans être connecté en tant qu'administrateur.
             </div>
         </div>
     </div>
-<?php elseif(isset($_GET['access']) && $_GET['access'] = 'userDenied') : ?>
+<?php elseif(isset($_GET['access']) && $_GET['access'] == 'userDenied') : ?>
     <!--Try to access to any register user's route page without been connect as register user-->
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mt-4">
         <div class=row>
-            <div class="col-sm-10">
+            <div class="col-lg-10">
                 Vous ne pouvez pas accéder à cette page sans être connecté.
             </div>
         </div>
@@ -80,7 +80,7 @@ else
             <div id="collapseConnect" class="collapse <?= $showconnection ?>" aria-labelledby="headingConnect"
                  data-parent="#accordion">
                 <div class="card-body">
-                    <form action="index.php?route=back.connect" method="post">
+                    <form action="index.php?route=front.connect" method="post">
                         <div class="form-group">
                             <label for="pseudo">Pseudonyme</label>
                             <input class="form-control" type="text" name="pseudo" value="<?= $pseudoConnect ?>"
@@ -113,7 +113,7 @@ else
             <div id="collapseRegister" class="collapse <?= $showRegister ?>" aria-labelledby="headingRegister"
                  data-parent="#accordion">
                 <div class="card-body">
-                    <form action="index.php?route=back.register" method="post">
+                    <form action="index.php?route=front.register" method="post">
                         <div class="form-group">
                             <label for="pseudo">Pseudonyme</label>
                             <input class="form-control" type="text" name="pseudo" value="<?= $pseudo ?>">

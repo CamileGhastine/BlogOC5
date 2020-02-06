@@ -64,7 +64,7 @@
                         <a class="nav-item nav-link  " href="doc/cv.pdf">Mon CV</a>
                         <a class="nav-item nav-link  " href="index.php?route=front.contact">Me Contacter</a>
                         <?php if($id === null) : ?>
-                            <a class="nav-item nav-link " href="index.php?route=back.connectionRegister">Enregistrement/connexion</a>
+                            <a class="nav-item nav-link " href="index.php?route=front.connectionRegister">Enregistrement/connexion</a>
                         <?php else : ?>
                             <a class="nav-item nav-link " href="index.php?route=back.account">Compte de <?= ucfirst($pseudo) ?></a>
 

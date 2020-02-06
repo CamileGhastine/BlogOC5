@@ -354,5 +354,15 @@ class AdminController extends Controller
     {
         $this->delete('users');
     }
+
+    /**
+     * One postById (by id) comment allow
+     */
+    public function postById()
+    {
+        $this->isAdmin();
+
+        $this->viewPostById();
+    }
 }
 

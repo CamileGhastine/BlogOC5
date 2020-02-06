@@ -28,6 +28,10 @@ class ErrorController extends Controller
             case 'typage' :
                 $message = 'Problème de typage, renouveler votre requête !!!';
                 break;
+            case 'session' :
+                session_destroy();
+                $message = 'Problème de session. Merci de vous reconnecter.';
+                break;
             default :
                 $message = 'Erreur : ' . $errorType;
         }

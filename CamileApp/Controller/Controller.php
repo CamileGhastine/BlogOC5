@@ -11,6 +11,9 @@ use CamileApp\Core\App;
  */
 abstract class Controller
 {
+    /**
+     * @var mixed
+     */
     protected $posts;
     protected $comments;
     protected $categories;
@@ -67,7 +70,19 @@ abstract class Controller
     {
         if($_SESSION['statut'] !== 'admin')
         {
-            header('Location: index.php?route=back.connectionRegister&access=adminDenied');
+            header('Location: index.php?route=front.connectionRegister&access=adminDenied');
+            exit;
+        }
+    }
+
+    /**
+     * check if the user is connected
+     */
+    protected function isConnect()
+    {
+        if($_SESSION['statut'] !== 'user' AND $_SESSION['statut'] !=='admin')
+        {
+            header('Location: index.php?route=front.connectionRegister&access=userDenied');
             exit;
         }
     }
@@ -128,10 +143,25 @@ abstract class Controller
         exit;
     }
 
+    /**
+     * display user management by admin
+     * @param $display
+     * @param $users
+     */
     protected function displayUserAdmin($display, $users)
     {
         $numberUsersUnvalidated = $this->users->countUnvalidated();
         $numberUsersBlocked = $this->users->countBlocked();
         $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
+    }
+
+    /**
+     * view of postById (front, user and admin)
+     */
+    protected function viewPostById()
+    {
+        $post = $this->posts->postById($_GET['id']);
+        $comments = $this->comments->commentsById($_GET['id']);
+        $this->render('postById', compact('post', 'comments'));
     }
 }

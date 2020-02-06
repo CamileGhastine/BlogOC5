@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-<?php require ROOT . '/CamileApp/view/frontend/formContact.php' ?>
+<?php require ROOT . '/CamileApp/view/frontend/required/formContact.php' ?>
 
     <div class="offset-lg-3 col-lg-6">
         <div class="card my-4">
