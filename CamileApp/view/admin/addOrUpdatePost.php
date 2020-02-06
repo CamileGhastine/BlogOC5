@@ -11,8 +11,7 @@ $update = (isset($post) OR isset($postUpdateUnvalid));
 if($update) //update post
 {
     $titlePage = 'Modifier l\'article';
-    $numberComments = $post->getNumberComments();
-    $postId = isset($postUpdateUnvalid) ? $id : htmlspecialchars($post->getId());
+    $postId = isset($postUpdateUnvalid) ? $postUpdateUnvalid['id'] : htmlspecialchars($post->getId());
     $formAction = 'index?route=admin.updatePost&id='.$postId;
     $title = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['title']) :  htmlspecialchars($post->getTitle());
     $chapo = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['chapo']) : htmlspecialchars($post->getChapo());
@@ -23,7 +22,6 @@ if($update) //update post
 else // add post
 {
     $titlePage = 'Ajouter un article';
-    $numberComments = '';
     $formAction = 'index?route=admin.addPost';
     $postId = null;
     $title = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['title']) : null;
@@ -60,7 +58,7 @@ else // add post
                         <p><?= $titleMessage ?></p>
                     </div>
                 </div>
-
+                <input type="hidden" name="id" value="<?= $postId ?>">
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <label for="chapo">Chapô</label>

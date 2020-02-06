@@ -90,18 +90,16 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
-                $_POST['id'] = $_GET['id'];
                 $this->posts->update();
                 header('Location: index.php?route=admin.posts&success=update');
                 exit;
             }
             else
             {
-                $id = $_GET['id'];
                 $postUpdateUnvalid = $_POST;
                 $comments = $this->comments->commentsById($_GET['id']);
                 $categories = $this->categories->all();
-                $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid', 'id'));
+                $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid'));
             }
         }
         else
