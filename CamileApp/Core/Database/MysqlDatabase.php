@@ -51,21 +51,16 @@ class MysqlDatabase extends Database
         if($param === null)
         {
             $req = $this->getPDO()->query($sql);
-
-            if($fetchall === null)
-            {
-                return $req;
-            }
         }
         else
         {
             $req = $this->getPDO()->prepare($sql);
             $req->execute($param);
+        }
 
-            if($fetchall === null)
-            {
-                return $req;
-            }
+        if($fetchall === null)
+        {
+            return $req;
         }
 
         if($table != null)
