@@ -12,16 +12,20 @@ use CamileApp\Core\App;
 abstract class Controller
 {
     protected $posts;
-    protected $comment;
+    protected $comments;
     protected $categories;
     protected $users;
+    protected $form_contacts;
     protected $postsValidationForm;
     protected $categoriesValidationForm;
     protected $commentsValidationForm;
     protected $registerValidationForm;
     protected $usersValidationForm;
+    protected $contactValidationForm;
     protected $password;
     protected $hijacking;
+    protected $mail;
+
 
     public function __construct()
     {
@@ -29,13 +33,16 @@ abstract class Controller
         $this->comments = App::getinstance()->getManager('comments');
         $this->categories = App::getinstance()->getManager('categories');
         $this->users = App::getinstance()->getManager('users');
+        $this->form_contacts = App::getinstance()->getManager('form_contacts');
         $this->postsValidationForm = App::getinstance()->getValidationForm('posts');
         $this->categoriesValidationForm = App::getinstance()->getValidationForm('categories');
         $this->commentsValidationForm = App::getinstance()->getValidationForm('comments');
         $this->registerValidationForm = App::getinstance()->getValidationForm('register');
         $this->usersValidationForm = App::getinstance()->getValidationForm('users');
+        $this->contactValidationForm = App::getinstance()->getValidationForm('contact');
         $this->password = App::getInstance()->getPassword();
         $this->hijacking = App::getInstance()->hijacking();
+        $this->mail = App::getInstance()->getMailer();
     }
 
     /**

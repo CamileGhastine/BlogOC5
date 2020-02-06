@@ -8,6 +8,7 @@ use CamileApp\Core\Database\MysqlDatabase;
 use Config\Config;
 use CamileApp\Core\Password\Password;
 use CamileApp\Core\Constraints\Hijacking;
+use CamileApp\Core\Mail\Mailer;
 
 /**
  * Class App prevent  dependency injection
@@ -19,6 +20,7 @@ class App
     private $router;
     private $error;
     private $db;
+    private $mailer;
 
     /**
      * Instance of App
@@ -115,4 +117,12 @@ class App
         return Hijacking::getTry();
     }
 
+    public function getMailer()
+    {
+        if($this->mailer === null)
+        {
+            $this->mailer = new Mailer(Config::configMailer());
+        }
+        return $this->mailer;
+    }
 }

@@ -48,4 +48,27 @@ class FrontController extends Controller
         $comments = $this->comments->commentsById($_GET['id']);
         $this->render('postById', compact('post', 'comments'));
     }
+
+    public function contact()
+    {
+        if(!$_POST)
+        {
+            $this->render('formContact');
+        }
+        else
+        {
+            $post = $_POST;
+            $formMessage = $this->contactValidationForm->checkForm($post);
+            if($formMessage)
+            {
+                $this->render('formContact', compact('post', 'formMessage'));
+            }
+            else
+            {
+                $this->form_contacts->add($post);
+                $result = $this->mail->send($this->mail->answerFormContact($post));
+                $this->render('formContact', compact('post', 'formMessage', 'result'));
+            }
+        }
+    }
 }

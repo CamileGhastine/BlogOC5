@@ -9,6 +9,7 @@ class Entity
     protected $id;
     protected $content;
     protected $pseudo;
+    protected $email;
     protected $date_creation;
 
     /**
@@ -66,6 +67,26 @@ class Entity
     public function setPseudo($pseudo): void
     {
         $this->pseudo = $pseudo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        if(is_string($email))
+        {
+            $this->email = $email;
+        }
+        throw new Exception('typage');
     }
 
     /**
