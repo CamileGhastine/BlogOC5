@@ -256,42 +256,24 @@ class AdminController extends Controller
     }
 
     /**
-     * validate user
+     * validate ($get = unvalide, $action = validate) or unlock ($get = unactive, $action = activate) user
      */
-    public function validateUsers()
+    public function validateOrUnlockUsers()
     {
         $this->isAdmin();
 
-        if(!isset($_GET['id']))
-        {
-            $display = 'validated';
-            $users = $this->users->getUnvalidated();
-            $this->displayUserAdmin($display, $users);
-        }
-        else
-        {
-            $this->users->validate(['id' => $_GET['id']]);
-            header('Location: index.php?route=admin.users&success=validate');
-        }
-    }
-
-    /**
-     * unlock user account
-     */
-    public function unlockUsers()
-    {
-        $this->isAdmin();
+        $get = 'getUn'.$_GET['action'];
+        $action = substr($_GET['action'], 0, -1).'ate';
 
         if(!isset($_GET['id']))
         {
-            $display = 'unlock';
-            $users = $this->users->getLocked();
-            $this->displayUserAdmin($display, $users);
+            $users = $this->users->$get();
+            $this->displayUserAdmin($action, $users);
         }
         else
         {
-            $this->users->unlock(['id' => $_GET['id']]);
-            header('Location: index.php?route=admin.users&success=unlock');
+            $this->users->$action(['id' => $_GET['id']]);
+            header('Location: index.php?route=admin.users&success='.$action);
         }
     }
 
