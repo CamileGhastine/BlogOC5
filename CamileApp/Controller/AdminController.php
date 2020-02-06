@@ -51,13 +51,13 @@ class AdminController extends Controller
             else
             {
                 $postAddUnvalid = $_POST;
-                $categories = $this->categories->all();
+                $categories = $this->categories->all('categories', 'name');
                 $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postAddUnvalid'));
             }
         }
         else
         {
-            $categories = $this->categories->all();
+            $categories = $this->categories->all('categories', 'name');
             $this->render('addOrUpdatePost', compact('categories'));
         }
 
@@ -84,7 +84,7 @@ class AdminController extends Controller
             {
                 $postUpdateUnvalid = $_POST;
                 $comments = $this->comments->commentsById($_GET['id']);
-                $categories = $this->categories->all();
+                $categories = $this->categories->all('categories', 'name');
                 $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid'));
             }
         }
@@ -92,7 +92,7 @@ class AdminController extends Controller
         {
             $post = $this->posts->postById($_GET['id']);
             $comments = $this->comments->commentsById($_GET['id']);
-            $categories = $this->categories->all();
+            $categories = $this->categories->all('categories', 'name');
             $this->render('addOrUpdatePost', compact('post', 'categories', 'comments'));
         }
     }
@@ -251,8 +251,9 @@ class AdminController extends Controller
         $this->isAdmin();
 
         $numberUsersUnvalidated = $this->users->countUnvalidated();
-        $users = $this->users->getValidated('pseudo');
-        $this->render('users', compact('users', 'numberUsersUnvalidated'));
+        $numberUsersBlocked = $this->users->countBlocked();
+        $users = $this->users->all('users', 'pseudo');
+        $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked'));
     }
 
     /**
@@ -332,15 +333,40 @@ class AdminController extends Controller
     {
         $this->isAdmin();
 
-        if($_POST == null)
+        if(!isset($_GET['id']))
         {
+            $display = 'validated';
+            $numberUsersUnvalidated = $this->users->countUnvalidated();
+            $numberUsersBlocked = $this->users->countBlocked();
             $users = $this->users->getUnvalidated();
-            $this->render('validate', compact('users'));
+            $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
         }
         else
         {
             $this->users->validate(['id' => $_GET['id']]);
             header('Location: index.php?route=admin.users&success=validate');
+        }
+    }
+
+    /**
+     * unlock user account
+     */
+    public function unlockUsers()
+    {
+        $this->isAdmin();
+
+        if(!isset($_GET['id']))
+        {
+            $display = 'unlock';
+            $numberUsersUnvalidated = $this->users->countUnvalidated();
+            $numberUsersBlocked = $this->users->countBlocked();
+            $users = $this->users->getLocked();
+            $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
+        }
+        else
+        {
+            $this->users->unlock(['id' => $_GET['id']]);
+            header('Location: index.php?route=admin.users&success=unlock');
         }
     }
 

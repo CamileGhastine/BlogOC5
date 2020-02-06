@@ -87,16 +87,6 @@ class UsersManager extends Manager
     }
 
     /**
-     * all validated users
-     * @return mixed
-     */
-    public function getValidated()
-    {
-        $sql = 'SELECT * FROM users WHERE validated IS NOT NULL ORDER BY pseudo';
-        return $this->db->request($sql, null, 'users', true);
-    }
-
-    /**
      * all unvalidated users
      * @return mixed
      */
@@ -106,6 +96,15 @@ class UsersManager extends Manager
         return $this->db->request($sql, null, 'users', true);
     }
 
+    /**
+     * all blocked user account
+     * @return mixed
+     */
+    public function getlocked()
+    {
+        $sql = 'SELECT * FROM users WHERE try >=5 ORDER BY pseudo';
+        return $this->db->request($sql, null, 'users', true);
+    }
 
     /**
      * number of unvalidated users
@@ -113,7 +112,16 @@ class UsersManager extends Manager
     public function countUnvalidated()
     {
         $sql = 'SELECT COUNT(*) AS number FROM users WHERE validated IS NULL';
-        return $this->db->request($sql, null, 'users', false);
+        return $this->db->request($sql, null, null, false);
+    }
+
+    /**
+     *number of blocked users
+     */
+    public function countBlocked()
+    {
+        $sql = 'SELECT COUNT(*) AS number FROM users WHERE try>=5';
+        return $this->db->request($sql, null, null, false);
     }
 
     /**
@@ -140,6 +148,15 @@ class UsersManager extends Manager
     public function validate($param)
     {
         $sql = 'UPDATE users SET validated=1 WHERE id=:id';
+        return $this->db->request($sql, $param);
+    }
+
+    /**
+     * unlock user
+     */
+    public function unlock($param)
+    {
+        $sql = 'UPDATE users SET try=0 WHERE id=:id';
         return $this->db->request($sql, $param);
     }
 

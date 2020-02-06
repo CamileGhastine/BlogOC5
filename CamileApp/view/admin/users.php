@@ -1,5 +1,6 @@
 <?php
 $numberUsersUnvalidated = $numberUsersUnvalidated->number;
+$numberUsersBlocked = $numberUsersBlocked->number;
 ?>
 
 <div class="row pt-4">
@@ -12,10 +13,16 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
 </div>
 
 <p>
-    <a href="index.php?route=admin.addUser" class="btn btn-success mt-3">Ajouter un utilisateur</a>
-    <a href="index.php?route=admin.validateUsers"
-       class="btn btn-success mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
+    <?php if(isset($display)) : ?>
+        <a href="index.php?route=admin.users" class="btn btn-success mt-3">Tous les utilisateurs</a>
+    <?php else : ?>
+        <a href="index.php?route=admin.addUser" class="btn btn-success mt-3">Ajouter un utilisateur</a>
+    <?php endif ?>
+    <a href="index.php?route=admin.validateUsers" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
         <?= $numberUsersUnvalidated . (($numberUsersUnvalidated <= 1) ? ' utilisateur à valider' : ' utilisateurs à valider') ?>
+    </a>
+    <a href="index.php?route=admin.unlockUsers" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersBlocked == 0) ? 'disabled' : null ?>">
+        <?= $numberUsersBlocked . (($numberUsersBlocked <= 1) ? ' compte bloqué' : ' comptes bloqués') ?>
     </a>
 </p>
 <p>
@@ -34,6 +41,9 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
         case('validate') :
             $message = 'L\'utilisateur a été validé avec succès.';
             break;
+        case('unlock') :
+            $message = 'Ce compte a été débloqué avec succès.';
+            break;
     }
     ?>
     <div class="alert alert-success">
@@ -47,6 +57,7 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
     <table class="table table-striped ">
         <thead>
         <tr>
+            <th></th>
             <th scope="col">Pseudo</th>
             <th scope="col">Courriel</th>
             <th scope="col">Date Inscription</th>
@@ -56,21 +67,34 @@ $numberUsersUnvalidated = $numberUsersUnvalidated->number;
         </tr>
         </thead>
         <tbody>
-        <?php foreach($users as $user):
+        <?php
+        foreach($users as $user):
             $userId = $user->getId();
             $pseudo = htmlspecialchars($user->getPseudo());
             $email = htmlspecialchars($user->getEmail());
             $date = htmlspecialchars($user->getDate_inscription());
-            $statut = htmlspecialchars($user->getStatut());
+            $statut = $user->getStatut();
+            $validated = $user->getValidated();
+            $try = $user->getTry();
 
             ?>
             <tr>
+                <?php if(!$validated) : ?>
+                    <td>
+                        <a href="index.php?route=admin.validateUsers&id=<?= $userId ?>" class="btn-sm btn-success">Valider</a>
+                    </td>
+                <?php elseif($try >= 5 ) : ?>
+                    <td>
+                        <a href="index.php?route=admin.unlockUsers&id=<?= $userId ?>" class="btn-sm btn-danger">Debloquer</a>
+                    </td>
+                <?php else : ?>
+                <td></td>
+                <?php endif ?>
                 <td><?= $pseudo ?></td>
                 <td><?= $email ?></td>
-                <td><?= $date ?></td>
-                <td><?= $statut ?></td>
-                <td><a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn-sm btn-primary">Modifier les
-                        informations</a>
+                <td><?= $date ?></td>                <td><?= $statut ?></td>
+                <td>
+                    <a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn-sm btn-primary">Modifier</a>
 
                     <?php
                     if(!isset($_GET['delete']))

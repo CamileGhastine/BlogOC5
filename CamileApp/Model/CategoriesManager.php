@@ -11,17 +11,6 @@ class CategoriesManager extends Manager
     protected $table = 'categories';
 
     /**
-     * all categories
-     * function request($sql, $param, $table, $fetchall)
-     * @return mixed
-     */
-    public function all()
-    {
-        $sql = 'SELECT * FROM categories ORDER BY name';
-        return $this->db->request($sql, null, 'categories', true);
-    }
-
-    /**
      * one category (by id)
      * @return mixed
      */
