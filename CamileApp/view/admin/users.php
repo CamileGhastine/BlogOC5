@@ -13,10 +13,10 @@ $numberUsersBlocked = $numberUsersBlocked->number;
 </div>
 
 <p>
-    <?php if(isset($display)) : ?>
-        <a href="index.php?route=admin.users" class="btn btn-success mt-3">Tous les utilisateurs</a>
-    <?php else : ?>
+    <?php if($display == 'all') : ?>
         <a href="index.php?route=admin.addUser" class="btn btn-success mt-3">Ajouter un utilisateur</a>
+    <?php else : ?>
+        <a href="index.php?route=admin.users" class="btn btn-success mt-3">Tous les utilisateurs</a>
     <?php endif ?>
     <a href="index.php?route=admin.validateUsers" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
         <?= $numberUsersUnvalidated . (($numberUsersUnvalidated <= 1) ? ' utilisateur à valider' : ' utilisateurs à valider') ?>

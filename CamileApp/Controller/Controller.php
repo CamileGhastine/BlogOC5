@@ -120,4 +120,11 @@ abstract class Controller
         header('Location: index.php?route=admin.' . $table . '&success=delete');
         exit;
     }
+
+    protected function displayUserAdmin($display, $users)
+    {
+        $numberUsersUnvalidated = $this->users->countUnvalidated();
+        $numberUsersBlocked = $this->users->countBlocked();
+        $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
+    }
 }

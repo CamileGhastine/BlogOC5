@@ -250,10 +250,49 @@ class AdminController extends Controller
     {
         $this->isAdmin();
 
-        $numberUsersUnvalidated = $this->users->countUnvalidated();
-        $numberUsersBlocked = $this->users->countBlocked();
+        $display = 'all';
         $users = $this->users->all('users', 'pseudo');
-        $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked'));
+        $this->displayUserAdmin($display, $users);
+    }
+
+    /**
+     * validate user
+     */
+    public function validateUsers()
+    {
+        $this->isAdmin();
+
+        if(!isset($_GET['id']))
+        {
+            $display = 'validated';
+            $users = $this->users->getUnvalidated();
+            $this->displayUserAdmin($display, $users);
+        }
+        else
+        {
+            $this->users->validate(['id' => $_GET['id']]);
+            header('Location: index.php?route=admin.users&success=validate');
+        }
+    }
+
+    /**
+     * unlock user account
+     */
+    public function unlockUsers()
+    {
+        $this->isAdmin();
+
+        if(!isset($_GET['id']))
+        {
+            $display = 'unlock';
+            $users = $this->users->getLocked();
+            $this->displayUserAdmin($display, $users);
+        }
+        else
+        {
+            $this->users->unlock(['id' => $_GET['id']]);
+            header('Location: index.php?route=admin.users&success=unlock');
+        }
     }
 
     /**
@@ -323,50 +362,6 @@ class AdminController extends Controller
                 header('Location: index.php?route=admin.users&success=update');
                 exit;
             }
-        }
-    }
-
-    /**
-     * validate user
-     */
-    public function validateUsers()
-    {
-        $this->isAdmin();
-
-        if(!isset($_GET['id']))
-        {
-            $display = 'validated';
-            $numberUsersUnvalidated = $this->users->countUnvalidated();
-            $numberUsersBlocked = $this->users->countBlocked();
-            $users = $this->users->getUnvalidated();
-            $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
-        }
-        else
-        {
-            $this->users->validate(['id' => $_GET['id']]);
-            header('Location: index.php?route=admin.users&success=validate');
-        }
-    }
-
-    /**
-     * unlock user account
-     */
-    public function unlockUsers()
-    {
-        $this->isAdmin();
-
-        if(!isset($_GET['id']))
-        {
-            $display = 'unlock';
-            $numberUsersUnvalidated = $this->users->countUnvalidated();
-            $numberUsersBlocked = $this->users->countBlocked();
-            $users = $this->users->getLocked();
-            $this->render('users', compact('users', 'numberUsersUnvalidated', 'numberUsersBlocked', 'display'));
-        }
-        else
-        {
-            $this->users->unlock(['id' => $_GET['id']]);
-            header('Location: index.php?route=admin.users&success=unlock');
         }
     }
 
