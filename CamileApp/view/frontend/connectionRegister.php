@@ -32,6 +32,21 @@ else
     $pass = '';
     $passConfirm = '';
 }
+
+if(isset($_GET['access']))
+{
+    switch($_GET['access'])
+    {
+        case 'adminDenied' :
+            $accessMessage = 'Vous ne pouvez pas accéder à cette page sans être connecté en tant qu\'administrateur.';
+            break;
+        case 'userDenied' :
+            $accessMessage ='Vous ne pouvez pas accéder à cette page sans être connecté.';
+        case 'token':
+            $accessMessage = 'Erreur de vérification. Merci de vous reconnecter.';
+            Break;
+    }
+}
 ?>
 
 <?php if(isset($success) && $success): ?>
@@ -46,21 +61,11 @@ else
             </div>
         </div>
     </div>
-<?php elseif(isset($_GET['access']) && $_GET['access'] == 'adminDenied') : ?>
-<!--Try to access to any administration route page without been connect as admin-->
+<?php elseif(isset($accessMessage)) : ?>
     <div class="alert alert-danger mt-4">
         <div class=row>
             <div class="col-lg-10">
-                Vous ne pouvez pas accéder à cette page sans être connecté en tant qu'administrateur.
-            </div>
-        </div>
-    </div>
-<?php elseif(isset($_GET['access']) && $_GET['access'] == 'userDenied') : ?>
-    <!--Try to access to any register user's route page without been connect as register user-->
-    <div class="alert alert-danger mt-4">
-        <div class=row>
-            <div class="col-lg-10">
-                Vous ne pouvez pas accéder à cette page sans être connecté.
+                <?= $accessMessage ?>
             </div>
         </div>
     </div>

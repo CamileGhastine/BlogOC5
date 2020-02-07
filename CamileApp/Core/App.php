@@ -9,6 +9,7 @@ use Config\Config;
 use CamileApp\Core\Password\Password;
 use CamileApp\Core\Constraints\Hijacking;
 use CamileApp\Core\Mail\Mailer;
+use CamileApp\Core\Token\Token;
 
 /**
  * Class App prevent  dependency injection
@@ -21,6 +22,7 @@ class App
     private $error;
     private $db;
     private $mailer;
+    private $token;
 
     /**
      * Instance of App
@@ -124,5 +126,14 @@ class App
             $this->mailer = new Mailer(Config::configMailer());
         }
         return $this->mailer;
+    }
+
+    public function getToken()
+    {
+        if($this->token === null)
+        {
+            $this->token = new Token();
+        }
+        return $this->token;
     }
 }

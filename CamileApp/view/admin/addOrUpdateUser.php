@@ -94,6 +94,7 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
                     <p><?= $statutMessage ?></p>
                 </div>
 
+                <input type="hidden" name="token" id="token" value="<?= $_SESSION['token']; ?>" />
 
                 <div class="row">
                     <div class="col-lg-6">

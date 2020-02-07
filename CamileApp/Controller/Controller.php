@@ -28,6 +28,7 @@ abstract class Controller
     protected $password;
     protected $hijacking;
     protected $mail;
+    protected $token;
 
 
     public function __construct()
@@ -46,6 +47,7 @@ abstract class Controller
         $this->password = App::getInstance()->getPassword();
         $this->hijacking = App::getInstance()->hijacking();
         $this->mail = App::getInstance()->getMailer();
+        $this->token = App::getinstance()->getToken();
     }
 
     /**

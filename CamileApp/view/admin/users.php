@@ -104,7 +104,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
                     else
                     {
                         ?>
-                        <a href="" class="<?= $_GET['delete'] == $userId ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
+                        <a id="delete" href="" class="<?= $_GET['delete'] == $userId ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
 
                         <?php
                     }

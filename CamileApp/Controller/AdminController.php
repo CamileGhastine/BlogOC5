@@ -286,10 +286,10 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $post = $_POST;
+            $post = $this->token->check($_POST);
 
             // Form verification
-            $formMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $formMessage = $this->usersValidationForm->checkForm($_POST);
+            $formMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $formMessage = $this->usersValidationForm->checkForm($post);
 
             if($formMessage)  // form ok
             {
@@ -298,8 +298,8 @@ class AdminController extends Controller
             }
             else // form not ok
             {
-                $_POST['validated'] = 1;
-                $this->users->add($_POST);
+                $post['validated'] = 1;
+                $this->users->add($post);
                 header('Location: index.php?route=admin.users&success=add');
                 exit;
             }
