@@ -71,6 +71,7 @@ if(isset($_GET['access']))
     </div>
 <?php endif; ?>
 
+<!--connexion-->
 <div class="accordion row py-4" id="accordion">
     <div class="col-lg-6">
         <div class="card">
@@ -100,11 +101,14 @@ if(isset($_GET['access']))
 
                         <button class="btn btn-primary" type="submit" name="connection">Se connecter</button>
                         <p><?= $connectionMessage ?></p>
+                        <a href="index.php?route=front.forgottenPassword">Mot de passe oublié</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+<!--    Registration-->
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header" id="headingRegister">

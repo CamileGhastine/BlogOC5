@@ -25,6 +25,7 @@ abstract class Controller
     protected $registerValidationForm;
     protected $usersValidationForm;
     protected $contactValidationForm;
+    protected $forgottenPasswordValidationForm;
     protected $password;
     protected $hijacking;
     protected $mail;
@@ -44,6 +45,7 @@ abstract class Controller
         $this->registerValidationForm = App::getinstance()->getValidationForm('register');
         $this->usersValidationForm = App::getinstance()->getValidationForm('users');
         $this->contactValidationForm = App::getinstance()->getValidationForm('contact');
+        $this->forgottenPasswordValidationForm = App::getinstance()->getValidationForm('forgottenPassword');
         $this->password = App::getInstance()->getPassword();
         $this->hijacking = App::getInstance()->hijacking();
         $this->mail = App::getInstance()->getMailer();
@@ -166,4 +168,12 @@ abstract class Controller
         $comments = $this->comments->commentsById($_GET['id']);
         $this->render('postById', compact('post', 'comments'));
     }
+
+//    protected function viewUpdatePost($get, $post=null, $postUpdateUnvalid=null, $formMessage=null)
+//    {
+//        $post = $post !== null ? 'post' : 'postUpdatevalid';
+//        $comments = $this->comments->commentsById($get);
+//        $categories = $this->categories->all('categories', 'name');
+//        $this->render('addOrUpdatePost', compact($post, 'categories', 'comments', 'formMessage'));
+//    }
 }

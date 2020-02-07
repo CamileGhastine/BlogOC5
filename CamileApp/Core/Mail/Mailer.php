@@ -78,4 +78,13 @@ class Mailer
             'subject' =>'Réponse automatique : Formulaire de contact',
             'body' => 'Bonjour '.ucfirst($post['first_name']).',<br/>Merci de m\'avoir contacté.<br/>Je vous répondrais dans les plus brefs délais.<br/><B>Camile Ghastrine</B>'];
     }
+
+    public function unlockAccount()
+    {
+        return $mailDetails =[
+            'adress' => $post['email'],
+            'subject' =>'Réinialisation du mot de passe',
+            'body' => 'Bonjour,<br/>**************** <br/><B>Camile Ghastrine</B>'];
+
+    }
 }

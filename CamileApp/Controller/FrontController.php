@@ -51,7 +51,7 @@ class FrontController extends Controller
         }
         elseif($_SESSION['statut'] == 'user' OR $_SESSION['statut'] == 'admin')
         {
-            header('Location: index.php?route=back.postByid&id='.$_GET['id']);
+            header('Location: index.php?route=back.postByid&id=' . $_GET['id']);
             exit;
         }
         else
@@ -60,6 +60,9 @@ class FrontController extends Controller
         }
     }
 
+    /**
+     * form contact
+     */
     public function contact()
     {
         if(!$_POST)
@@ -173,6 +176,30 @@ class FrontController extends Controller
         if($infoPseudo->getValidated() === null) // user not yet validated by the administrator
         {
             return 'Encore un peu de patience ! Votre compte sera validé sous peu.';
+        }
+    }
+
+    public function forgottenPassword()
+    {
+        if($_POST != null)
+        {
+            $post = $_POST;
+            $formMessage = $this->forgottenPasswordValidationForm->checkForm($_POST);
+
+            if($formMessage)
+            {
+                $this->render('forgottenPassword', compact('formMessage', 'post'));
+            }
+            else
+            {
+                echo 'message envoyé';
+//                $this->mail->send($this->mail($_POST));
+            }
+
+        }
+        else
+        {
+            $this->render('forgottenPassword');
         }
     }
 }
