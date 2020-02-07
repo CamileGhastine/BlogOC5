@@ -85,20 +85,20 @@ ORDER BY p.date_creation DESC
      * INSERT INTO request
      * @return mixed
      */
-    public function add()
+    public function add($post)
     {
         $sql = 'INSERT INTO posts(title, chapo, content, category_id, user_id) VALUES (:title, :chapo, :content, :category_id, :user_id)';
-        return $this->db->request($sql, $_POST, 'posts');
+        return $this->db->request($sql, $post, 'posts');
     }
 
     /**
      * UPDATE request
      * @return mixed
      */
-    public function update()
+    public function update($post)
     {
         $sql = 'UPDATE posts SET title=:title, chapo=:chapo, content=:content, category_id=:category_id WHERE id=:id';
-        return $this->db->request($sql, $_POST, 'posts');
+        return $this->db->request($sql, $post, 'posts');
     }
 
     /**

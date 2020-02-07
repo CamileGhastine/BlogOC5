@@ -39,19 +39,19 @@ class CategoriesManager extends Manager
      * INSERT INTO request
      * @return mixed
      */
-    public function add()
+    public function add($post)
     {
         $sql = 'INSERT INTO categories(name, description) VALUES (:name, :description)';
-        return $this->db->request($sql, $_POST);
+        return $this->db->request($sql, $post);
     }
 
     /**
      * UPDATE request
      * @return mixed
      */
-    public function update()
+    public function update($post)
     {
         $sql = 'UPDATE categories SET name=:name, description=:description WHERE id=:id';
-        return $this->db->request($sql, $_POST);
+        return $this->db->request($sql, $post);
     }
 }

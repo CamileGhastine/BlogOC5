@@ -81,11 +81,11 @@ $numberUsersBlocked = $numberUsersBlocked->number;
             <tr>
                 <?php if(!$validated) : ?>
                     <td>
-                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=valide" class="btn-sm btn-success">Valider</a>
+                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=valide&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success">Valider</a>
                     </td>
                 <?php elseif($try >= 5 ) : ?>
                     <td>
-                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=active" class="btn-sm btn-danger">Debloquer</a>
+                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=active&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger">Debloquer</a>
                     </td>
                 <?php else : ?>
                 <td></td>
@@ -115,7 +115,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
                     if(isset($_GET['delete']) && $_GET['delete'] == $userId)
                     {
                         ?>
-                        <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
+                        <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
                         <a href="?route=admin.users" class="btn-sm btn-success">Annuler</a>
                     <?php } ?>
                 </td>

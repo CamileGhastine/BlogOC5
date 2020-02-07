@@ -73,7 +73,7 @@
 
                 <td>
                     <?php if($btn == 'secondary'): ?>
-                        <a id="deleteConfirmation" href="index.php?route=admin.deleteCategory&id=<?= $categoryId ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
+                        <a id="deleteConfirmation" href="index.php?route=admin.deleteCategory&id=<?= $categoryId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
                         <a href="index.php?route=admin.categories" class="btn-sm btn-success mt-3">Annuler</a
                     <?php endif ?>
                 </td>

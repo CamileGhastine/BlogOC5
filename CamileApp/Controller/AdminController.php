@@ -40,17 +40,19 @@ class AdminController extends Controller
         $this->isAdmin();
         if($_POST)
         {
-            $formMessage = $this->postsValidationForm->checkForm($_POST);
+            $post = $this->token->check($_POST);
+
+            $formMessage = $this->postsValidationForm->checkForm($post);
 
             if(!$formMessage)
             {
-                $this->posts->add();
+                $this->posts->add($post);
                 header('Location: index.php?route=admin.posts&success=add');
                 exit;
             }
             else
             {
-                $postAddUnvalid = $_POST;
+                $postAddUnvalid = $post;
                 $categories = $this->categories->all('categories', 'name');
                 $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postAddUnvalid'));
             }
@@ -72,17 +74,19 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->postsValidationForm->checkForm($_POST);
+            $post = $this->token->check($_POST);
+
+            $formMessage = $this->postsValidationForm->checkForm($post);
 
             if(!$formMessage)
             {
-                $this->posts->update();
+                $this->posts->update($post);
                 header('Location: index.php?route=admin.posts&success=update');
                 exit;
             }
             else
             {
-                $postUpdateUnvalid = $_POST;
+                $postUpdateUnvalid = $post;
                 $comments = $this->comments->commentsById($_GET['id']);
                 $categories = $this->categories->all('categories', 'name');
                 $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid'));
@@ -102,6 +106,7 @@ class AdminController extends Controller
      */
     public function deletepost()
     {
+        $this->token->check($_GET);
         $this->delete('posts');
     }
 
@@ -126,17 +131,19 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->categoriesValidationForm->checkForm($_POST);
+            $post = $this->token->check($_POST);
+
+            $formMessage = $this->categoriesValidationForm->checkForm($post);
 
             if(!$formMessage)
             {
-                $this->categories->add();
+                $this->categories->add($post);
                 header('Location: index.php?route=admin.categories&success=add');
                 exit;
             }
             else
             {
-                $postAddUnvalid = $_POST;
+                $postAddUnvalid = $post;
                 $this->render('addOrUpdatecategory', compact('formMessage', 'postAddUnvalid'));
             }
         }
@@ -148,22 +155,6 @@ class AdminController extends Controller
     }
 
     /**
-     * delete category in admin dashboard
-     */
-    public function deleteCategory()
-    {
-        if($_GET['id'] != 1)
-        {
-            $this->delete('categories');
-        }
-        else
-        {
-            header('Location: index.php?route=admin.categories&success=no');
-            exit;
-        }
-    }
-
-    /**
      *update category in admin dashboard
      */
     public function updateCategory()
@@ -172,19 +163,21 @@ class AdminController extends Controller
 
         if($_POST)
         {
-            $formMessage = $this->categoriesValidationForm->checkForm($_POST);
+            $post = $this->token->check($_POST);
+
+            $formMessage = $this->categoriesValidationForm->checkForm($post);
 
             if(!$formMessage)
             {
-                $_POST['id'] = $_GET['id'];
-                $this->categories->update();
+                $post['id'] = $_GET['id'];
+                $this->categories->update($post);
                 header('Location: index.php?route=admin.categories&success=update');
                 exit;
             }
             else
             {
                 $id = $_GET['id'];
-                $postUpdateUnvalid = $_POST;
+                $postUpdateUnvalid = $post;
                 $this->render('addOrUpdateCategory', compact('formMessage', 'postUpdateUnvalid', 'id'));
             }
         }
@@ -192,6 +185,23 @@ class AdminController extends Controller
         {
             $category = $this->categories->categoryById();
             $this->render('addOrUpdateCategory', compact('category'));
+        }
+    }
+
+    /**
+     * delete category in admin dashboard
+     */
+    public function deleteCategory()
+    {
+        if($_GET['id'] != 1)
+        {
+            $this->token->check($_GET);
+            $this->delete('categories');
+        }
+        else
+        {
+            header('Location: index.php?route=admin.categories&success=no');
+            exit;
         }
     }
 
@@ -213,6 +223,7 @@ class AdminController extends Controller
     public function validateComment()
     {
         $this->isAdmin();
+        $this->token->check($_GET);
 
         $this->comments->validate($_GET['commentId']);
         header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=validate#comments');
@@ -225,8 +236,9 @@ class AdminController extends Controller
     public function updateComment()
     {
         $this->isAdmin();
+        $post = $this->token->check($_POST);
 
-        $this->comments->update($_GET['commentId'], $_POST['content']);
+        $this->comments->update($_GET['commentId'], $post['content']);
         header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=update#comments');
         exit;
     }
@@ -237,6 +249,7 @@ class AdminController extends Controller
     public function deleteComment()
     {
         $this->isAdmin();
+        $this->token->check($_GET);
 
         $this->comments->delete($_GET['commentId']);
         header('Location: index.php?route=admin.comments&id=' . $_GET['id'] . '&action=delete#comments');
@@ -253,28 +266,6 @@ class AdminController extends Controller
         $display = 'all';
         $users = $this->users->all('users', 'pseudo');
         $this->displayUserAdmin($display, $users);
-    }
-
-    /**
-     * validate ($get = unvalide, $action = validate) or unlock ($get = unactive, $action = activate) user
-     */
-    public function validateOrUnlockUsers()
-    {
-        $this->isAdmin();
-
-        $get = 'getUn'.$_GET['action'];
-        $action = substr($_GET['action'], 0, -1).'ate';
-
-        if(!isset($_GET['id']))
-        {
-            $users = $this->users->$get();
-            $this->displayUserAdmin($action, $users);
-        }
-        else
-        {
-            $this->users->$action(['id' => $_GET['id']]);
-            header('Location: index.php?route=admin.users&success='.$action);
-        }
     }
 
     /**
@@ -327,7 +318,7 @@ class AdminController extends Controller
         }
         else
         {
-            $postUpdate = $_POST;
+            $postUpdate = $this->token->check($_POST);
             $postUpdate['id'] = $_GET['id'];
 
             // Form verification
@@ -352,6 +343,7 @@ class AdminController extends Controller
      */
     public function deleteUser()
     {
+        $this->token->check($_GET);
         $this->delete('users');
     }
 
@@ -363,6 +355,29 @@ class AdminController extends Controller
         $this->isAdmin();
 
         $this->viewPostById();
+    }
+
+    /**
+     * validate ($get = unvalide, $action = validate) or unlock ($get = unactive, $action = activate) user
+     */
+    public function validateOrUnlockUsers()
+    {
+        $this->isAdmin();
+
+        $get = 'getUn' . $_GET['action'];
+        $action = substr($_GET['action'], 0, -1) . 'ate';
+
+        if(!isset($_GET['id']))
+        {
+            $users = $this->users->$get();
+            $this->displayUserAdmin($action, $users);
+        }
+        else
+        {
+            $this->token->check($_GET);
+            $this->users->$action(['id' => $_GET['id']]);
+            header('Location: index.php?route=admin.users&success=' . $action);
+        }
     }
 }
 

@@ -78,7 +78,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
             <tr >
                 <?php if(!$validated) : ?>
                     <td>
-                        <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>" class="btn-sm btn-success mt-3">Valider</a>
+                        <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success mt-3">Valider</a>
                     </td>
                 <?php else : ?>
                     <td></td>
@@ -88,6 +88,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                         <?= '<U><B>'.$pseudo.'</B> (<small>'.$dateComment.'</small>) :</U> ' ?>
                         <form method="post" action="index.php?route=admin.updateComment&id=<?= $postId ?>&commentId=<?= $commentId ?>">
                             <input type="text" class="form-control" name="content" value="<?= $content ?>">
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                             <button type="submit" class="btn-sm btn-success">Modifier</button>
                             <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-primary">annuler</a>
                         </form>
@@ -109,7 +110,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                 </td>
 
                 <?php if($btn == 'secondary'): ?>
-                    <td><a id="deleteConfirmation" href="index.php?route=admin.deleteComment&id=<?= $postId ?>&commentId= <?= $commentId ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
+                    <td><a id="deleteConfirmation" href="index.php?route=admin.deleteComment&id=<?= $postId ?>&commentId= <?= $commentId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
                     <td> <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-success mt-3">Annuler</a></td>
                 <?php else : ?>
                     <td></td>

@@ -61,20 +61,21 @@ class BackController extends Controller
     public function addComment()
     {
         $this->isConnect();
+        $post = $this->token->check($_POST);
 
-        $formMessage = $this->commentsValidationForm->checkForm($_POST);
+        $formMessage = $this->commentsValidationForm->checkForm($post);
 
         if(!$formMessage)
         {
-            $_POST['user_id'] = $_SESSION['id'];
-            $_POST['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
-            $this->comments->add($_POST);
+            $post['user_id'] = $_SESSION['id'];
+            $post['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
+            $this->comments->add($post);
             header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=' . $_SESSION['statut'] . '#comments');
             exit;
         }
         else
         {
-            $postAddUnvalid = $_POST;
+            $postAddUnvalid = $post;
             $post = $this->posts->postById($_GET['id']);
             $comments = $this->comments->commentsById($_GET['id']);
             $this->render('comment', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));

@@ -60,6 +60,8 @@ else // add category
                 </div>
             </div>
 
+            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+
             <div class="row">
                 <div class="col-lg-6">
                     <button type="submit" class="btn btn-danger"><?= $button ?></button>

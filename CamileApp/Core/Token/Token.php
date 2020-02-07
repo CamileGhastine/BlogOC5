@@ -20,6 +20,7 @@ class Token
         {
             session_destroy();
             header('Location: index.php?route=front.connectionRegister&access=token');
+            exit;
         }
     }
 }

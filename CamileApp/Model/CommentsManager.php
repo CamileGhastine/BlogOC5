@@ -30,10 +30,10 @@ class CommentsManager extends Manager
      * INSERT INTO request
      * @return mixed
      */
-    public function add()
+    public function add($post)
     {
         $sql = 'INSERT INTO comments(content, post_id, user_id, validated) VALUES (:content, :post_id, :user_id, :validated)';
-        return $this->db->request($sql, $_POST);
+        return $this->db->request($sql, $post);
     }
 
     /**

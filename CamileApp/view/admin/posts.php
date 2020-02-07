@@ -42,6 +42,7 @@
             <th class="text-center" scope="col">Commentaires</th>
             <th scope="col">Action</th>
             <th scope="col"></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -66,8 +67,11 @@
                 </td>
 
                 <?php if($btn == 'secondary'): ?>
-                    <td><a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
+                    <td><a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
                     <td><a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a></td>
+                <?php else : ?>
+                    <td></td>
+                    <td></td>
                 <?php endif ?>
 
             </tr>
