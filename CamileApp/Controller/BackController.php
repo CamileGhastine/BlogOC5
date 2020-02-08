@@ -54,32 +54,4 @@ class BackController extends Controller
             throw new Exception('session');
         }
     }
-
-    /**
-     * add a new comment
-     */
-    public function addComment()
-    {
-        $this->isConnect();
-        $post = $this->token->check($_POST);
-
-        $formMessage = $this->commentsValidationForm->checkForm($post);
-
-        if(!$formMessage)
-        {
-            $post['user_id'] = $_SESSION['id'];
-            $post['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
-            $this->comments->add($post);
-            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=' . $_SESSION['statut'] . '#comments');
-            exit;
-        }
-        else
-        {
-            $postAddUnvalid = $post;
-            $post = $this->posts->postById($_GET['id']);
-            $comments = $this->comments->commentsById($_GET['id']);
-            $this->render('comment', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));
-            $this->viewPath = ROOT . '/CamileApp/view/backend/';
-        }
-    }
 }

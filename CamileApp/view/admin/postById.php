@@ -8,7 +8,7 @@ require '../CamileApp/view/frontend/required/post.php';
                 <div class="card my-4">
                     <p id="comments" class="card-header">Réagissez ici</p>
                     <div class="card-body">
-                        <form method="post" action="index.php?route=back.addComment&id=<?= $postId ?>#comments">
+                        <form method="post" action="index.php?route=admin.addComment&id=<?= $postId ?>#comments">
 
                             <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 

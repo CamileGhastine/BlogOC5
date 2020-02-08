@@ -169,11 +169,31 @@ abstract class Controller
         $this->render('postById', compact('post', 'comments'));
     }
 
-//    protected function viewUpdatePost($get, $post=null, $postUpdateUnvalid=null, $formMessage=null)
-//    {
-//        $post = $post !== null ? 'post' : 'postUpdatevalid';
-//        $comments = $this->comments->commentsById($get);
-//        $categories = $this->categories->all('categories', 'name');
-//        $this->render('addOrUpdatePost', compact($post, 'categories', 'comments', 'formMessage'));
-//    }
+    /**
+     * add a new comment
+     */
+    public function addComment()
+    {
+        $this->isConnect();
+
+        $post = $this->token->check($_POST);
+
+        $formMessage = $this->commentsValidationForm->checkForm($post);
+
+        if(!$formMessage)
+        {
+            $post['user_id'] = $_SESSION['id'];
+            $post['validated'] = ($_SESSION['statut'] === 'admin') ? 1 : null;
+            $this->comments->add($post);
+            header('Location: index.php?route=front.postById&id=' . $_POST['post_id'] . '&success=' . $_SESSION['statut'] . '#comments');
+            exit;
+        }
+        else
+        {
+            $postAddUnvalid = $post;
+            $post = $this->posts->postById($_GET['id']);
+            $comments = $this->comments->commentsById($_GET['id']);
+            $this->render('postById', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));
+        }
+    }
 }
