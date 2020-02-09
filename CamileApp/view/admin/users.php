@@ -18,10 +18,10 @@ $numberUsersBlocked = $numberUsersBlocked->number;
     <?php else : ?>
         <a href="index.php?route=admin.users" class="btn btn-success mt-3">Tous les utilisateurs</a>
     <?php endif ?>
-    <a href="index.php?route=admin.validateOrUnlockUsers&action=valide" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
+    <a href="index.php?route=admin.validateUsers&action=valide" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersUnvalidated == 0) ? 'disabled' : null ?>">
         <?= $numberUsersUnvalidated . (($numberUsersUnvalidated <= 1) ? ' utilisateur à valider' : ' utilisateurs à valider') ?>
     </a>
-    <a href="index.php?route=admin.validateOrUnlockUsers&action=active" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersBlocked == 0) ? 'disabled' : null ?>">
+    <a href="index.php?route=admin.unlockUsers&action=active" class="btn btn-primary mt-3 ml-5 <?= ($numberUsersBlocked == 0) ? 'disabled' : null ?>">
         <?= $numberUsersBlocked . (($numberUsersBlocked <= 1) ? ' compte bloqué' : ' comptes bloqués') ?>
     </a>
 </p>
@@ -81,11 +81,11 @@ $numberUsersBlocked = $numberUsersBlocked->number;
             <tr>
                 <?php if(!$validated) : ?>
                     <td>
-                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=valide&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success">Valider</a>
+                        <a href="index.php?route=admin.validateUsers&id=<?= $userId ?>&action=valide&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success">Valider</a>
                     </td>
                 <?php elseif($try >= 5 ) : ?>
                     <td>
-                        <a href="index.php?route=admin.validateOrUnlockUsers&id=<?= $userId ?>&action=active&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger">Debloquer</a>
+                        <a href="index.php?route=admin.unlockUsers&id=<?= $userId ?>&action=active&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger">Debloquer</a>
                     </td>
                 <?php else : ?>
                 <td></td>

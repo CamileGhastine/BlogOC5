@@ -100,7 +100,7 @@ class UsersManager extends Manager
      * all blocked user account
      * @return mixed
      */
-    public function getUnactive()
+    public function getLocked()
     {
         $sql = 'SELECT * FROM users WHERE try >=5 ORDER BY pseudo';
         return $this->db->request($sql, null, 'users', true);
@@ -154,7 +154,7 @@ class UsersManager extends Manager
     /**
      * unlock user
      */
-    public function activate($param)
+    public function unlock($param)
     {
         $sql = 'UPDATE users SET try=0 WHERE id=:id';
         return $this->db->request($sql, $param);
