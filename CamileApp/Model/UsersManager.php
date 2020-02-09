@@ -11,7 +11,7 @@ class UsersManager extends Manager
     protected $table = 'users';
 
     /**
-     * Check if the pseudo exists
+     * Check if  $value exists in $field where id != $id
      * function request($sql, $param, $table, $fetchall)
      * @param $pseudo
      */
@@ -160,4 +160,12 @@ class UsersManager extends Manager
         return $this->db->request($sql, $param);
     }
 
+    /**
+     * UPDATE password
+     */
+    public function updatePass($param)
+    {
+        $sql = 'UPDATE users SET pass=:pass WHERE id=:id';
+        return $this->db->request($sql, $param);
+    }
 }

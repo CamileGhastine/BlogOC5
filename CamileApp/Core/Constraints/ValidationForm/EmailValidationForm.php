@@ -4,7 +4,7 @@
 namespace CamileApp\Core\Constraints\ValidationForm;
 
 
-class ForgottenPasswordValidationForm extends ValidationForm
+class EmailValidationForm extends ValidationForm
 {
     protected $email;
     protected $keys = ['email'];

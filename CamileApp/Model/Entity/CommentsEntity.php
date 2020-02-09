@@ -37,7 +37,10 @@ class CommentsEntity extends Entity
         {
             $this->post_id = $post_id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -58,7 +61,10 @@ class CommentsEntity extends Entity
         {
             $this->user_id = $user_id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**

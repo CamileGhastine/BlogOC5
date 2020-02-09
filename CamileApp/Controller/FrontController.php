@@ -165,14 +165,9 @@ class FrontController extends Controller
         }
         if(!$this->password->verify($_POST['pass'], $infoPseudo->getPass())) // password not ok
         {
-            $this->users->substractTry($_POST['pseudo']);
-
-            $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
-
-            $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
-            $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
-            return $connectionMessage;
+            return $this->passwordNotMatch($_POST, $infoPseudo);
         }
+
         if($infoPseudo->getValidated() === null) // user not yet validated by the administrator
         {
             return 'Encore un peu de patience ! Votre compte sera validé sous peu.';
@@ -184,7 +179,7 @@ class FrontController extends Controller
         if($_POST != null)
         {
             $post = $_POST;
-            $formMessage = $this->forgottenPasswordValidationForm->checkForm($_POST);
+            $formMessage = $this->emailValidationForm->checkForm($_POST);
 
             if($formMessage)
             {

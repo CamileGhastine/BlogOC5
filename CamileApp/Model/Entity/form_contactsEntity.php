@@ -3,6 +3,7 @@
 
 namespace CamileApp\Model\Entity;
 
+use Exception;
 
 class form_contactsEntity extends Entity
 {
@@ -39,7 +40,10 @@ class form_contactsEntity extends Entity
         {
             $this->first_name = $first_name;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -60,7 +64,10 @@ class form_contactsEntity extends Entity
         {
             $this->last_name = $last_name;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
 
@@ -83,7 +90,10 @@ class form_contactsEntity extends Entity
         {
             $this->subject = $subject;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -105,7 +115,10 @@ class form_contactsEntity extends Entity
         {
             $this->user_id = $user_id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
 
     }
 

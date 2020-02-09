@@ -40,7 +40,10 @@ class CategoriesEntity extends Entity
         {
             $this->name = $name;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -61,7 +64,10 @@ class CategoriesEntity extends Entity
         {
             $this->description = $description;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**

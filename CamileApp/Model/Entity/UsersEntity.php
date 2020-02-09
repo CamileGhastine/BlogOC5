@@ -38,7 +38,10 @@ class UsersEntity extends Entity
         {
             $this->statut = $statut;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -58,7 +61,10 @@ class UsersEntity extends Entity
         {
             $this->pass = $pass;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**

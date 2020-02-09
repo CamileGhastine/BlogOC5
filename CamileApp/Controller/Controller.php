@@ -25,7 +25,8 @@ abstract class Controller
     protected $registerValidationForm;
     protected $usersValidationForm;
     protected $contactValidationForm;
-    protected $forgottenPasswordValidationForm;
+    protected $emailValidationForm;
+    protected $changePassValidationForm;
     protected $password;
     protected $hijacking;
     protected $mail;
@@ -45,7 +46,8 @@ abstract class Controller
         $this->registerValidationForm = App::getinstance()->getValidationForm('register');
         $this->usersValidationForm = App::getinstance()->getValidationForm('users');
         $this->contactValidationForm = App::getinstance()->getValidationForm('contact');
-        $this->forgottenPasswordValidationForm = App::getinstance()->getValidationForm('forgottenPassword');
+        $this->emailValidationForm = App::getinstance()->getValidationForm('email');
+        $this->changePassValidationForm = App::getinstance()->getValidationForm('changePass');
         $this->password = App::getInstance()->getPassword();
         $this->hijacking = App::getInstance()->hijacking();
         $this->mail = App::getInstance()->getMailer();
@@ -104,20 +106,20 @@ abstract class Controller
     }
 
     /**
-     * test if the pseudo or/and mail exists
+     * test if the pseudo or/and mail (in $array) exists in DB
      * @param null $id
      * @return mixed
      */
-    protected function pseudoOrEmailExist($id=null)
+        protected function pseudoOrEmailExist($id=null)
     {
-        if($this->exists('pseudo', $_POST['pseudo'], $id))
-        {
-            $formMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
-        }
-        if($this->exists('email', $_POST['email'], $id))
-        {
-            $formMessage['email'] = 'Ce courriel est déjà utilisé.';
-        }
+            if($this->exists('pseudo', $_POST['pseudo'], $id))
+            {
+                $formMessage['pseudo'] = 'Ce pseudo est déjà utilisé.';
+            }
+            if($this->exists('email', $_POST['email'], $id))
+            {
+                $formMessage['email'] = 'Ce courriel est déjà utilisé.';
+            }
         if(isset($formMessage))
         {
             return $formMessage ;
@@ -195,5 +197,22 @@ abstract class Controller
             $comments = $this->comments->commentsById($_GET['id']);
             $this->render('postById', compact('formMessage', 'postAddUnvalid', 'post', 'comments'));
         }
+    }
+
+    /**
+     * message and reduce Try if password not match
+     * @param $post
+     * @param $infoPseudo
+     * @return string
+     */
+    protected function passwordNotMatch($post, $infoPseudo)
+    {
+        $this->users->substractTry($post['pseudo']);
+
+        $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
+
+        $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
+        $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
+        return $connectionMessage;
     }
 }

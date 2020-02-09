@@ -3,6 +3,7 @@
 
 namespace CamileApp\Model\Entity;
 
+use Exception;
 
 class Entity
 {
@@ -29,7 +30,10 @@ class Entity
         {
             $this->id = $id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -50,7 +54,10 @@ class Entity
         {
             $this->content = $content;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -86,7 +93,10 @@ class Entity
         {
             $this->email = $email;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**

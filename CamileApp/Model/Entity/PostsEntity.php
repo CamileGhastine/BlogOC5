@@ -57,7 +57,10 @@ class PostsEntity extends Entity
         {
             $this->title = $title;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -79,7 +82,10 @@ class PostsEntity extends Entity
         {
             $this->chapo = $chapo;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
     }
 
     /**
@@ -117,7 +123,10 @@ class PostsEntity extends Entity
         {
             $this->category_id = $category_id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
 
     }
 
@@ -140,7 +149,10 @@ class PostsEntity extends Entity
         {
             $this->user_id = $user_id;
         }
-        throw new Exception('typage');
+        else
+        {
+            throw new Exception('typage');
+        }
 
     }
 
