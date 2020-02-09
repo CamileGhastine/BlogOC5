@@ -212,7 +212,7 @@ abstract class Controller
         $tryLeft = $this->hijacking - $infoPseudo->getTry() - 1;
 
         $connectionMessage = 'Le mot de passe est incorrect. Il vous reste ' . $tryLeft . ' tentatives.';
-        $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.' : $connectionMessage;
+        $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.<br/>Cliquez sur mot de passe oublié pour le débloquer.' : $connectionMessage;
         return $connectionMessage;
     }
 }

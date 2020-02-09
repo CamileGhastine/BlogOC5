@@ -23,6 +23,7 @@ class App
     private $db;
     private $mailer;
     private $token;
+    private $hijacking;
 
     /**
      * Instance of App
@@ -116,7 +117,12 @@ class App
      */
     public function hijacking()
     {
-        return Hijacking::getTry();
+        if($this->hijacking === null)
+        {
+            $hijacking = new Hijacking(config::configHijacking());
+            $this->hijacking = $hijacking->getTry();
+        }
+        return $this->hijacking;
     }
 
     public function getMailer()

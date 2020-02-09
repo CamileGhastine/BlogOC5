@@ -161,7 +161,7 @@ class FrontController extends Controller
         }
         if($infoPseudo->getTry() >= $this->hijacking) // maximum number of trials reached
         {
-            return 'Votre compte a été bloqué après ' . $this->hijacking . ' tentatives infructueuses.';
+            return 'Votre compte a été bloqué après ' . $this->hijacking . ' tentatives infructueuses.<br/>Cliquez sur mot de passe oublié pour le débloquer.';
         }
         if(!$this->password->verify($_POST['pass'], $infoPseudo->getPass())) // password not ok
         {

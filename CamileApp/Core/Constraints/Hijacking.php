@@ -12,13 +12,18 @@ class Hijacking
      * Number of trying connexion allow before blocking the registered user account
      * @var int
      */
-    const TRY = 5;
+    protected $try;
+
+    public function __construct($try)
+    {
+        $this->try = $try;
+    }
 
     /**
      * @return mixed
      */
-    public static function getTry()
+    public function getTry()
     {
-        return self::TRY;
+        return $this->try;
     }
 }
