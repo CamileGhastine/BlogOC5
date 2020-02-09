@@ -372,7 +372,10 @@ class AdminController extends Controller
         else
         {
             $this->token->check($_GET);
+            $user = $this->users->infoPseudoWithId($_GET['id']);
             $this->users->validate(['id' => $_GET['id']]);
+            $this->mail->send($this->mail->validate($user));
+
             header('Location: index.php?route=admin.users&success=validate');
         }
     }

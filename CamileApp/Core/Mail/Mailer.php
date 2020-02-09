@@ -98,4 +98,18 @@ Une fois connecté, cliquez dans le menu sur compte de '.ucfirst($user->getPseud
 '];
 
     }
+
+    public function validate($user)
+    {
+        return $mailDetails =[
+            'adress' => $user->getEmail(),
+            'subject' =>'Activation de votre compte',
+            'body' => '
+Bonjour '.ucfirst($user->getPseudo()).',<br/>
+Votre compte à été activé avec succès.<br/>
+Vous pouvez maintenant vous rendre sur www.blog.ghastine.com et profiter de toutes les fonctionalités offertes (commenter un article, gérer votre compte, etc.).<br/>
+<B>Camile Ghastine</B>
+'];
+
+    }
 }
