@@ -20,7 +20,7 @@ if(isset($_GET['modification']) AND $_GET['modification'] == 'email') // Email M
 {
     ob_start();
     ?>
-    <form method="post" action="index.php?route=back.updateEmail&id=<?= $id ?>&modification=email">
+    <form method="post" action="index.php?route=back.updateEmail&id=<?= $id ?>&modification=email&token=<?= $_SESSION['token'] ?>">
         <div class="form-group">
             <td>
                 <input type="hidden" name="pseudo" value="<?= $pseudo ?>">
@@ -48,7 +48,7 @@ elseif(isset($_GET['modification']) AND $_GET['modification'] == 'password') // 
 {
     ob_start();
     ?>
-    <form method="post" action="index.php?route=back.updatePass&id=<?= $id ?>&modification=password">
+    <form method="post" action="index.php?route=back.updatePass&id=<?= $id ?>&modification=password&token=<?= $_SESSION['token'] ?>">
         <div class="form-group">
             <td>
                 <input type="hidden" name="pseudo" value="<?= $pseudo ?>">

@@ -61,8 +61,10 @@ class BackController extends Controller
     public function updateEmail()
     {
         $this->isConnect();
+        $this->token->check($_GET);
 
         $formMessage = $this->pseudoOrEmailExist($_GET['id']) ? $this->pseudoOrEmailExist($_GET['id']) : $this->usersValidationForm->checkForm($_POST);
+        unset($formMessage['statut']);
 
         $user = $this->users->infoPseudoWithPseudo($_POST['pseudo']);
 
@@ -90,6 +92,7 @@ class BackController extends Controller
     public function updatePass()
     {
         $this->isConnect();
+        $this->token->check($_GET);
 
         $formMessage = $this->changePassValidationForm->checkForm($_POST);
 
