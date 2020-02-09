@@ -76,15 +76,26 @@ class Mailer
         return $mailDetails =[
             'adress' => $post['email'],
             'subject' =>'Réponse automatique : Formulaire de contact',
-            'body' => 'Bonjour '.ucfirst($post['first_name']).',<br/>Merci de m\'avoir contacté.<br/>Je vous répondrais dans les plus brefs délais.<br/><B>Camile Ghastine</B>'];
+            'body' => '
+Bonjour '.ucfirst($post['first_name']).',<br/>
+Merci de m\'avoir contacté.<br/>
+Je vous répondrai dans les plus brefs délais.<br/>
+<B>Camile Ghastine</B>'
+        ];
     }
 
-    public function unlockAccount()
+    public function unlock($user, $newPass)
     {
         return $mailDetails =[
-            'adress' => $post['email'],
+            'adress' => $user->getEmail(),
             'subject' =>'Réinialisation du mot de passe',
-            'body' => 'Bonjour,<br/>**************** <br/><B>Camile Ghastrine</B>'];
+            'body' => '
+Bonjour '.ucfirst($user->getPseudo()).',<br/>
+Votre compte à été débloqué avec succès.<br/>
+Reconnectez-vous avec le mot de passe suivant : '.$newPass.'<br/>
+Une fois connecté, cliquez dans le menu sur compte de '.ucfirst($user->getPseudo()).' pour changer votre mot de passe<br/>
+<B>Camile Ghastine</B>
+'];
 
     }
 }

@@ -215,4 +215,16 @@ abstract class Controller
         $connectionMessage = $tryLeft == 0 ? $connectionMessage . ' Votre compte a été bloqué.<br/>Cliquez sur mot de passe oublié pour le débloquer.' : $connectionMessage;
         return $connectionMessage;
     }
+
+    /**
+     * update DB and sen mail when unlock user or forgotten password
+     * @param $user
+     * @throws \Exception
+     */
+    protected function unlock($user)
+    {
+        $newPass = bin2hex(random_bytes(6));
+        $this->users->unlock(['id' => $user->getId(), 'pass' => $this->password->hash($newPass)]);
+        $this->mail->send($this->mail->unlock($user, $newPass));
+    }
 }

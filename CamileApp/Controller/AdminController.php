@@ -392,7 +392,8 @@ class AdminController extends Controller
         else
         {
             $this->token->check($_GET);
-            $this->users->unlock(['id' => $_GET['id']]);
+            $user = $this->users->infoPseudoWithId($_GET['id']);
+            $this->unlock($user);
             header('Location: index.php?route=admin.users&success=unlock');
         }
     }

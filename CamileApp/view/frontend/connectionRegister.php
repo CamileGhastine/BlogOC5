@@ -47,14 +47,24 @@ if(isset($_GET['access']))
             Break;
     }
 }
+
+if(isset($success))
+{
+    $successMessage = ' L\'enregistrement a été réalisé avec succès. Une fois validé par l\'admistrateur, vous pourrez profiter de
+                toutes les fonctionnalités du site.';
+}
+elseif(isset($_GET['success']) && $_GET['success'] == 'unlock')
+{
+    $successMessage ='Un nouveau mot de passe vous a été envoyé sur votre boite mail.';
+}
+
 ?>
 
-<?php if(isset($success) && $success): ?>
+<?php if(isset($successMessage)) : ?>
     <div class="alert alert-success mt-4">
         <div class=row>
             <div class="col-sm-10">
-                L'enregistrement a été réalisé avec succès. Une fois validé par l'admistrateur, vous pourrez profiter de
-                toutes les fonctionnalités du site.
+               <?= $successMessage ?>
             </div>
             <div class="col-sm-2">
                 <a href="index.php" class="btn btn-success">Retour à l'accueil</a>

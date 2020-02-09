@@ -41,7 +41,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
         case('validate') :
             $message = 'L\'utilisateur a été validé avec succès.';
             break;
-        case('activate') :
+        case('unlock') :
             $message = 'Ce compte a été débloqué avec succès.';
             break;
     }

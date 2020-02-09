@@ -103,7 +103,8 @@ class FrontController extends Controller
         else // form ok
         {
             $param = ['pseudo' => $_POST['pseudo'], 'email' => $_POST['email'], 'pass' => $this->password->hash($_POST['pass']), 'statut' => 'user', 'validated' => null];
-            $success = $this->users->add($param);
+            $this->users->add($param);
+            $success = 'register';
             $pseudoRegister = $_POST['pseudo'];
             $this->render('connectionRegister', compact('success', 'pseudoRegister'));
         }
@@ -187,8 +188,9 @@ class FrontController extends Controller
             }
             else
             {
-                echo 'message envoyé';
-//                $this->mail->send($this->mail($_POST));
+                $user = $this->users->infoPseudoWithEmail($_POST['email']);
+                $this->unlock($user);
+                header('Location: index.php?route=front.connectionRegister&success=unlock');
             }
 
         }

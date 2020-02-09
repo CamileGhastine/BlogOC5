@@ -77,6 +77,17 @@ class UsersManager extends Manager
     }
 
     /**
+     * id, statut, hash pass and try for a email
+     * @param $id
+     * @return mixed
+     */
+    public function infoPseudoWithEmail($email)
+    {
+        $sql = 'SELECT id, pseudo, email, statut, date_inscription, pass, validated, try FROM users WHERE email=:email';
+        return $this->db->request($sql, ['email' => $email], 'users', false);
+    }
+
+    /**
      * INSERT INTO request
      * @return mixed
      */
@@ -156,7 +167,7 @@ class UsersManager extends Manager
      */
     public function unlock($param)
     {
-        $sql = 'UPDATE users SET try=0 WHERE id=:id';
+        $sql = 'UPDATE users SET try=0, pass=:pass WHERE id=:id';
         return $this->db->request($sql, $param);
     }
 
