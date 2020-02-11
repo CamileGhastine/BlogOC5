@@ -2,7 +2,7 @@
 {
     color : rgb(200, 200 ,200);
 }
-#my-photo
+.my-photo
 {
     width: 120px;
     height: 160px;
@@ -15,4 +15,8 @@
 {
     width: 70px;
     height: 70px;
+}
+.mediaHome
+{
+    min-width: 350px;
 }

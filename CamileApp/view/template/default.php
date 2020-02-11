@@ -84,11 +84,8 @@
 
     <!-- Pied de page -->
     <footer class="row align-items-center py-2 px-lg-5">
-        <div class="col">
-
-            <a class="btn" href="https://www.linkedin.com/in/camile-ghastine/" target="_blank"><img src="img/default/linkedIn.png" id="icon"></a>
-            <a class="btn" href="https://github.com/CamileGhastine" target="_blank"><img src="img/default/github.png" id="icon"></a>
-        </div>
+            <a class="col col-sm-1 btn" href="https://www.linkedin.com/in/camile-ghastine/" target="_blank"><img src="img/default/linkedIn.png" id="icon"></a>
+            <a class="col col-sm-1 btn" href="https://github.com/CamileGhastine" target="_blank"><img src="img/default/github.png" id="icon"></a>
         <a class="col text-right pr-5 btn" href="index.php?route=admin.home"><img src="img/default/admin.png" id="icon"></a>
         <div  id="caret"><a href="#"><i class="fas fa-angle-double-up fa-2x"></i></a></div>
     </footer>
