@@ -1,0 +1,78 @@
+/*menu categories*/
+.menu-categories
+{
+    border: 1px solid #292269;
+    border-radius: 15px;
+    background: #c2c9e8;
+    box-shadow: -6px 6px 10px #292269;
+}
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active
+{
+    color : rgb(200, 200 ,200);
+    background-color: #292269;
+    margin: 10px;
+}
+.badge-dark
+{
+    color: rgb(200, 200 ,200);
+    background-color: #292269;
+}
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active >.badge-dark
+{
+    color: #292269;
+    background-color: #c2c9e8;
+}
+.nav-item
+{
+    color : black;
+}
+
+/*descripion category*/
+#description
+{
+    border: 1px solid #292269;
+    background: #c2c9e8;
+    box-shadow: 6px 6px 10px #292269;
+}
+
+/*post*/
+.card
+{
+    background-color: #292269;
+    box-shadow: 6px 6px 10px #292269;
+}
+.card-header
+{
+    border: none;
+    text-align: center;
+}
+.card-header a
+{
+    color : rgb(200, 200 ,200);
+    text-decoration: none;
+}
+
+.card-body
+{
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+    background-color: rgb(230, 230, 230);
+    text-align: justify;
+}
+.card-body p
+{
+    padding : 10px 20px 0 20px;
+}
+.card-footer
+{
+    color : black;
+    background-color: #c2c9e8;
+    padding: 5px 20px 5px 20px;
+}
+.card-footer a
+{
+    color : black;
+}
+
+

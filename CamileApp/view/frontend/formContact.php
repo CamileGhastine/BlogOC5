@@ -28,48 +28,57 @@ if(!empty($result)) : ?>
         </div>
     </div>
 <?php else : ?>
-    <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center py-4">
             <div class="col-lg-8">
                 <div class="card my-4">
                     <h4 id="comments" class="card-header text-center">Contactez-moi</h4>
                     <div class="card-body">
-                        <form method="post" action="index.php?route=front.contact">
-                            <div class="form-group">
-                                <input type="hidden" name="user_id" value="<?= $userId ?>"
-                                <div class="form-group">
-                                    <label for="first_name">Prénom</label>
-                                    <input class="form-control" type="text" name="first_name" value="<?= $firstName ?>">
-                                    <p><?= $firstNameMessage ?></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="last_name">Nom</label>
-                                    <input class="form-control" type="text" name="last_name" value="<?= $lastName ?>">
-                                    <p><?= $lastNameMessage ?></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Courriel</label>
-                                    <input class="form-control" type="text" name="email" value="<?= $email ?>">
-                                    <p><?= $emailMessage ?></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject">Objet</label>
-                                    <input class="form-control" type="text" name="subject" value="<?= $subject ?>">
-                                    <p><?= $subjectMessage ?></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="content">Message</label>
-                                    <textarea class="form-control" type="text" name="content"><?= $content ?></textarea>
-                                    <p><?= $contentMessage ?></p>
+                        <form method="post" action="index.php?route=front.contact" class="mx-4 my-3">
+                            <input type="hidden" name="user_id" value="<?= $userId ?>">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="first_name">Prénom</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-control-sm" type="text" name="first_name" value="<?= $firstName ?>" required>
+                                    <div class="message-form pb-2"><?= $firstNameMessage ?></div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="last_name">Nom</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="last_name" value="<?= $lastName ?>" required>
+                                    <div class="message-form pb-2"><?= $lastNameMessage ?></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="email">Courriel</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="email" value="<?= $email ?>" required>
+                                    <div class="message-form pb-2"><?= $emailMessage ?></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="subject">Objet</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="subject" value="<?= $subject ?>" required>
+                                    <div class="message-form pb-2"><?= $subjectMessage ?></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="content">Message</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" type="text" name="content" required><?= $content ?></textarea>
+                                    <div class="message-form pb-2"><?= $contentMessage ?></div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" id="btn-perso1">Envoyer</button>
+                            </div>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
 <?php endif ?>
 
 

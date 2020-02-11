@@ -21,6 +21,22 @@ class CategoriesManager extends Manager
     }
 
     /**
+     * all categories with posts with post count
+     * @return mixed
+     */
+    public function allWithpostsWithPostCount()
+    {
+        $sql = '
+        SELECT ca.id, ca.name, ca.description, COUNT(p.id) AS numberPosts
+        FROM categories AS ca
+        LEFT JOIN posts AS p ON p.category_id=ca.id
+        WHERE p.category_id IS NOT NULL
+        GROUP BY ca.id
+        ORDER BY ca.name';
+        return $this->db->request($sql, null, 'categories', true);
+    }
+
+    /**
      * all categories with post count
      * @return mixed
      */

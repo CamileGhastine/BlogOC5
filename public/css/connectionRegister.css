@@ -1,0 +1,16 @@
+#btn-title
+{
+    color :#c2c9e8;
+    font-size: 0.7em;
+}
+#forgotten-password
+{
+    color: black;
+    text-decoration: underline;
+}
+#forgotten-password:hover
+{
+    color: #292269 !important;
+}
+
+/*forgotten password*/

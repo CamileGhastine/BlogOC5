@@ -44,6 +44,12 @@ ORDER BY p.date_creation DESC ';
         return $this->db->request($sql, ['id' => $id], 'posts', false);
     }
 
+    public function countPosts()
+    {
+        $sql = 'SELECT count(*) AS numberPosts FROM posts';
+        return $this->db->request($sql, null, 'categories', false);
+
+    }
     /**
      * all postById by category id (with number of comments)
      * function request($sql, $param, $table, $fetchall)

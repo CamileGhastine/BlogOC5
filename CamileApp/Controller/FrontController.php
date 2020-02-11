@@ -25,9 +25,10 @@ class FrontController extends Controller
      */
     public function posts()
     {
-        $categories = $this->categories->allWithPostCount();
+        $categories = $this->categories->allWithPostsWithPostCount();
         $posts = $this->posts->allWithCommentCount();
-        $this->render('posts', compact('posts', 'categories'));
+        $countPosts = $this->posts->countPosts();
+        $this->render('posts', compact('posts', 'categories', 'countPosts'));
     }
 
     /**
@@ -35,9 +36,10 @@ class FrontController extends Controller
      */
     public function postsByCategory()
     {
-        $categories = $this->categories->allWithPostCount();
+        $categories = $this->categories->allWithPostsWithPostCount();
         $posts = $this->posts->allByCategoryWithCommentCount($_GET['id']);
-        $this->render('posts', compact('posts', 'categories'));
+        $countPosts = $this->posts->countPosts();
+        $this->render('posts', compact('posts', 'categories', 'countPosts'));
     }
 
     /**

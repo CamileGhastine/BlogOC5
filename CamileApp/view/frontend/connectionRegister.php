@@ -64,7 +64,7 @@ elseif(isset($_GET['success']) && $_GET['success'] == 'unlock')
     <div class="alert alert-success mt-4">
         <div class=row>
             <div class="col-sm-10">
-               <?= $successMessage ?>
+                <?= $successMessage ?>
             </div>
             <div class="col-sm-2">
                 <a href="index.php" class="btn btn-success">Retour à l'accueil</a>
@@ -82,12 +82,12 @@ elseif(isset($_GET['success']) && $_GET['success'] == 'unlock')
 <?php endif; ?>
 
 <!--connexion-->
-<div class="accordion row py-4" id="accordion">
-    <div class="col-lg-6">
+<div class="accordion row" id="accordion">
+    <div class="col-lg-6 pt-5">
         <div class="card">
             <div class="card-header" id="headingConnect">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseConnect"
+                <h2>
+                    <button class="btn btn-link" id="btn-title" type="button" data-toggle="collapse" data-target="#collapseConnect"
                             aria-expanded="true" aria-controls="collapseConnect">
                         Se connecter
                     </button>
@@ -96,34 +96,39 @@ elseif(isset($_GET['success']) && $_GET['success'] == 'unlock')
             <div id="collapseConnect" class="collapse <?= $showconnection ?>" aria-labelledby="headingConnect"
                  data-parent="#accordion">
                 <div class="card-body">
-                    <form action="index.php?route=front.connect" method="post">
-                        <div class="form-group">
-                            <label for="pseudo">Pseudonyme</label>
-                            <input class="form-control" type="text" name="pseudo" value="<?= $pseudoConnect ?>"
-                                   required="required">
+                    <form action="index.php?route=front.connect" method="post" class="mx-4 my-3">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="pseudo">Pseudonyme</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="text" name="pseudo" value="<?= $pseudoConnect ?>" required="required">
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="pass">Mot de passe</label>
-                            <input class="form-control" type="password" name="pass" required="required" pattern=".{6,}"
-                                   required="required" title="au moins 6 caractères">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="pass">Mot de passe</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="password" name="pass"
+                                       required="required" pattern=".{6,}" title="au moins 6 caractères">
+                            </div>
                         </div>
-
-                        <button class="btn btn-primary" type="submit" name="connection">Se connecter</button>
-                        <p><?= $connectionMessage ?></p>
-                        <a href="index.php?route=front.forgottenPassword">Mot de passe oublié</a>
+                        <div class="message-form pb-2 text-center"><?= $connectionMessage ?></div>
+                        <div class="text-center">
+                            <button class="btn btn-primary mb-3" type="submit" name="connection" id="btn-perso1">Se connecter</button>
+                        </div>
+                        <div class="text-center">
+                            <a href="index.php?route=front.forgottenPassword" class="texte-center" id="forgotten-password">Mot de passe oublié</a>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-<!--    Registration-->
-    <div class="col-lg-6">
+    <!--    Registration-->
+    <div class="col-lg-6 pt-5">
         <div class="card">
             <div class="card-header" id="headingRegister">
-                <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                <h2>
+                    <button class="btn btn-link collapsed" id="btn-title" type="button" data-toggle="collapse"
                             data-target="#collapseRegister" aria-expanded="false" aria-controls="collapseRegister">
                         S'enregistrer
                     </button>
@@ -132,31 +137,41 @@ elseif(isset($_GET['success']) && $_GET['success'] == 'unlock')
             <div id="collapseRegister" class="collapse <?= $showRegister ?>" aria-labelledby="headingRegister"
                  data-parent="#accordion">
                 <div class="card-body">
-                    <form action="index.php?route=front.register" method="post">
-                        <div class="form-group">
-                            <label for="pseudo">Pseudonyme</label>
-                            <input class="form-control" type="text" name="pseudo" value="<?= $pseudo ?>">
-                            <?= $pseudoMessage ?>
+                    <form action="index.php?route=front.register" method="post" class="mx-4 my-3">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="pseudo">Pseudonyme</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="text" name="pseudo" required value="<?= $pseudo ?>">
+                                <div class="message-form pb-2"><?= $pseudoMessage ?></div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Courriel</label>
-                            <input class="form-control" type="text" name="email" value="<?= $email ?>">
-                            <?= $emailMessage ?>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="email">Courriel</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="text" name="email" required value="<?= $email ?>">
+                                <div class="message-form pb-2"><?= $emailMessage ?></div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="pass">Mot de passe</label>
-                            <input class="form-control" type="password" name="pass">
-                            <?= $passMessage ?>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="pass">Mot de passe</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="password" name="pass" required>
+                                <div class="message-form pb-2"><?= $passMessage ?></div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="passConfirm">Confirmer le mot de passe</label>
-                            <input class="form-control" type="password" name="passConfirm">
-                            <?= $passConfirmMessage ?>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm text-center" for="passConfirm">Confirmer le mot de passe</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="password" name="passConfirm" required>
+                                <div class="message-form pb-2"><?= $passConfirmMessage ?></div>
+                            </div>
                         </div>
-                        <button class="btn btn-primary" type="submit" name="connection">S'enregistrer</button>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit" name="connection" id="btn-perso1">S'enregistrer</button>
+                        </div>
                     </form>
                 </div>
             </div>

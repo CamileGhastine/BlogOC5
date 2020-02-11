@@ -19,7 +19,6 @@ class stdValidationForm extends ValidationForm
     protected $title;
     protected $chapo;
     protected $pseudo;
-    protected $pass;
     protected $statut;
     protected $keys;
 

@@ -1,0 +1,29 @@
+.lead
+{
+    font-weight: bold;
+}
+#register-connection
+{
+    color: black;
+}
+#register-connection:hover
+{
+    color: #c2c9e8 !important;
+}
+#commentDate
+{
+    font-size: 0.65em;
+}
+#btn-perso1
+{
+    background-color: #292269;
+}
+.message-form
+{
+    color: #cd0000;
+}
+
+.comments-post
+{
+    text-align: left !important;
+}
