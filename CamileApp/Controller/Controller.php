@@ -142,6 +142,10 @@ abstract class Controller
             case 'categories':
                 $this->posts->changeCategoryToUnknown();
                 break;
+            case 'users':
+                $this->comments->commentsToAnonymous($_GET['id']);
+                $this->posts->PostsToAnonymous($_GET['id']);
+                break;
         }
 
         $this->$table->delete($_GET['id']);

@@ -1,5 +1,18 @@
 .card-header
 {
-    background-color: #292269 ;
-    color : white;
+    color : rgb(200, 200 ,200);
+}
+#my-photo
+{
+    width: 120px;
+    height: 160px;
+}
+.media-body
+{
+    font-family: 'Hepta Slab', serif;
+}
+.imgServices
+{
+    width: 70px;
+    height: 70px;
 }

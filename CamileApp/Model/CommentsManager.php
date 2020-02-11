@@ -66,4 +66,14 @@ class CommentsManager extends Manager
         $sql = 'UPDATE comments SET content=:content WHERE id=:id';
         $this->db->request($sql, ['id' => $id, 'content' => $content ]);
     }
+
+    /**
+     * UPDATE user comment when user is delete
+     */
+    public function commentsToAnonymous($id)
+    {
+        $sql = 'UPDATE comments SET user_id=2 WHERE user_id=:id';
+        return $this->db->request($sql, ['id' => $id]);
+    }
+
 }

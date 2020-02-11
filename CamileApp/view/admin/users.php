@@ -5,7 +5,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
 
 <div class="row pt-4">
     <div class="col-sm-8">
-        <h1>Administration des utilisateurs</h1>
+        <h1 id="title">Administration des utilisateurs</h1>
     </div>
     <div class="col-sm-4">
         <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
@@ -70,6 +70,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
         <?php
         foreach($users as $user):
             $userId = $user->getId();
+            $userStatut = $user->getStatut();
             $pseudo = htmlspecialchars($user->getPseudo());
             $email = htmlspecialchars($user->getEmail());
             $date = htmlspecialchars($user->getDate_inscription());
@@ -97,16 +98,20 @@ $numberUsersBlocked = $numberUsersBlocked->number;
                     <a href="index.php?route=admin.updateUser&id=<?= $userId ?>" class="btn-sm btn-primary">Modifier</a>
 
                     <?php
-                    if(!isset($_GET['delete']))
+                    if(!isset($_GET['delete']) )
                     {
-                        echo '<a href="?route=admin.users&delete=' . $userId . '#delete" class="btn-sm btn-danger">Supprimer</a>';
+                        if($userStatut != 'admin') echo '<a href="?route=admin.users&delete=' . $userId . '#delete" class="btn-sm btn-danger">Supprimer</a>';
                     }
                     else
                     {
-                        ?>
-                        <a id="delete" href="" class="<?= $_GET['delete'] == $userId ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
+                        if($userStatut != 'admin')
+                        { ?>
+                            <a id="delete" href="" class="<?= $_GET['delete'] == $userId ? 'btn-sm btn-secondary' : 'btn-sm btn-danger' ?>">Supprimer</a>
 
                         <?php
+                        }
+
+
                     }
                     ?>
                 </td>
@@ -116,7 +121,7 @@ $numberUsersBlocked = $numberUsersBlocked->number;
                     {
                         ?>
                         <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
-                        <a href="?route=admin.users" class="btn-sm btn-success">Annuler</a>
+                        <a href="?route=admin.users#title" class="btn-sm btn-success">Annuler</a>
                     <?php } ?>
                 </td>
             </tr>

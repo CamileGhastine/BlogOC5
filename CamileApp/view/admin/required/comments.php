@@ -13,11 +13,7 @@
                         $content = htmlspecialchars($comment->getContent());
                         $validate = $comment->getValidated() == null ? '<a href="index.php?route=admin.comments&id='.$_GET['id'].'#comments" class="btn-sm btn-success mt-3">Valider</a>' : null;
                         ?>
-                        <p>
-                            <U><B><?= $pseudo ?></B> (<small><?= $dateComment ?></small>) :</U>
-                            <?= $content ?>
-                            <?= $validate ?>
-                        </p>
+                        <p><?= '<spann id="commentDate">' . $dateComment . '</spann> - <B>' . $pseudo . '</B>  : ' . $content ?> <?= $validate ?></p>
 
                     <?php } ?>
                 </div>

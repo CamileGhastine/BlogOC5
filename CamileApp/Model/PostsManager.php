@@ -116,4 +116,13 @@ ORDER BY p.date_creation DESC
         $sql = 'UPDATE posts SET category_id=1 WHERE category_id=:id';
         return $this->db->request($sql, ['id' => $_GET['id']], 'posts');
     }
+
+    /**
+     * UPDATE user posts when user is delete
+     */
+    public function postsToAnonymous($id)
+    {
+        $sql = 'UPDATE posts SET user_id=2 WHERE user_id=:id';
+        return $this->db->request($sql, ['id' => $id]);
+    }
 }

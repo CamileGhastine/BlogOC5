@@ -353,7 +353,6 @@ class AdminController extends Controller
     public function postById()
     {
         $this->isAdmin();
-
         $this->viewPostById();
     }
 

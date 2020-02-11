@@ -179,4 +179,6 @@ class UsersManager extends Manager
         $sql = 'UPDATE users SET pass=:pass WHERE id=:id';
         return $this->db->request($sql, $param);
     }
+
+
 }
