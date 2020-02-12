@@ -82,7 +82,6 @@ class AdminController extends Controller
             {
                 $this->posts->update($post);
                 header('Location: index.php?route=admin.posts&success=update');
-                exit;
             }
             else
             {
@@ -403,14 +402,6 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteAccount()
-    {
-        $this->token->check($_GET);
-        $this->isConnect();
-        $this->delete('users', false);
-        session_destroy();
-        header('Location: index.php');
-        exit;
-    }
+
 }
 

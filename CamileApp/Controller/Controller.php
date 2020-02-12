@@ -233,4 +233,17 @@ abstract class Controller
         $this->users->unlock(['id' => $user->getId(), 'pass' => $this->password->hash($newPass)]);
         $this->mail->send($this->mail->unlock($user, $newPass));
     }
+
+    /**
+     * delete user account
+     */
+    public function deleteAccount()
+    {
+        $this->token->check($_GET);
+        $this->isConnect();
+        $this->delete('users', false);
+        session_destroy();
+        header('Location: index.php');
+        exit;
+    }
 }
