@@ -130,10 +130,8 @@ abstract class Controller
      * Delete à table : user, post or category
      * @param $table
      */
-    public function delete($table)
+    public function delete($table, $direction=true)
     {
-        $this->isAdmin();
-
         switch($table)
         {
             case 'posts':
@@ -149,8 +147,12 @@ abstract class Controller
         }
 
         $this->$table->delete($_GET['id']);
-        header('Location: index.php?route=admin.' . $table . '&success=delete');
-        exit;
+
+        if($direction)
+        {
+            header('Location: index.php?route=admin.' . $table . '&success=delete');
+            exit;
+        }
     }
 
     /**

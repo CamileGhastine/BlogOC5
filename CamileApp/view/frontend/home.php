@@ -1,5 +1,5 @@
 <div class=" row">
-    <div class="col-lg-8">
+    <div class="col-lg-8 pt-4">
         <div class="col-lg-12 mediaHome">
             <div class="card my-4 ">
                 <h4 class="card-header text-center">Qui suis je ?</h4>
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 mediaHome">
+        <div class="col-lg-12 pt-3 mediaHome">
             <div class="card my-4">
                 <h4 class="card-header text-center">Mes services</h4>
                 <div class="card-body pt-4 pb-3 pl-4 pr-5">
@@ -44,11 +44,11 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="col-lg-12 d-none d-lg-block">
+    <div class="col-lg-4 pt-4">
+        <div class="col-lg-12 pb-2 d-none d-lg-block">
             <?php require ROOT . '/CamileApp/view/frontend/required/formContactWindow.php' ?>
         </div>
-        <div class="col-lg-12 d-block d-lg-none mediaHome">
+        <div class="col-lg-12 pb-2 d-block d-lg-none mediaHome">
             <?php require ROOT . '/CamileApp/view/frontend/required/formContact.php' ?>
         </div>
         <div class="col-lg-12 mediaHome">

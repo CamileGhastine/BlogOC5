@@ -3,7 +3,7 @@ $all = isset($_GET['id']) ? false : true;
 $categoryDescriptionActive = 'Toutes mes formations et compétences dans le domaine du développement numérique et autres.';
 ?>
 <div class="d-none d-sm-block">
-    <h1 class=" py-4 d-flex text-center justify-content-center justify-content-lg-start" id="title">Formations / Compétences</h1>
+    <h1 class=" pl-4 py-4 d-flex text-center justify-content-center justify-content-lg-start" id="title">Formations / Compétences</h1>
 </div>
 <div class="d-block d-sm-none">
     <h1 class=" py-4 d-flex text-center justify-content-center justify-content-lg-start" id="title">Formations<br/>Compétences</h1>

@@ -106,6 +106,7 @@ class AdminController extends Controller
      */
     public function deletepost()
     {
+        $this->isAdmin();
         $this->token->check($_GET);
         $this->delete('posts');
     }
@@ -195,6 +196,7 @@ class AdminController extends Controller
     {
         if($_GET['id'] != 1)
         {
+            $this->isAdmin();
             $this->token->check($_GET);
             $this->delete('categories');
         }
@@ -344,6 +346,7 @@ class AdminController extends Controller
     public function deleteUser()
     {
         $this->token->check($_GET);
+        $this->isAdmin();
         $this->delete('users');
     }
 
@@ -400,5 +403,14 @@ class AdminController extends Controller
         }
     }
 
+    public function deleteAccount()
+    {
+        $this->token->check($_GET);
+        $this->isConnect();
+        $this->delete('users', false);
+        session_destroy();
+        header('Location: index.php');
+        exit;
+    }
 }
 
