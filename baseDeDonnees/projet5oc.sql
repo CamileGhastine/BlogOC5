@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 04 fév. 2020 à 22:01
+-- Généré le :  mer. 12 fév. 2020 à 20:09
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(100) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `categories`
@@ -42,8 +42,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 (1, 'Non classé', 'Articles non classés'),
-(2, 'Divers', 'Autres formations'),
-(36, 'Parcours PHP/Symfony', 'Formation dispensée par Openclassrooms délivrant un diplôme bac +3');
+(2, 'Développement numérique', 'Référencement, sécurité,  outils, image numérique, etc.'),
+(36, 'PHP/Symfony', 'Formation avec Openclassrooms délivrant un diplôme de développeur PHP/Symfony de niveau 6 (bac +3/4).'),
+(45, 'Général', 'Compétences généralistes dans d\'autres domaines que le développement numérique.');
 
 -- --------------------------------------------------------
 
@@ -62,54 +63,40 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`id`),
   KEY `post_id` (`post_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
 --
 
 INSERT INTO `comments` (`id`, `content`, `date_creation`, `post_id`, `user_id`, `validated`) VALUES
-(1, 'Deuxieme commentaire !', '2019-12-04 16:00:00', 1, 4, 1),
-(3, 'commenatair 3', '2019-12-07 11:00:00', 1, 3, 1),
-(4, 'pemier commentaire', '2019-12-02 11:00:00', 1, 4, 1),
-(6, 'un autre commentaire non validé', '2019-12-11 22:13:54', 3, 1, 1),
-(15, 'tres interessant ', '2019-12-12 14:39:33', 3, 1, 1),
-(16, 'Rien de bien onteressant dans cette discution ', '2019-12-12 14:39:59', 1, 1, 1),
-(17, 'Je vais eleve le niveau ...', '2019-12-12 14:40:13', 1, 1, 1),
-(18, 'Wordpress, jumla ou from scratch ????', '2019-12-12 14:40:26', 1, 1, 1),
-(19, 'scratch c\'est bien comme langage, je choisie scratch !!!', '2019-12-12 14:41:00', 1, 4, 1),
-(20, 'comme sael', '2019-12-12 14:41:19', 1, 3, 1),
-(21, 'Moi je comprends rien', '2019-12-12 14:41:37', 1, 2, 1),
-(22, 'je t\'expliquerai', '2019-12-12 14:41:54', 1, 1, 1),
-(33, 'test com phpmyadmin', '2020-01-27 10:05:43', 2, 1, 1),
-(34, 'ytyutyu', '2020-01-27 10:39:29', 2, 1, 1),
-(35, 'ghgfhjfhgj', '2020-01-27 10:40:13', 2, 1, 1),
-(36, 'retreztre', '2020-01-27 10:41:02', 2, 1, 1),
-(37, 'yttyu', '2020-01-27 10:42:01', 2, 1, 1),
-(58, 'aezrazer', '2020-01-28 17:51:15', 1, 1, 1),
-(86, 'pas faux', '2020-01-31 17:57:53', 3, 1, 1),
-(90, 'rereret', '2020-01-31 17:58:56', 3, 4, NULL),
-(92, 'modification test', '2020-01-31 17:59:07', 14, 4, 1),
-(93, 'reertret', '2020-01-31 17:59:10', 14, 4, NULL),
-(96, 'ertertertre', '2020-01-31 17:59:26', 2, 4, NULL),
-(97, 'reretertert', '2020-01-31 17:59:29', 2, 4, NULL),
-(98, 'ggrtg', '2020-02-03 22:05:00', 14, 1, 1),
-(99, 'rezrez', '2020-02-03 22:05:31', 14, 1, 1),
-(100, 'rterty', '2020-02-03 22:06:36', 14, 1, 1),
-(101, 'ertg', '2020-02-03 22:07:35', 14, 1, 1),
-(102, 'rtgrt', '2020-02-03 22:08:31', 14, 1, 1),
-(103, 'rtyerty', '2020-02-03 22:10:49', 14, 1, 1),
-(105, 'test commentaire', '2020-02-04 10:15:17', 3, 1, 1),
-(106, 'test commentaire maintenant validé', '2020-02-04 10:17:26', 14, 3, 1);
+(145, 'Bonne chance pour ta reconversion !', '2020-02-12 17:39:56', 2, 3, 1),
+(146, 'Bon courage !', '2020-02-12 17:40:26', 2, 4, 1),
+(147, 'Bon travail !', '2020-02-12 17:40:53', 2, 5, 1),
+(148, 'Merci pour vos encouragements, je suis plus motivé que jamais.', '2020-02-12 17:41:19', 2, 1, 1),
+(149, 'C\'est chouette pour une première réalisation.', '2020-02-12 17:42:36', 1, 5, 1),
+(150, 'Merci, mais faut bien avouer que les chalets en vente sont plus sympa que le site ;-)', '2020-02-12 17:43:17', 1, 1, 1),
+(151, 'Moi j’achète celui pret du lac !!!', '2020-02-12 17:43:51', 1, 3, 1),
+(152, 'très jolie !', '2020-02-12 17:45:50', 14, 3, 1),
+(153, 'SUPER !!!', '2020-02-12 17:46:16', 14, 4, 1),
+(154, 'merci,\r\nJe suis content du résultat \r\n:-)', '2020-02-12 17:46:52', 14, 1, 1),
+(155, 'Tu peux', '2020-02-12 17:48:53', 14, 4, 1),
+(156, 'Y-a-pas de site cette fois ?\r\n', '2020-02-12 17:52:34', 25, 5, 1),
+(157, 'He non !', '2020-02-12 17:52:51', 25, 1, 1),
+(158, 'Ca avance ton blog ?', '2020-02-12 17:58:59', 27, 3, 1),
+(159, 'Doucement, mais surement ...', '2020-02-12 17:59:28', 27, 1, 1),
+(160, 'Alors ta soutenance s\'est bien passée ?', '2020-02-12 17:59:52', 27, 3, NULL),
+(161, 'Tu lances dans la musique finalement ?', '2020-02-12 18:00:26', 28, 5, NULL),
+(162, 'LOL :-D', '2020-02-12 18:00:50', 28, 4, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `form_contact`
+-- Structure de la table `form_contacts`
 --
 
-DROP TABLE IF EXISTS `form_contact`;
-CREATE TABLE IF NOT EXISTS `form_contact` (
+DROP TABLE IF EXISTS `form_contacts`;
+CREATE TABLE IF NOT EXISTS `form_contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -120,16 +107,29 @@ CREATE TABLE IF NOT EXISTS `form_contact` (
   `date_submission` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `alreadyRead` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `form_contact`
+-- Déchargement des données de la table `form_contacts`
 --
 
-INSERT INTO `form_contact` (`id`, `first_name`, `last_name`, `email`, `subject`, `content`, `user_id`, `date_submission`, `alreadyRead`) VALUES
+INSERT INTO `form_contacts` (`id`, `first_name`, `last_name`, `email`, `subject`, `content`, `user_id`, `date_submission`, `alreadyRead`) VALUES
 (4, 'Sael', 'ghastine', 'sael@SAel.fr', 'petit test forumlaire', 'I am trying to conditionally style user-to-user messages on my site based on the following:\r\n\r\nIf the user has not yet accessed the message, it remains bold (\"unread\"). If the user clicks the link and accesses it, it goes from bold to unbold (\"read\")\r\n\r\n(reference: this is how many email inboxes work)\r\n\r\nQuestion: How would I check if the user has clicked on the link to view their new message, or if they have not? As in, how would I store this information and indicate that it has been \"read\"?', 4, '2019-12-11 10:00:00', 'X'),
 (6, 'Olivier', 'Rentz', 'olivier@rentz.fr', 'Creation d\'un site web', 'Un site web pour 15€, c\'est possible ?', NULL, '2019-12-11 11:00:00', 'X'),
-(7, 'camile', 'ghjd', 'camileghastine@hotmail.com', 'test', 'hqskdhqs', NULL, '2020-01-15 13:49:26', 'X');
+(11, 'fzfd', 'sdqfdqsf', 'dqsfdqsf@gjgj.fr', 'dfsqdqsf', 'dqsdfsdsfq', 1, '2020-02-06 20:27:22', NULL),
+(12, 'fzfd', 'sdqfdqsf', 'dqsfdqsf@gjgj.fr', 'dfsqdqsf', 'dqsdfsdsfq', 1, '2020-02-06 20:51:52', NULL),
+(13, 'fzfd', 'sdqfdqsf', 'dqsfdqsf@gjgj.fr', 'dfsqdqsf', 'dqsdfsdsfq', 1, '2020-02-06 20:52:51', NULL),
+(14, 'camile', 'ghastine', 'camileghastine@hotmail.com', 'test phpmailer', 'alors ca marche ?', 1, '2020-02-06 20:56:57', NULL),
+(15, 'camile', 'ghastine', 'camileghastine@hotmail.com', 'test', 'gjdsgfjsdgfj', 3, '2020-02-08 08:02:30', NULL),
+(16, 'dffds', 'dqsfsdqf', 'camileghastine@hotmail.com', 'dsfqqsdf', 'dqsfqsdfqsdf', 1, '2020-02-11 21:38:26', NULL),
+(17, 'dffds', 'dqsfsdqf', 'camileghastine@hotmail.com', 'dsfqqsdf', 'dqsfqsdfqsdf', 1, '2020-02-11 21:39:31', NULL),
+(18, 'dffds', 'dqsfsdqf', 'camileghastine@hotmail.com', 'dsfqqsdf', 'dqsfqsdfqsdf', 1, '2020-02-11 21:39:44', NULL),
+(19, 'dffds', 'dqsfsdqf', 'camileghastine@hotmail.com', 'dsfqqsdf', 'dqsfqsdfqsdf', 1, '2020-02-11 21:41:20', NULL),
+(20, 'dffds', 'dqsfsdqf', 'camileghastine@hotmail.com', 'dsfqqsdf', 'dqsfqsdfqsdf', 1, '2020-02-11 21:41:46', NULL),
+(21, 'bcndfg', 'xcbxcvbx', 'camileghastine@hotmail.com', 'dfdqsfdqs', 'qdsfqdsfdqsf', 2, '2020-02-11 21:56:12', NULL),
+(22, 'dfqsqsdf', 'dqsfqsd', 'dqsfqsdf@dqsfqsdf.fr', 'kjmlkml', 'hgfdgfh', 2, '2020-02-11 21:56:54', NULL),
+(23, 'sfsdf', 'qsdfqsdf', 'camileghastine@hotmail.com', 'dfsgdgfs', 'sdfgsdfg', 2, '2020-02-11 21:58:09', NULL),
+(24, 'camile', 'ghastine', 'camileghastine@hotmail.com', 'etes vous le meilleur ?', 'J\'ai besaoin €d\'un site. Je vous paye 1 millions ', 2, '2020-02-12 19:37:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -150,17 +150,26 @@ CREATE TABLE IF NOT EXISTS `posts` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `chapo`, `content`, `date_creation`, `date_modification`, `category_id`, `user_id`) VALUES
-(1, 'Projet 2 : Créer un site avec Wordpress', 'Wordpress', 'Maitrise de Wordpress, HTML et CSS .', '2019-12-03 21:05:22', '2019-12-12 09:57:57', 36, 1),
-(2, 'Projet 1: Stratégie d\'apprentissage', 'STratégie d\'apprentissage, CV et lien vers linkedIn et Github', 'Mise en place de la stratégie d\'apprentissage, Rédaction du CV, création d\'un compte linkedin', '2019-12-03 08:00:00', '2019-12-03 08:00:00', 36, 1),
-(3, 'Référencement web', 'Les clefs pour réussir son référencement', 'Web\r\nLe web porte l’objectif de développement des entreprises. Toutes les campagnes de communication passent aujourd’hui par le web (même partiellement).\r\n\r\nDeux objectifs du web :\r\n•	Attirer les prospects (faire du trafic)\r\n•	Mais le plus important est de convertir les prospects (vente, formulaire, téléchargement, etc.)\r\n\r\nMarketing : segmenter pour adapter le dispositif au marché\r\n\r\n3 types de visiteurs sur internet :\r\n•	Visiteurs qui cherchent : c’est le référencement qui attire ces visiteurs\r\n•	Visiteurs qui participent : s’intégrer dans les communautés qui concerne notre domaine (Facebook, twitter, etc.) et prouver notre expertise au sein de cette communauté pour proposer nos services.\r\n•	Visiteurs qui surfent : ces visiteurs doivent être touché par des bandeaux pubs pour éveiller leur intérêt et qu’il s’adresse à nous le jour où ils en auront besoin.\r\n\r\nDispositif webmarketing complet\r\nDispositif web pour créer une présence sur le web dans le cadre d’objectif déterminés.\r\nOn va devoir s’adresser aux trois types de visiteurs :\r\n•	Ceux qui cherchent en travaillant sur le référencement\r\n•	Ceux qui participent en faisant du Community management (travail sur les réseaux sociaux : veille, publication de contenu, animation de communauté)\r\n•	Ceux qui surfent en faisant des bandeaux pub, du mailing et du « print » réel (4 par 3, flyers, etc.)\r\n\r\nCe cours portera sur la partie référencement et plus précisément sur la partie référencement naturel.\r\n', '2019-12-05 09:00:00', '2019-12-05 09:00:00', 2, 1),
-(14, 'article test 2', 'chapo test', '<p>You can use the mark tag to <mark>highlight</mark> text.</p>\r\n<p><del>This line of text is meant to be treated as deleted text.</del></p>\r\n<p><s>This line of text is meant to be treated as no longer accurate.</s></p>\r\n<p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>\r\n<p><u>This line of text will render as underlined</u></p>\r\n<p><small>This line of text is meant to be treated as fine print.</small></p>\r\n<p><strong>This line rendered as bold text.</strong></p>\r\n<p><em>This line rendered as italicized text.</em></p>\r\n\r\n.mark and .small classes are also available to apply the same styles as <mark> and <small> while avoiding any unwanted semantic implications that the tags would bring.\r\n\r\nWhile not shown above, feel free to use <b> and <i> in HTML5. <b> is meant to highlight words or phrases without conveying additional importance while <i> is mostly for voice, technical terms, etc.\r\nText utilities\r\n\r\nChange text alignment, transform, style, weight, and color with our text utilities and color utilities.\r\nAbbreviations\r\n\r\nStylized implementation of HTML’s <abbr> element for abbreviations and acronyms to show the expanded version on hover. Abbreviations have a default underline and gain a help cursor to provide additional context on hover and to users of assistive technologies.\r\n\r\nAdd .initialism to an abbreviation for a slightly smaller font-size.', '2020-01-31 14:15:48', '2020-01-31 14:15:48', 2, 1);
+(1, 'WordPress', 'Projet 2 : Intégrer un thème WordPress pour un client', 'Création d\'un site avec WordPress : <a href=\"https://wp.ghastine.com/\"><img style=\"width: 20%; height: 20%;\" src=\"img/perso/chalet&caviar.png\"></a>\r\n\r\nRédaction d\'un <a href=\"img/perso/guideUtilisateur.pdf\">guide utilisateur</a> du site à usage du client.\r\n\r\nMaitrise de HTML 5 et CSS 3.\r\n\r\n<U>Certificats :</U>\r\n<a href=\"#\">Apprendre à créer un site web avec HTML5 et CSS3</a>\r\n<a href=\"#\">Découvrir les solutions CMS</a>\r\n<a href=\"#\">Créer un site moderne et professionnel avec WordPress 5</a>', '2019-12-03 21:05:22', '2019-12-12 09:57:57', 36, 1),
+(2, 'Mise en place de ma stratégie d\'apprentissage', 'Projet 1 : planification de mon calendrier de formation, mise à jour ou création de mon CV et des comptes linkedIn et Github.', 'Mon CV : <a href=\"doc/cv.pdf\"><img style=\"width: 5%; height: 45%;\" src=\"img/home/cv.jpg\"></a>\r\n\r\nProfil LinkedIn : <a class=\"col col-sm-1 btn\" href=\"https://www.linkedin.com/in/camile-ghastine/\" target=\"_blank\"><img style=\"width: 100%; height: 100%;\" src=\"img/default/linkedIn.png\" id=\"icon\"></a>\r\n\r\nCompte GitHub : <a class=\"col col-sm-1 btn\" href=\"https://github.com/CamileGhastine\" target=\"_blank\"><img style=\"width: 100%; height: 100%;\" src=\"img/default/github.png\" id=\"icon\"></a>', '2019-12-03 08:00:00', '2019-12-03 08:00:00', 36, 1),
+(3, 'Javascript', 'Toutes les bases de javascript et introduction à JQuery', '<U>Certificats :</U>\r\n<a href=\"#\">Apprendre à coder avec Javascript</a>\r\n<a href=\"#\">Créer des pages web interactives avec Javascript</a>\r\n<a href=\"#\">Introduction à JQuery</a>', '2019-12-05 09:00:00', '2019-12-05 09:00:00', 2, 1),
+(14, 'Réalisation d\'un cahier des charges et intégration d\'une maquette', 'Projet 3 : Analyse des besoins du client pour son festival du film', 'Création d\'un site avec Bootstrap 4 : <a href=\"https://boot.ghastine.com/\"><img style=\"width: 30%; height: 50%;\" src=\"img/perso/festivalDuFilm.png\"></a>\r\n\r\nRéalisatation d\'un <a href=\"img/perso/cahierDesCharges.pdf\">cahier des charges</a> : \r\n- Cadre du projet\r\n- Spécification techniques et fonctionnelles\r\n- Conception graphique (brief créatif, charte graphique et wireframes).\r\n\r\n<U>Certificats :</U>\r\n<a href=\"#\">Boostrap</a>\r\n<a href=\"#\">Découper et intégrer une maquette</a>', '2020-01-31 14:15:48', '2020-01-31 14:15:48', 36, 1),
+(21, 'Le référencement web', 'Toutes les clefs pour réussir son référencement web', '<U>Certificat :</U>\r\n<a href=\"#\">Le référencement web</a>', '2020-02-09 22:31:11', '2020-02-09 22:31:11', 2, 1),
+(23, 'GitHub', 'Utilisation de GitHUb pour versionner mes codes', '<U>Certificats :</U>\r\n<a href=\"#\">Apprendre à utiliser la ligne de commande</a>\r\n<a href=\"#\">Gérer un code avec GitHub</a>\r\n<a href=\"#\">Utiliser Git et GitHub pour des projets de développement</a>', '2020-02-12 14:06:03', '2020-02-12 14:06:03', 2, 1),
+(24, 'Gestion de projet numérique', 'Principes et applications des différents types de gestion de projets (en cascade, agile, etc.)', '<U>Certificats :</U>\r\n<a href=\"#\">Gérer un projet informatique facilement</a>\r\n<a href=\"#\">Gérer un projet numérique avec une méthodologie en cascade</a>', '2020-02-12 14:06:16', '2020-02-12 14:06:16', 2, 1),
+(25, 'Conception de l\'architecture d\'une base de données avec UML et MySQL', 'Projet 4 : Concevoir la solution technique d\'une application de restauration en ligne', 'Réalisation d\'un document présentant la <a href=\"img/perso/conceptionTechnique.pdf\">conception technique</a> de l\'application :\r\n- Cas d\'utilisation (diagrammes des cas d\'utilisation, fiches descriptives et diagrammes de séquences)\r\n- Diagramme de classes\r\n- Modèle physique de données\r\n\r\n<U>Certificats :</U>\r\n<a href=\"#\">Analyse locielle avec UML</a>\r\n<a href=\"#\">Modéliser et implémenter une base de données relationnelles avec UML</a>', '2020-02-12 16:52:20', '2020-02-12 16:52:20', 36, 1),
+(26, 'Sécurité informatique', 'Les différents types de failles web et les techniques pour s\'en protéger', '<U>Failles :</U>\r\n- XSS\r\n- Include\r\n- Upload\r\n- Injection SQL\r\n- CSRF\r\n- CRLF\r\n- Attaque par force brute\r\n- Variables de session\r\n- Buffer Overflow\r\n- Protection des données\r\n- Captcha\r\n- Protection des mots de passe\r\n- Protection des répertoires\r\n- Etc.\r\n\r\n<U>Certificat :</U>\r\n<a href=\"#\">Protection efficace contre les failles web</a>', '2020-02-12 16:56:08', '2020-02-12 16:56:08', 2, 1),
+(27, 'PHP programmation orienté objet', 'Projet 5 : Créer un blog en PHP en orienté objet', '- Création d\'<a href=\"https://github.com/CamileGhastine/BlogOC5/issues\">issues</a> sur GitHub pour planifier les tâches à effectuer\r\n- <a href=\"#\">Diagramme UML</a> et <a href=\"#\">modèle physique de données</a> de l\'application\r\n- Utilisation de librairies externes (auto-loader et gestion des mails) intégrées grâce à composer.\r\n- Toutes les autres fonctionnalités ont été codées maison en programmation orienté objet (routeur, vérification poussée des formulaires, protection par mot de passe, pagination etc.) sans injection de dépendance\r\n- Protection contre les failles de sécurité (XSS, injection SQL, CSRF, hijacking, etc.)\r\n- Code versionné sur <a href=\"https://github.com/CamileGhastine/BlogOC5\">GitHub</a>\r\n- Suivi de code sur <a href=\"https://codeclimate.com/github/CamileGhastine/BlogOC5\">CodeClimat</a>\r\n- Déploiement du <a href=\"http://blog.ghastine.com\">blog</a>\r\n\r\n<U>Certificats :</U>\r\n<a href=\"#\">Concevoir un site web en PHP et MySQL</a>\r\n<a href=\"#\">Adopter une architecture MVC en PHP</a>\r\n<a href=\"#\">Programmer en orienté objet</a>\r\n<a href=\"#\">Administrer les bases de données avec MySQL</a>\r\n\r\n', '2020-02-12 17:27:05', '2020-02-12 17:27:05', 36, 1),
+(28, 'Framework Symfony', 'Projet 6 : Développer un site communautaire avec Symfony', 'En cours ...', '2020-02-12 17:32:15', '2020-02-12 17:32:15', 36, 1),
+(29, 'Images numériques', 'Retouche photo et monatge vidéo numérique', 'Bonne Maitrise des produits Adobe :\r\n- Photoshop\r\n- Première\r\n- After effects)', '2019-12-02 18:14:09', '2020-02-12 18:14:09', 2, 1),
+(30, 'Sciences Physiques', 'Titulaire du CAPES et Professeur de Sciences Physiques ', 'Professeur de Sciences Physiques pendant plus de 10 ans.\r\nTuteur d\'enseignants néo-titulaires.\r\n', '2019-12-01 18:18:50', '2020-02-12 18:18:50', 45, 1);
 
 -- --------------------------------------------------------
 
@@ -181,21 +190,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `pseudo` (`pseudo`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `email`, `statut`, `pass`, `date_inscription`, `validated`, `try`) VALUES
-(1, 'camile', 'camileghastine@hotmail.com', 'admin', '$2y$10$7s2mOmm/urAsjsCwo0vNkumJ.aRecfiwNCvQszafaP72fgCmt48ty', '2019-12-09 09:00:00', 1, 0),
-(2, 'ninel', 'ninel@ninel.fr', 'user', '$2y$10$BBL2hAvsE2muvGpQ9F9T/.IPBhKHo7sXX8wsvvCI7IdOAar5KPdZS', '2019-12-10 10:00:00', 1, 0),
-(3, 'loann', 'loann@loann.fr', 'user', '$2y$10$E1XGxrwmWlRAVIisgD3TdOvx6cTy2/jJfiSjCV.innWU3t8WSolbG', '2019-12-11 08:00:00', 1, 0),
-(4, 'saël', 'sael@sael.fr', 'user', '$2y$10$OtuH.6/wKlapy3WRxRQRu.hoHXOGA1KQMI.H8v/vv.XZ7sDy8qwGy', '2019-12-11 10:00:00', 1, 0),
-(68, 'roger', 'roger@roger.fr', 'user', '$2y$10$QNvlluZh8hCYkcldqjvdAu4S/9RBNgwU9O9O9NQPv7jOl35Oo2L/y', '2020-01-30 16:20:52', 1, 1),
-(75, 'jean charles', 'jc@jc.fr', 'user', '$2y$10$qCDbZaBLCtEKXPqGYtWB/.iv/xRXkj6YvUhqSrcrRPlsHgSduhWUW', '2020-02-02 23:19:09', NULL, 0),
-(76, 'benoit', 'benoit@chien.fr', 'user', '$2y$10$lQEQu/.Kv.HlISfbuvLnHepAnZ5zo1DWDEZ85NPW4Uc4BeHwM56YO', '2020-02-02 23:19:34', NULL, 0),
-(77, 'tratlala', 'dsfsdf@dsfds.fr', 'user', '$2y$10$Jme1ybo1Ilp.mW6vyGgece0qIENumtHxDYYSuS79n7YXG6n9WR2Kq', '2020-02-04 10:16:33', 1, 0);
+(1, 'camile', 'camileghastine@hotmail.com', 'admin', '$2y$10$joat/ETZJ/bnN/AfWUYJA.D0LINvXYSAzovx/lXf4ACFoFd.p1Bva', '2019-12-09 09:00:00', 1, 0),
+(2, 'Anonyme', 'camile@ghastine.com', 'admin', '$2y$10$joat/ETZJ/bnN/AfWUYJA.D0LINvXYSAzovx/lXf4ACFoFd.p1Bva', '2019-12-10 10:00:00', 1, 0),
+(3, 'loann', 'loann@loann.fr', 'user', '$2y$10$joat/ETZJ/bnN/AfWUYJA.D0LINvXYSAzovx/lXf4ACFoFd.p1Bva', '2019-12-11 08:00:00', 1, 0),
+(4, 'saël', 'sael@sael.fr', 'user', '$2y$10$ojgdv21iKCNQ40e6khuJdOz0EdAa3bfgyyfuagZu3lj.cmIKfH94.', '2019-12-11 10:00:00', 1, 5),
+(5, 'Ninel', 'ninel@ninel.fr', 'user', '$2y$10$joat/ETZJ/bnN/AfWUYJA.D0LINvXYSAzovx/lXf4ACFoFd.p1Bva', '2020-02-11 21:54:26', 1, 4),
+(110, 'roberto', 'roberto@mel.com', 'user', '$2y$10$joat/ETZJ/bnN/AfWUYJA.D0LINvXYSAzovx/lXf4ACFoFd.p1Bva', '2020-02-11 18:23:06', 5, 0);
 
 --
 -- Contraintes pour les tables déchargées

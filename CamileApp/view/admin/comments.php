@@ -30,6 +30,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
             </div>
         </div>
     </div>
+    <?php if($numberComments == 0) $_GET['action']='none'; ?>
     <?php if(isset($_GET['action'])):
         switch($_GET['action'])
         {
@@ -41,6 +42,9 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                 break;
             case('update') :
                 $message = 'Le commentaire a été modifié avec succès.';
+                break;
+                case('none') :
+                $message = 'Aucun commentaire pour cet article.';
                 break;
         }
         ?>
@@ -71,7 +75,9 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                     <?php if(!$formUpdate): ?>
                         <?php if($btn != 'secondary') : ?>
                             <td>
-                                <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>&token=<?= $_SESSION['token'] ?>" class="d-none d-sm-block btn-sm btn-success mr-3">Valider</a>
+                                <?php if(!$validated) : ?>
+                                    <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>&token=<?= $_SESSION['token'] ?>" class="d-none d-sm-block btn-sm btn-success mr-3">Valider</a>
+                                <?php endif ?>
                             </td>
                         <?php else : ?>
                             <td></td>
@@ -120,4 +126,5 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
         </table>
     </div>
 </div>
+
 

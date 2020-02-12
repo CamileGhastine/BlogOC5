@@ -1,9 +1,8 @@
 <?php
-
 $postId = $post->getId();
 $title = htmlspecialchars($post->getTitle());
 $chapo = nl2br(htmlspecialchars($post->getChapo()));
-$content = nl2br(htmlspecialchars($post->getContent()));
+$content = $post->getPSeudo() === 'camile' ? nl2br(($post->getContent())) : nl2br(htmlspecialchars($post->getContent()));
 $datePost = $post->getDate_creation() == $post->getDate_modification() ?
     'Publié le ' . htmlspecialchars($post->getDate_creation()) :
     'Publié le ' . htmlspecialchars($post->getDate_creation()).'<br/>(modifié le ' . htmlspecialchars($post->getDate_modification()).')';

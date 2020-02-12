@@ -24,8 +24,8 @@ class Config
     public static function configMailer()
     {
         return array(
-            'host' => 'mail.ghastine.com',
-            'username' => 'camile@ghastine.com',
+            'host' => '',
+            'username' => '',
             'password' => 'CamileProjet5');
     }
 

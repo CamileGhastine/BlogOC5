@@ -2,6 +2,7 @@
 $numberUsersUnvalidated = $numberUsersUnvalidated->number;
 $numberUsersBlocked = $numberUsersBlocked->number;
 ?>
+
 <div class="admin">
     <div class="row">
         <div class="py-4 px-5 col-sm-8 text-center text-md-left">

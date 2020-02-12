@@ -27,12 +27,12 @@ if(isset($_GET['modification']) AND $_GET['modification'] == 'email') // Email M
                 <input type="hidden" name="statut" value="<?= $statut ?>">
                 <div class="form-group">
                     <input type="text" class="form-control" name="email" value="<?= $email ?>">
-                    <p><?= $emailMessage ?></p>
+                    <p class="message-form pb-2"><?= $emailMessage ?></p>
                 </div>
                 <div class="form-group">
                     <label for="email">Mot de passe</label>
                     <input type="password" class="form-control" name="pass">
-                    <p><?= $passMessage ?></p>
+                    <p class="message-form pb-2"><?= $passMessage ?></p>
 
                 </div>
             </td>
@@ -57,7 +57,7 @@ elseif(isset($_GET['modification']) AND $_GET['modification'] == 'password') // 
                 <div class="form-group">
                     <label for="pass">Nouveau mot de passe</label>
                     <input type="password" class="form-control" name="pass">
-                    <p><?= $passMessage ?></p>
+                    <p class="message-form pb-2"><?= $passMessage ?></p>
                 </div>
                 <div class="form-group">
                     <label for="passConfirm">Confirmation du nouveau mot de passe</label>
@@ -67,7 +67,7 @@ elseif(isset($_GET['modification']) AND $_GET['modification'] == 'password') // 
                 <div class="form-group">
                     <label for="oldPass">Ancien mot de passe</label>
                     <input type="password" class="form-control" name="oldPass">
-                    <p><?= $oldPassMessage ?></p>
+                    <p class="message-form pb-2"><?= $oldPassMessage ?></p>
 
                 </div>
             </td>
@@ -111,7 +111,7 @@ elseif(isset($_GET['modification']) AND $_GET['modification'] == 'password') // 
                 <?= $tdPass ?>
             </tr>
             <tr>
-                <th scope="col">Satut</th>
+                <th scope="col">Statut</th>
                 <td><?= $statut ?></td>
                 <td></td>
             </tr>

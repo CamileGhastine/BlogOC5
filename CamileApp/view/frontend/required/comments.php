@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card my-4">
-                <h4 id="comments" class="card-header">Commentaires (<?= $numberComments ?>)</h4>
+                <h4 id="comments" class="card-header"><?= $numberComments > 1 ? 'Commentaires' : 'Commentaire' ?> (<?= $numberComments ?>)</h4>
                 <div class="card-body comments-post">
                     <?php if($numberComments == 0) : ?>
                         <p>Aucun Commentaire</p>

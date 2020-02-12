@@ -20,3 +20,7 @@
 {
     min-width: 350px;
 }
+.media-body> h3
+{
+    font-size: 1.5em;
+}

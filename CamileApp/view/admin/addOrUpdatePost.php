@@ -41,7 +41,7 @@ else // add post
         </div>
         <?php if($update) : ?>
             <div class="py- py-md-0 px-5 col text-center text-md-right">
-                <a href="index.php?route=admin.comments&id=<?= $_GET['id'] ?>#comments" class="btn btn-primary">Gérer ses commentaires</a>
+                <a href="index.php?route=admin.comments&id=<?= $_GET['id'] ?>#comments" class="btn btn-primary">Gérer les commentaires</a>
             </div>
         <?php endif ?>
     </div>

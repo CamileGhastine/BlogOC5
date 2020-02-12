@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-4 d-flex justify-content-center pb-4">
                         <a href="?route=admin.posts">
-                            <button class="btn btn-admin-home btn-success">Gérér les artciles et les commentaires</button>
+                            <button class="btn btn-admin-home btn-success">Gérér les articiles et les commentaires</button>
                         </a>
                     </div>
                     <div class="col-md-4 d-flex justify-content-center pb-4">

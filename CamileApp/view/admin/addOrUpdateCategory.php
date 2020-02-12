@@ -49,7 +49,7 @@ else // add category
                     </div>
 
                     <div class="form-group col-lg-12 text-center text-sm-left">
-                        <label for="description">description</label>
+                        <label for="description">Description</label>
                         <textarea class="form-control" name="description" rows="2" maxlength="255" required><?= $categoryDescription ?></textarea>
                         <p class="message-form"><?= $descriptionMessage ?></p>
                     </div>

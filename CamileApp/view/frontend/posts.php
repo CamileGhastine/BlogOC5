@@ -71,7 +71,7 @@ $categoryDescriptionActive = 'Toutes mes formations et compétences dans le doma
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-md-6 text-center text-sm-left" id="comments-number">
-                                        <a href="<?= $url ?>#comments">Commentaires <span class="badge badge-dark"><?= $numberComments ?></span></a>
+                                        <a href="<?= $url ?>#comments"><?= $numberComments > 1 ? 'Commentaires' : 'Commentaire'?> <span class="badge badge-dark"><?= $numberComments ?></span></a>
                                     </div>
                                     <div class="col-md-6 text-center text-sm-right text-muted">
                                         <small><?= $date ?></small>

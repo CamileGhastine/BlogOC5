@@ -1,5 +1,5 @@
 Blog:
-blog.ghastine.com
+http://blog.ghastine.com
 
 Github :
 https://github.com/CamileGhastine/BlogOC5

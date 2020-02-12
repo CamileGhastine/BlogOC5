@@ -61,7 +61,7 @@
                 <tr>
                     <td><?= $title ?></td>
                     <td><?= $category ?></td>
-                    <td class="text-center"><a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-primary mt-3">Modifdier(<?= $numberUnvalidated ?>/<?= $numberComment ?>)</a></td>
+                    <td class="text-center"><a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-primary mt-3">Modifdier-<?= $numberUnvalidated ?>/<?= $numberComment ?></a></td>
                     <td class="text-center">
                         <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
                         <a href="index.php?route=admin.posts&delete=<?= $postId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
