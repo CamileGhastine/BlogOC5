@@ -42,8 +42,8 @@
         </div>
     </div>
 
-    <div class="pb-3 mx-5">
-        <table class="table table-striped table-responsive">
+    <div class="row pb-3 mx-5">
+        <table class="col table table-striped table-responsive">
             <thead>
             <tr>
                 <th scope="col">Catégorie</th>

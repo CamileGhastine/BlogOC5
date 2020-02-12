@@ -35,8 +35,8 @@
         </div>
     </div>
 
-    <div class="pb-3 mx-5">
-        <table class="table table-striped table-responsive">
+    <div class="row pb-3 mx-0 mx-sm-5">
+        <table class="col table table-striped table-responsive">
             <thead>
             <tr>
                 <th scope="col">Article</th>
@@ -61,15 +61,17 @@
                 <tr>
                     <td><?= $title ?></td>
                     <td><?= $category ?></td>
-                    <td class="text-center"><a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-success mt-3">Modifdier(<?= $numberUnvalidated ?>/<?= $numberComment ?>)</a></td>
-                    <td>
+                    <td class="text-center"><a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-primary mt-3">Modifdier(<?= $numberUnvalidated ?>/<?= $numberComment ?>)</a></td>
+                    <td class="text-center">
                         <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
                         <a href="index.php?route=admin.posts&delete=<?= $postId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
                     </td>
 
                     <?php if($btn == 'secondary'): ?>
-                        <td><a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a></td>
-                        <td><a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a></td>
+                        <td class="text-center">
+                            <a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
+                            <a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a>
+                        </td>
                     <?php else : ?>
                         <td></td>
                         <td></td>
