@@ -38,18 +38,10 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
 
 ?>
 <div class="admin">
-    <div class="row">
-        <div class="py-4 px-5 col-sm-8 text-center text-md-left">
-            <h1><?= $titlePage ?></h1>
-        </div>
-        <div class="col-sm-4 text-center text-md-right px-5 pt-2 pb-4 py-md-4">
-            <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
-        </div>
-    </div>
+
     <div class="row px-5">
         <div class="col-lg-12">
             <form method="post" action="<?= $action ?>" class="pb-3">
-
                 <div class="form-group text-center text-sm-left">
                     <label for="title">Pseudo</label>
                     <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" required>
@@ -67,7 +59,7 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
                     <input type="text" class="form-control" name="email" value="<?= $email ?>" required>
                     <p class="message-form"><?= $emailMessage ?></p>
                 </div>
-                <div class="form-group ">
+                <div class="form-group text-center text-sm-left ">
                     <label for="statut">Statut</label>
                     <SELECT class="form-control" name="statut" size="1" >
                         <?php foreach($statuts as $statut) :

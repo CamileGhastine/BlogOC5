@@ -41,25 +41,18 @@ else // add category
         <div class="col-lg-12">
             <form method="post" action="<?= $formAction ?>" class="pb-3">
 
-                <div class="row pt-4">
+
                     <div class="form-group col-lg-12 text-center text-sm-left">
                         <label for="name" >Nom</label>
                         <input type="text" class="form-control" name="name" value="<?= $categoryName ?>" maxlength="100" required>
-                    </div>
-                    <div class="col-lg-12 d-flex align-items-end">
                         <p class="message-form"><?= $nameMessage ?></p>
                     </div>
-                </div>
 
-                <div class="row pt-4">
                     <div class="form-group col-lg-12 text-center text-sm-left">
                         <label for="description">description</label>
                         <textarea class="form-control" name="description" rows="2" maxlength="255" required><?= $categoryDescription ?></textarea>
-                    </div>
-                    <div class="col-lg-4 d-flex align-items-end">
                         <p class="message-form"><?= $descriptionMessage ?></p>
                     </div>
-                </div>
 
                 <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 

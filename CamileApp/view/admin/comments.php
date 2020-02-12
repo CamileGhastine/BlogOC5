@@ -1,46 +1,34 @@
 <?php
 $postId = $post->getId();
 $title = htmlspecialchars($post->getTitle());
-$chapo = nl2br(htmlspecialchars($post->getChapo()));
-$content = nl2br(htmlspecialchars($post->getContent()));
-$datePost = $post->getDate_creation() == $post->getDate_modification() ? 'Publié le '.htmlspecialchars($post->getDate_creation()) : 'Modifié le '. htmlspecialchars($post->getDate_modification());
-$author = htmlspecialchars($post->getPseudo());
-$category = htmlspecialchars($post->getCategory());
 $numberComments = ($post->getNumberComments());
 $contentUnvalid = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['content']) : null;
 $contentMessage = isset($formMessage) ? htmlspecialchars($formMessage['content']) : null;
 $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Une fois validé par l\'administrateur, votre commentaires sera publié.': null;
 ?>
 <div class="admin">
-    <div class="row">
-        <div class="col-lg-6">
-            <h2><?= $title ?></h2>
+    <div class="row py-4 px-5 ">
+        <div class="col-12">
+            <div class="row">
+                <div class="py-4 px-5 col-md-8 text-center text-md-left">
+                    <h1 id="comments">Gérer les <?= $numberComments ?> commentaires</h1>
+                </div>
+                <div class="col-md-4 text-center text-md-right px-5 pt-2 pb-4 py-md-4">
+                    <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 d-flex justify-content-end">
-            <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary">Modifier l'article</a>
-        </div>
-        <div class="col-lg-3 d-flex justify-content-end">
-            <a href="index.php?route=admin.home" class="btn-sm btn-secondary">Retour au tableau de bord</a>
-        </div>
-    </div>
-    <p><B><?= $chapo ?></B></p>
-    <p><?= $content ?></p>
-    <p>Par <?= $author ?></p>
-    <p>Categorie : <?= $category ?></p>
-    <p><small><?= $datePost ?></small></p>
-
-    <div class="row pb-3">
-        <div class="col-lg-6">
-            <h1 id="comments">Commentaires (<?= $numberComments ?>) :</h1>
-        </div>
-        <div class="col-lg-3 d-flex justify-content-end">
-            <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary">Modifier l'article</a>
-        </div>
-        <div class="col-lg-3 d-flex justify-content-end">
-            <a href="index.php?route=admin.home" class="btn-sm btn-secondary">Retour au tableau de bord</a>
+        <div class="col-12">
+            <div class="row">
+                <div class="py-3 py-md-0 px-5 col-md-8 text-center text-md-left">
+                    <h2><?= $title ?></h2>
+                </div>
+                <div class="py-3 py-md-0 col-md-4 text-center text-md-right px-5">
+                    <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn btn-primary">Modifier l'article</a>
+                </div>
+            </div>
         </div>
     </div>
-
     <?php if(isset($_GET['action'])):
         switch($_GET['action'])
         {
@@ -52,9 +40,10 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                 break;
         }
         ?>
-        <div class="alert alert-success">
-            <div class=row>
-                <div class="col-sm-8">
+    <div class="row ">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="alert alert-success text-center">
+
                     <?= $message ?>
                 </div>
             </div>
@@ -62,7 +51,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
     <?php endif ?>
 
     <div class="pb-3">
-        <table class="table table-striped ">
+        <table class="table table-striped table-responsive mx-5">
             <tbody>
             <?php
             foreach($comments as $comment)
@@ -77,7 +66,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                 ?>
                 <tr >
                     <?php if(!$validated) : ?>
-                        <td>
+                        <td class="d-flex flex-column">
                             <a href="index.php?route=admin.validateComment&id=<?= $_GET['id'] ?>&commentId=<?= $commentId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success mt-3">Valider</a>
                         </td>
                     <?php else : ?>
@@ -85,7 +74,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                     <?php endif ?>
                     <?php if($formUpdate) : ?>
                         <td id="update">
-                            <?= '<U><B>'.$pseudo.'</B> (<small>'.$dateComment.'</small>) :</U> ' ?>
+                            <?= '<B>'.$pseudo .' :</B>' ?>
                             <form method="post" action="index.php?route=admin.updateComment&id=<?= $postId ?>&commentId=<?= $commentId ?>">
                                 <input type="text" class="form-control" name="content" value="<?= $content ?>">
                                 <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
@@ -95,7 +84,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                         </td>
                     <?php else : ?>
                         <td>
-                            <?= '<U><B>'.$pseudo.'</B> (<small>'.$dateComment.'</small>) :</U> '.$content ?>
+                            <?= '<B>' . $pseudo . '</B>  : '.'<div class="d-block d-sm-none"><br/></div>'. $content ?>
                         </td>
                     <?php endif ?>
                     <?php if($btn != 'secondary' AND !$formUpdate): ?>

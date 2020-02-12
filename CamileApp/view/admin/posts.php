@@ -1,17 +1,18 @@
 <div class="admin">
-    <div class="row py-4">
-        <div class="col-sm-8">
-            <h1>Administration des articles et des commentaires</h1>
+    <div class="row">
+        <div class="py-4 px-5 col-sm-8 text-center text-md-left">
+            <h1 id="title">Gérer les articles et les commentaires</h1>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-center text-md-right px-5 pt-2 pb-4 py-md-4">
             <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-lg-4">
+        <div class="pb-3 mx-5 col-md-4 text-center text-md-left">
             <p><a href="index.php?route=admin.addPost" class="btn btn-success mt-3">Ajouter un article</a></p>
         </div>
-        <div class="col-lg-8">
+        <div class="col-md-8 px-5">
             <?php if(isset($_GET['success'])):
                 switch($_GET['success'])
                 {
@@ -25,7 +26,7 @@
                 ?>
                 <div class="alert alert-success">
                     <div class=row>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 text-center">
                             <?= $message ?>
                         </div>
                     </div>
@@ -34,14 +35,14 @@
         </div>
     </div>
 
-    <div class="pb-3">
-        <table class="table table-striped ">
+    <div class="pb-3 mx-5">
+        <table class="table table-striped table-responsive">
             <thead>
             <tr>
                 <th scope="col">Article</th>
                 <th scope="col">Catégorie</th>
                 <th class="text-center" scope="col">Commentaires</th>
-                <th scope="col">Action</th>
+                <th scope="col">Articles</th>
                 <th scope="col"></th>
                 <th></th>
             </tr>
@@ -53,17 +54,16 @@
                 $title = htmlspecialchars($post->getTitle());
                 $category = htmlspecialchars($post->getCategory());
                 $numberComment = $post->getNumberComments() + $post->getNumberUnvalidated();
-                $href = 'index.php?route=admin.comments&id='.$postId.'#comments';
-                $numberUnvalidated = $post->getNumberUnvalidated() == 0 ? null : 'dont '.'<a href="'.$href.'" class="btn-sm btn-success mt-3">'.$post->getNumberUnvalidated().' à valider</a>';
+                $numberUnvalidated = $post->getNumberUnvalidated();
                 $btn = (isset($_GET['delete']) AND $_GET['delete'] == $postId) ? 'secondary' : 'danger';
 
                 ?>
                 <tr>
                     <td><?= $title ?></td>
                     <td><?= $category ?></td>
-                    <td class="text-center"><?= $numberComment.' '.$numberUnvalidated ?></td>
+                    <td class="text-center"><a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-success mt-3">Modifdier(<?= $numberUnvalidated ?>/<?= $numberComment ?>)</a></td>
                     <td>
-                        <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier l'article et ses commentaires</a>
+                        <a href="index.php?route=admin.updatePost&id=<?= $postId ?>" class="btn-sm btn-primary mt-3">Modifier</a>
                         <a href="index.php?route=admin.posts&delete=<?= $postId ?>#deleteConfirmation" class="btn-sm btn-<?= $btn ?> mt-3">Supprimer</a>
                     </td>
 

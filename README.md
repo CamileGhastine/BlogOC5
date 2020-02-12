@@ -12,4 +12,12 @@ After installation:
     mode d'emploi installation
     fonctionnement (php doc)
 
-Lien vers notation codeclimate.
+
+
+LIENS
+
+Github :
+https://github.com/CamileGhastine/BlogOC5
+
+Codeclimate : note A
+https://codeclimate.com/github/CamileGhastine/BlogOC5
