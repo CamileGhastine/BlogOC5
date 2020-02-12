@@ -4,11 +4,11 @@ $pseudo = htmlspecialchars($user->getPseudo());
 $email = htmlspecialchars($user->getEmail());
 $tdEmail = '
             <td>' . $email . '</td>
-            <td><a href="index.php?route=back.account&modification=email#emailAccount" class="btn-sm btn-primary btn-perso1">Modifier</a></td>';
+            <td><a href="index.php?route=back.account&modification=email#emailAccount" class="btn btn-sm btn-primary btn-perso1">Modifier</a></td>';
 $pass = '**********';
 $tdPass = '
             <td>' . $pass . '</td>
-            <td><a href="index.php?route=back.account&modification=password#emailAccount" class="btn-sm btn-primary btn-perso1" >Modifier</a></td>';
+            <td><a href="index.php?route=back.account&modification=password#emailAccount" class="btn btn-sm btn-primary btn-perso1" >Modifier</a></td>';
 $statut = $user->getStatut() == 'user' ? 'Utilisateur' : htmlspecialchars(ucfirst($user->getStatut()));
 $date_inscription = htmlspecialchars($user->getDate_inscription());
 $emailMessage = isset($formMessage['email']) ? $formMessage['email'] : null;

@@ -3,7 +3,8 @@
 @import "posts.css";
 @import "post.css";
 @import "connectionRegister.css";
-@import "account.css";
+@import "accountUser.css";
+@import "homeAdmin.css";
 
 /*all pages*/
 body

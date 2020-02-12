@@ -37,48 +37,35 @@ $emailMessage = isset($formMessage['email']) ? $formMessage['email'] : null;
 $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
 
 ?>
-
-<div class="row">
-    <div class="col-lg-12 mt-3">
-
-        <div class="row pt-4">
-            <div class="col-sm-8">
-                <h1><?= $titlePage ?></h1>
-            </div>
-            <div class="col-sm-4">
-                <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
-            </div>
-        </div> <?php if(isset($result)): ?>
-            <div class="alert alert-success">
-                <div class=row>
-                    <div class="col-sm-6">
-                        L'utilisateur a bien été ajouté.
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="index.php?p=backend.users.usersAdmin" class="btn btn-success">Retour au tableau de
-                            bord</a>
-                    </div>
-                </div>
-            </div>
-        <?php else : ?>
+<div class="admin">
+    <div class="row">
+        <div class="py-4 px-5 col-sm-8 text-center text-md-left">
+            <h1><?= $titlePage ?></h1>
+        </div>
+        <div class="col-sm-4 text-center text-md-right px-5 pt-2 pb-4 py-md-4">
+            <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
+        </div>
+    </div>
+    <div class="row px-5">
+        <div class="col-lg-12">
             <form method="post" action="<?= $action ?>" class="pb-3">
 
-                <div class="form-group">
+                <div class="form-group text-center text-sm-left">
                     <label for="title">Pseudo</label>
-                    <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>">
-                    <p><?= $pseudoMessage ?></p>
+                    <input type="text" class="form-control" name="pseudo" value="<?= $pseudo ?>" required>
+                    <p class="message-form"><?= $pseudoMessage ?></p>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group text-center text-sm-left">
                     <label for="chapo">Mot de passe</label>
-                    <input type="password" class="form-control" name="pass" value="<?= $pass ?>" <?= isset($update) ? 'readOnly="readOnly"' : null ?>>
-                    <p><?= $passMessage ?></p>
+                    <input type="password" class="form-control" name="pass" value="<?= $pass ?>" <?= isset($update) ? 'readOnly="readOnly"' : null ?> required>
+                    <p class="message-form"><?= $passMessage ?></p>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group text-center text-sm-left">
                     <label for="chapo">Courriel</label>
-                    <input type="text" class="form-control" name="email" value="<?= $email ?>">
-                    <p><?= $emailMessage ?></p>
+                    <input type="text" class="form-control" name="email" value="<?= $email ?>" required>
+                    <p class="message-form"><?= $emailMessage ?></p>
                 </div>
                 <div class="form-group ">
                     <label for="statut">Statut</label>
@@ -91,23 +78,22 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
                             </OPTION>
                         <?php endforeach; ?>
                     </SELECT>
-                    <p><?= $statutMessage ?></p>
+                    <p class="message-form"><?= $statutMessage ?></p>
                 </div>
 
                 <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
 
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row px-5">
+                    <div class="col-sm-6 text-center text-sm-left mb-3">
                         <button type="submit" class="btn btn-danger"><?= $btn ?></button>
                     </div>
-                    <div class="col-lg-6 d-flex justify-content-end">
+                    <div class="col-sm-6 text-center text-sm-right">
                         <?php if(!isset($result)) : ?>
                             <a class="btn btn-success " href="index.php?route=admin.users">Annuler</a>
                         <?php endif ?>
                     </div>
                 </div>
-
             </form>
-        <?php endif ?>
+        </div>
     </div>
 </div>

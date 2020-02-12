@@ -31,7 +31,7 @@ else // add post
     $button = 'Publier';
 }
 ?>
-
+<div class="admin">
     <div class="row">
         <div class="col-lg-12 mt-3">
             <div class="row">
@@ -112,3 +112,4 @@ else // add post
             </form>
         </div>
     </div>
+</div>
