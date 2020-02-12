@@ -53,7 +53,7 @@
                 $postId = $post->getId();
                 $title = htmlspecialchars($post->getTitle());
                 $category = htmlspecialchars($post->getCategory());
-                $numberComment = $post->getNumberComments() + $post->getNumberUnvalidated();
+                $numberComment = $post->getNumberComments() + $post->getNumberUnvalidated(); // number comments = numberValidatedComments + numberUnvalidatedComments
                 $numberUnvalidated = $post->getNumberUnvalidated();
                 $btn = (isset($_GET['delete']) AND $_GET['delete'] == $postId) ? 'secondary' : 'danger';
 

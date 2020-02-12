@@ -18,7 +18,7 @@ class PostsManager extends Manager
     public function allWithCommentCount()
     {
         $sql = '
-SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments
+SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.id) AS numberComments
 FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
 GROUP BY p.id
@@ -35,7 +35,7 @@ ORDER BY p.date_creation DESC ';
     public function postById($id)
     {
         $sql = '
-        SELECT p.id, p.title, p.chapo, p.content, p.date_creation, p.date_modification, p.category_id, u.pseudo, ca.name As category, COUNT(co.validated) AS numberComments
+        SELECT p.id, p.title, p.chapo, p.content, p.date_creation, p.date_modification, p.category_id, u.pseudo, ca.name As category, COUNT(co.id) AS numberComments
         FROM posts AS p
         LEFT JOIN users AS u ON u.id = p.user_id
         LEFT JOIN categories AS ca ON ca.id = p.category_id
@@ -59,7 +59,7 @@ ORDER BY p.date_creation DESC ';
     public function allByCategoryWithCommentCount($id)
     {
         $sql = '
-SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.validated) AS numberComments
+SELECT p.id, p.title, p.chapo, p.date_creation, p.date_modification, COUNT(co.id) AS numberComments
 FROM posts AS p
 LEFT JOIN comments AS co ON co.post_id = p.id
 LEFT JOIN categories AS ca ON ca.id = p.category_id

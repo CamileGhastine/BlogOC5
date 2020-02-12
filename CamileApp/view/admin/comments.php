@@ -11,7 +11,7 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
         <div class="col-12">
             <div class="row">
                 <div class="py-4 px-5 col-md-8 text-center text-md-left">
-                    <h1 id="comments">Gérer les <?= $numberComments ?> commentaires</h1>
+                    <h1 id="comments">Gérer les commentaires</h1>
                 </div>
                 <div class="col-md-4 text-center text-md-right px-5 pt-2 pb-4 py-md-4">
                     <a href="index.php?route=admin.home" class="btn btn-secondary">Retour au tableau de bord</a>
