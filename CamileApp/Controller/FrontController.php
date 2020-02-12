@@ -82,6 +82,7 @@ class FrontController extends Controller
             else
             {
                 $this->form_contacts->add($post);
+                $this->mail->send($this->mail->stockFormContact($post));
                 $result = $this->mail->send($this->mail->answerFormContact($post));
                 $this->render('formContact', compact('post', 'formMessage', 'result'));
             }

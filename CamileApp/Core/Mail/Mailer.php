@@ -84,6 +84,22 @@ Je vous répondrai dans les plus brefs délais.<br/>
         ];
     }
 
+    public function stockFormContact($post)
+    {
+        return $mailDetails =[
+            'adress' => 'camile@ghastine.com',
+            'subject' =>'Nouveau formulaire de contact',
+            'body' => '
+Prénom :'.$post['first_name'].'<br/>
+Nom :'.$post['last_name'].'<br/>
+Courriel :'.$post['email'].'<br/>
+Objet :'.$post['subject'].'<br/>
+Contenu :'.$post['content'].'<br/>
+User_id :'.$post['user_id']
+
+        ];
+    }
+
     public function unlock($user, $newPass)
     {
         return $mailDetails =[
