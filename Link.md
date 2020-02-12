@@ -1,3 +1,6 @@
+Blog:
+blog.ghastine.com
+
 Github :
 https://github.com/CamileGhastine/BlogOC5
 
