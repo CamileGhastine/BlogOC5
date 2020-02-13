@@ -77,11 +77,11 @@ $statutMessage = isset($formMessage['statut']) ? $formMessage['statut'] : null;
 
                 <div class="row px-5">
                     <div class="col-sm-6 text-center text-sm-left mb-3">
-                        <button type="submit" class="btn btn-danger"><?= $btn ?></button>
+                        <button type="submit" class="btn btn-success"><?= $btn ?></button>
                     </div>
                     <div class="col-sm-6 text-center text-sm-right">
                         <?php if(!isset($result)) : ?>
-                            <a class="btn btn-success " href="index.php?route=admin.users">Annuler</a>
+                            <a class="btn btn-danger " href="index.php?route=admin.users">Annuler</a>
                         <?php endif ?>
                     </div>
                 </div>

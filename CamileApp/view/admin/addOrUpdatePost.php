@@ -90,10 +90,10 @@ else // add post
 
                 <div class="row px-5">
                     <div class="col-sm-6 text-center text-sm-left mb-3">
-                        <button type="submit" class="btn btn-danger"><?= $button ?></button>
+                        <button type="submit" class="btn btn-success"><?= $button ?></button>
                     </div>
                     <div class="col-sm-6 text-center text-sm-right">
-                        <a class="btn btn-success " href="index.php?route=admin.posts">Annuler</a>
+                        <a class="btn btn-danger " href="index.php?route=admin.posts">Annuler</a>
                     </div>
                 </div>
             </form>

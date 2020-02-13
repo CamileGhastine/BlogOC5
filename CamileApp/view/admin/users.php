@@ -129,8 +129,8 @@ $numberUsersBlocked = $numberUsersBlocked->number;
                         if(isset($_GET['delete']) && $_GET['delete'] == $userId)
                         {
                             ?>
-                            <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mb-3">Confirmer</a>
-                            <a href="?route=admin.users#title" class="btn-sm btn-success">Annuler</a>
+                            <a id="deleteConfirmation" href="index.php?route=admin.deleteuser&id=<?= $userId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success mb-3">Confirmer</a>
+                            <a href="?route=admin.users#title" class="btn-sm btn-danger">Annuler</a>
                         <?php } ?>
                     </td>
                 </tr>

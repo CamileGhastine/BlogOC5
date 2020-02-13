@@ -86,14 +86,15 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
 
                     <?php if($formUpdate) : ?>
                     <form method="post" action="index.php?route=admin.updateComment&id=<?= $postId ?>&commentId=<?= $commentId ?>">
+                        <td></td>
                         <td id="update">
                             <?= '<B>' . $pseudo . ' :</B>' ?>
                             <input type="text" class="form-control" name="content" value="<?= $content ?>">
                         </td>
                         <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
-                        <td class="d-flex flex-column">
-                            <button type="submit" class="btn-sm btn-success">Modifier</button>
-                            <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-primary">annuler</a>
+                        <td class="d-flex ">
+                            <button type="submit" class="btn-sm btn-success mx-1">Modifier</button>
+                            <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments" class="btn-sm btn-danger text-center mx-1">annuler</a>
                         </td>
                         <td></td>
                     </form>
@@ -114,9 +115,9 @@ $successMessage = (isset($_GET['success']) AND $_GET['success'] == 'user') ? 'Un
                         <td></td>
                         <td class="d-flex flex-column">
                             <a href="index.php?route=admin.deleteComment&id=<?= $postId ?>&commentId= <?= $commentId ?>&token=<?= $_SESSION['token'] ?>"
-                                   class="btn-sm btn-danger mt-3">Confirmer</a>
+                                   class="btn-sm btn-success mt-3">Confirmer</a>
                             <a href="index.php?route=admin.comments&id=<?= $postId ?>#comments"
-                                   class="btn-sm btn-success mt-3">Annuler</a>
+                                   class="btn-sm btn-danger mt-3">Annuler</a>
                         </td>
                     <?php endif ; ?>
                  </tr>

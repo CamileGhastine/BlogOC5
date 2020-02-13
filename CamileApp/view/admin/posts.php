@@ -69,8 +69,8 @@
 
                     <?php if($btn == 'secondary'): ?>
                         <td class="text-center">
-                            <a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-danger mt-3">Confirmer</a>
-                            <a href="index.php?route=admin.posts" class="btn-sm btn-success mt-3">Annuler</a>
+                            <a id="deleteConfirmation" href="index.php?route=admin.deletePost&id=<?= $postId ?>&token=<?= $_SESSION['token'] ?>" class="btn-sm btn-success mt-3">Confirmer</a>
+                            <a href="index.php?route=admin.posts" class="btn-sm btn-danger mt-3">Annuler</a>
                         </td>
                     <?php else : ?>
                         <td></td>
