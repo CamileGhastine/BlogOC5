@@ -402,14 +402,5 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteAccount()
-    {
-        $this->token->check($_GET);
-        $this->isConnect();
-        $this->delete('users', false);
-        session_destroy();
-        header('Location: index.php');
-        exit;
-    }
 }
 
