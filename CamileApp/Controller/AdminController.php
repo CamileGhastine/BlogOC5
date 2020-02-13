@@ -32,12 +32,10 @@ class AdminController extends Controller
         $this->render('posts', compact('posts'));
     }
 
-    /**
-     * add post in admin dashboard
-     */
-    public function addPost()
+    public function AddOrUpdatePost($action)
     {
         $this->isAdmin();
+
         if($_POST)
         {
             $post = $this->token->check($_POST);
@@ -46,23 +44,41 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
-                $this->posts->add($post);
-                header('Location: index.php?route=admin.posts&success=add');
-                exit;
+                $this->posts->$action($post);
+                header('Location: index.php?route=admin.posts&success='.$action);
             }
             else
             {
-                $postAddUnvalid = $post;
+                $postUpdateUnvalid = $post;
                 $categories = $this->categories->all('categories', 'name');
-                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postAddUnvalid'));
+                if($action == 'update') $comments = $this->comments->commentsById($_GET['id']);
+                $compact = ($action == 'update') ? compact('categories', 'formMessage', 'postUpdateUnvalid', 'comments') : compact('categories', 'formMessage', 'postUpdateUnvalid');
+                $this->render('addOrUpdatePost', $compact );
             }
         }
         else
         {
             $categories = $this->categories->all('categories', 'name');
-            $this->render('addOrUpdatePost', compact('categories'));
-        }
+            if($action =='update')
+            {
+                $post = $this->posts->postById($_GET['id']);
+                $comments = $this->comments->commentsById($_GET['id']);
+                $compact = compact('categories', 'post', 'comments');
+            }
+            else
+            {
+                $compact = compact('categories');
+            }
 
+            $this->render('addOrUpdatePost', $compact);
+        }
+    }
+    /**
+     * add post in admin dashboard
+     */
+    public function addPost()
+    {
+        $this->AddOrUpdatePost('add');
     }
 
     /**
@@ -70,34 +86,8 @@ class AdminController extends Controller
      */
     public function updatePost()
     {
-        $this->isAdmin();
+        $this->AddOrUpdatePost('update');
 
-        if($_POST)
-        {
-            $post = $this->token->check($_POST);
-
-            $formMessage = $this->postsValidationForm->checkForm($post);
-
-            if(!$formMessage)
-            {
-                $this->posts->update($post);
-                header('Location: index.php?route=admin.posts&success=update');
-            }
-            else
-            {
-                $postUpdateUnvalid = $post;
-                $comments = $this->comments->commentsById($_GET['id']);
-                $categories = $this->categories->all('categories', 'name');
-                $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid'));
-            }
-        }
-        else
-        {
-            $post = $this->posts->postById($_GET['id']);
-            $comments = $this->comments->commentsById($_GET['id']);
-            $categories = $this->categories->all('categories', 'name');
-            $this->render('addOrUpdatePost', compact('post', 'categories', 'comments'));
-        }
     }
 
     /**
