@@ -22,7 +22,6 @@
             <tbody>
             <?php
             foreach($form_contacts as $form_contact):
-                $id = $form_contact->getId();
                 $first_name = $form_contact->getFirst_name();
                 $last_name = htmlspecialchars($form_contact->getLast_name());
                 $email = htmlspecialchars($form_contact->getEmail());

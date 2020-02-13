@@ -5,7 +5,7 @@ namespace CamileApp\Model\Entity;
 
 use Exception;
 
-class form_contactsEntity extends Entity
+class Form_contactsEntity extends Entity
 {
     protected $id;
     protected $first_name;
