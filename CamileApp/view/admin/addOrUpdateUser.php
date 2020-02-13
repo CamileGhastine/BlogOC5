@@ -17,7 +17,7 @@ else // update user
         $pass = 'password1';
         $email = $user->getEmail();
         $statutUser = $user->getStatut();
-        $action = 'index?route=admin.updateUser&id='.$user->getId();
+        $action = 'index.php?route=admin.updateUser&id='.$user->getId();
     }
     if(isset($postUpdate)) // update user (form already submit)
     {

@@ -403,5 +403,10 @@ class AdminController extends Controller
         }
     }
 
+    public function form_contacts()
+    {
+        $form_contacts = $this->form_contacts->allContact();
+        $this->render('form_contacts', compact('form_contacts'));
+    }
 }
 

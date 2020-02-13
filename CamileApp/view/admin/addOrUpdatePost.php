@@ -12,7 +12,7 @@ if($update) //update post
 {
     $titlePage = 'Modifier l\'article';
     $postId = isset($postUpdateUnvalid) ? $postUpdateUnvalid['id'] : htmlspecialchars($post->getId());
-    $formAction = 'index?route=admin.updatePost&id='.$postId;
+    $formAction = 'index.php?route=admin.updatePost&id='.$postId;
     $title = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['title']) :  htmlspecialchars($post->getTitle());
     $chapo = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['chapo']) : htmlspecialchars($post->getChapo());
     $content = isset($postUpdateUnvalid) ? htmlspecialchars($postUpdateUnvalid['content']) : htmlspecialchars($post->getContent());
@@ -22,7 +22,7 @@ if($update) //update post
 else // add post
 {
     $titlePage = 'Ajouter un article';
-    $formAction = 'index?route=admin.addPost';
+    $formAction = 'index.php?route=admin.addPost';
     $postId = null;
     $title = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['title']) : null;
     $chapo = isset($postAddUnvalid) ? htmlspecialchars($postAddUnvalid['chapo']) : null;;
