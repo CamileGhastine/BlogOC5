@@ -4,7 +4,7 @@
 namespace CamileApp\Core\Constraints\ValidationForm\Field;
 
 
-class oldPassField extends PassField
+class OldPassField extends PassField
 {
 
 }

@@ -4,7 +4,7 @@
 namespace CamileApp\Core\Constraints\ValidationForm\Field;
 
 
-class smallField extends Field
+class SmallField extends Field
 {
     protected $min = 2;
     protected $max = 100;

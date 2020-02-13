@@ -8,7 +8,7 @@ namespace CamileApp\Core\Constraints\ValidationForm\Field;
  * Class DescriptionField
  * @package CamileApp\Core\Constraints\ValidationForm\Field
  */
-class mediumField extends Field
+class MediumField extends Field
 {
     protected $min = 2;
     protected $max = 255;
