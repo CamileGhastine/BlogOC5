@@ -32,7 +32,43 @@ class AdminController extends Controller
         $this->render('posts', compact('posts'));
     }
 
-    public function AddOrUpdatePost($action)
+    /**
+     * add post in admin dashboard
+     */
+    public function addPost()
+    {
+        $this->isAdmin();
+        if($_POST)
+        {
+            $post = $this->token->check($_POST);
+
+            $formMessage = $this->postsValidationForm->checkForm($post);
+
+            if(!$formMessage)
+            {
+                $this->posts->add($post);
+                header('Location: index.php?route=admin.posts&success=add');
+                exit;
+            }
+            else
+            {
+                $postAddUnvalid = $post;
+                $categories = $this->categories->all('categories', 'name');
+                $this->render('addOrUpdatePost', compact('categories', 'formMessage', 'postAddUnvalid'));
+            }
+        }
+        else
+        {
+            $categories = $this->categories->all('categories', 'name');
+            $this->render('addOrUpdatePost', compact('categories'));
+        }
+
+    }
+
+    /**
+     * update post in admin dashboard
+     */
+    public function updatePost()
     {
         $this->isAdmin();
 
@@ -44,50 +80,24 @@ class AdminController extends Controller
 
             if(!$formMessage)
             {
-                $this->posts->$action($post);
-                header('Location: index.php?route=admin.posts&success='.$action);
+                $this->posts->update($post);
+                header('Location: index.php?route=admin.posts&success=update');
             }
             else
             {
                 $postUpdateUnvalid = $post;
+                $comments = $this->comments->commentsById($_GET['id']);
                 $categories = $this->categories->all('categories', 'name');
-                if($action == 'update') $comments = $this->comments->commentsById($_GET['id']);
-                $compact = ($action == 'update') ? compact('categories', 'formMessage', 'postUpdateUnvalid', 'comments') : compact('categories', 'formMessage', 'postUpdateUnvalid');
-                $this->render('addOrUpdatePost', $compact );
+                $this->render('addOrUpdatePost', compact('categories', 'comments', 'formMessage', 'postUpdateUnvalid'));
             }
         }
         else
         {
+            $post = $this->posts->postById($_GET['id']);
+            $comments = $this->comments->commentsById($_GET['id']);
             $categories = $this->categories->all('categories', 'name');
-            if($action =='update')
-            {
-                $post = $this->posts->postById($_GET['id']);
-                $comments = $this->comments->commentsById($_GET['id']);
-                $compact = compact('categories', 'post', 'comments');
-            }
-            else
-            {
-                $compact = compact('categories');
-            }
-
-            $this->render('addOrUpdatePost', $compact);
+            $this->render('addOrUpdatePost', compact('post', 'categories', 'comments'));
         }
-    }
-    /**
-     * add post in admin dashboard
-     */
-    public function addPost()
-    {
-        $this->AddOrUpdatePost('add');
-    }
-
-    /**
-     * update post in admin dashboard
-     */
-    public function updatePost()
-    {
-        $this->AddOrUpdatePost('update');
-
     }
 
     /**
@@ -392,6 +402,14 @@ class AdminController extends Controller
         }
     }
 
-
+    public function deleteAccount()
+    {
+        $this->token->check($_GET);
+        $this->isConnect();
+        $this->delete('users', false);
+        session_destroy();
+        header('Location: index.php');
+        exit;
+    }
 }
 
