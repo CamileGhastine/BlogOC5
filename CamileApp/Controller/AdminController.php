@@ -405,6 +405,7 @@ class AdminController extends Controller
 
     public function form_contacts()
     {
+        $this->isAdmin();
         $form_contacts = $this->form_contacts->allContact();
         $this->render('form_contacts', compact('form_contacts'));
     }
