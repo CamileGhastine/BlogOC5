@@ -283,14 +283,15 @@ class AdminController extends Controller
             // Form verification
             $formMessage = $this->pseudoOrEmailExist() ? $this->pseudoOrEmailExist() : $formMessage = $this->usersValidationForm->checkForm($post);
 
-            if($formMessage)  // form ok
+            if($formMessage)  // form not ok
             {
                 $statuts = $this->users->statut();
                 $this->render('addOrUpdateUser', compact('statuts', 'formMessage', 'post'));
             }
-            else // form not ok
+            else // form ok
             {
                 $post['validated'] = 1;
+                $post['pass'] = $this->password->hash($post['pass']);
                 $this->users->add($post);
                 header('Location: index.php?route=admin.users&success=add');
                 exit;

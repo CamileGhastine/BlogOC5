@@ -5,7 +5,7 @@ if(!isset($update)) // add user
     $pass = isset($post['pass']) ? $post['pass'] : null;
     $email = isset($post['email']) ? $post['email'] : null;
     $statutUser = isset($post['statut']) ? $post['statut'] : 'user';
-    $action = 'index?route=admin.addUser';
+    $action = 'index.php?route=admin.addUser';
     $titlePage = 'Ajouter un utilisateur';
     $btn = 'Ajouter';
 }
@@ -25,7 +25,7 @@ else // update user
         $pass = 'password1';
         $email = $postUpdate['email'];
         $statutUser = $postUpdate['statut'];
-        $action = 'index?route=admin.updateUser&id='.$postUpdate['id'];
+        $action = 'index.php?route=admin.updateUser&id='.$postUpdate['id'];
     }
     $titlePage = 'Modifier l\'utilisateur';
     $btn = 'Modifier';
